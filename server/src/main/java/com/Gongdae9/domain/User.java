@@ -3,6 +3,7 @@ package com.Gongdae9.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,4 +29,6 @@ public class User {
     @OneToMany(mappedBy="user")
     private List<JoinRoom> joinRooms = new ArrayList<JoinRoom>();
 
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL) // persist 전파
+    private List<Message> messages;
 }
