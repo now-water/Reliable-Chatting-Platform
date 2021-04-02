@@ -27,15 +27,19 @@ public class Friend {
     private Long id;
 
     @ManyToOne(fetch = LAZY)
+    private User friend;
+
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Friend (User user) {
+    public Friend (User user,User friend) {
         this.user = user;
+        this.friend=friend;
     }
 
     public static Friend createFriendShip(User from, User to){
-        Friend ret = new Friend(to);
+        Friend ret = new Friend(from,to);
         from.getFriends().add(ret);
         System.out.println(from.getFriends().size());
         return ret;

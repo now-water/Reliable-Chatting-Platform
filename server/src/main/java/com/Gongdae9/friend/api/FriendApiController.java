@@ -34,16 +34,7 @@ public class FriendApiController {
 
     @PostMapping("/api/friend/add/{from}/{to}")
     public long addFriend(@PathVariable("from") long fromId, @PathVariable("to") long toId){
-        User from = userService.findById(fromId);
-        System.out.println(from.getName() + "의 친구를 추가한다.");
-        User to = userService.findById(toId);
-        System.out.println(to.getName() + "를 " + from.getName() + "에게 추가한다.");
-
-        Friend friend = Friend.createFriendShip(from, to);
-        System.out.println(from.getFriends().size());
-        friendService.save(friend);
-        userService.save(from);
-        System.out.println();
+        friendService.addFriend(fromId,toId);
         return toId;
     }
 }

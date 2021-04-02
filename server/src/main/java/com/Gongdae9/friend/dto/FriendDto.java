@@ -14,7 +14,7 @@ public class FriendDto {
     private String nickName;
 
     public FriendDto(Friend friend){
-        User user = friend.getUser();
+        User user = friend.getFriend();
         this.userId = user.getUserId();
         this.name = user.getName();
         this.phoneNum = user.getPhoneNum();

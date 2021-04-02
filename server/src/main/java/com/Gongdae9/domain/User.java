@@ -48,11 +48,5 @@ public class User {
         this.password = password;
     }
 
-    @Transactional
-    public User addFriend(User user) {
-        Friend friend = new Friend(user);
-        this.friends.add(friend);
-        System.out.println(user.getName() + "을 친구로 추가한다.");
-        return this;
-    }
+    
 }
