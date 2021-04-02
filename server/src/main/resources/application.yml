@@ -11,7 +11,7 @@ spring:
     properties:
       hibernate:
         show_sql: flase
-        format_sql: false
+        format_sql: true
 
   h2:
     console:
