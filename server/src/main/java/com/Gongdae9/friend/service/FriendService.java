@@ -31,17 +31,22 @@ public class FriendService {
     }
 
     @Transactional
-    public void addFriend(long fromId,long toId){
+    public boolean addFriend(long fromId,long toId){
         User from = userRepository.findById(fromId);
-        System.out.println(from.getName() + "의 친구를 추가한다.");
         User to = userRepository.findById(toId);
-        System.out.println(to.getName() + "를 " + from.getName() + "에게 추가한다.");
 
-        Friend friend = Friend.createFriendShip(from, to);
-        friendRepository.save(friend);
-        System.out.println(from.getFriends().size());
+        if(fromId==toId) return false;
 
-        System.out.println();
+        boolean check=from.getFriends()
+            .stream()
+            .anyMatch(a->a.getFriend().getUserId()==toId);
 
+        if(!check){
+            Friend friend = Friend.createFriendShip(from, to);
+            friendRepository.save(friend);
+            return true;
+        }
+
+        return false;
     }
 }

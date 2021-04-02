@@ -26,11 +26,12 @@ public class Friend {
     @Column(name="friend_id")
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY)
+    @JoinColumn(name="to_id")
     private User friend;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "from_id")
     private User user;
 
     public Friend (User user,User friend) {
@@ -41,7 +42,7 @@ public class Friend {
     public static Friend createFriendShip(User from, User to){
         Friend ret = new Friend(from,to);
         from.getFriends().add(ret);
-        System.out.println(from.getFriends().size());
+
         return ret;
     }
 }

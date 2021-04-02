@@ -25,16 +25,13 @@ public class FriendApiController {
     @GetMapping("/api/friend/all/{from}")
     public List<FriendDto> showAll(@PathVariable("from") long fromId){
         User user = userService.findById(fromId);
-        System.out.println(user.getName() + "의 친구를 조회한다.");
-        System.out.println("친구 수 : " + user.getFriends().size());
         return user.getFriends().stream()
             .map(o -> new FriendDto(o))
             .collect(Collectors.toList());
     }
 
     @PostMapping("/api/friend/add/{from}/{to}")
-    public long addFriend(@PathVariable("from") long fromId, @PathVariable("to") long toId){
-        friendService.addFriend(fromId,toId);
-        return toId;
+    public boolean addFriend(@PathVariable("from") long fromId, @PathVariable("to") long toId){
+        return friendService.addFriend(fromId,toId);
     }
 }
