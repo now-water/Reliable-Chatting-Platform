@@ -26,6 +26,9 @@ public class User {
     private String id;
     private String password;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) // persist 전파
+    private List<Friend> friends;
+
     @OneToMany(mappedBy="user")
     private List<JoinRoom> joinRooms = new ArrayList<JoinRoom>();
 
