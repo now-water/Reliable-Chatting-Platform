@@ -1,7 +1,9 @@
-package com.Gongdae9.domain;
+package com.Gongdae9.bookmark.domain;
 
 import static javax.persistence.FetchType.LAZY;
 
+import com.Gongdae9.joinroom.domain.JoinRoom;
+import com.Gongdae9.message.domain.Message;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

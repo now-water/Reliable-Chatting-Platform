@@ -1,7 +1,6 @@
 package com.Gongdae9.user.repository;
 
-import com.Gongdae9.domain.Friend;
-import com.Gongdae9.domain.User;
+import com.Gongdae9.user.domain.User;
 import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

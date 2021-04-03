@@ -1,6 +1,6 @@
 package com.Gongdae9.friend.repository;
 
-import com.Gongdae9.domain.Friend;
+import com.Gongdae9.friend.domain.Friend;
 import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

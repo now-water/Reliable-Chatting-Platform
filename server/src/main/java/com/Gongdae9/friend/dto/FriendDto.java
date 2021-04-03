@@ -1,9 +1,8 @@
 package com.Gongdae9.friend.dto;
 
-import com.Gongdae9.domain.Friend;
-import com.Gongdae9.domain.User;
+import com.Gongdae9.friend.domain.Friend;
+import com.Gongdae9.user.domain.User;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public class FriendDto {

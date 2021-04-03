@@ -1,7 +1,10 @@
-package com.Gongdae9.domain;
+package com.Gongdae9.message.domain;
 
 import static javax.persistence.FetchType.LAZY;
 
+import com.Gongdae9.bookmark.domain.Bookmark;
+import com.Gongdae9.room.domain.Room;
+import com.Gongdae9.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import javax.persistence.Id;

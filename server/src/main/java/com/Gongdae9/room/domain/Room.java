@@ -1,6 +1,8 @@
-package com.Gongdae9.domain;
+package com.Gongdae9.room.domain;
 
 
+import com.Gongdae9.joinroom.domain.JoinRoom;
+import com.Gongdae9.message.domain.Message;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;

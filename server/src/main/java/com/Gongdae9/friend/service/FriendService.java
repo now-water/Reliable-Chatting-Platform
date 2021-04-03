@@ -1,12 +1,11 @@
 package com.Gongdae9.friend.service;
 
-import com.Gongdae9.domain.Friend;
-import com.Gongdae9.domain.User;
+import com.Gongdae9.friend.domain.Friend;
+import com.Gongdae9.user.domain.User;
 import com.Gongdae9.friend.repository.FriendRepository;
 import com.Gongdae9.user.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

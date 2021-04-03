@@ -2,7 +2,7 @@ package com.Gongdae9.room.repository;
 
 
 
-import com.Gongdae9.domain.Room;
+import com.Gongdae9.room.domain.Room;
 import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

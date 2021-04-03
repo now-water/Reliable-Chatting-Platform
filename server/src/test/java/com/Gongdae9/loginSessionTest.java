@@ -1,6 +1,6 @@
 package com.Gongdae9;
 
-import com.Gongdae9.domain.User;
+import com.Gongdae9.user.domain.User;
 import com.Gongdae9.user.dto.LoginRequestDto;
 import com.Gongdae9.user.service.UserService;
 import org.junit.Test;

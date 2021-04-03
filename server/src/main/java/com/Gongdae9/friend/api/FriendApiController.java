@@ -2,7 +2,7 @@ package com.Gongdae9.friend.api;
 
 
 
-import com.Gongdae9.domain.User;
+import com.Gongdae9.user.domain.User;
 import com.Gongdae9.friend.dto.FriendDto;
 import com.Gongdae9.friend.service.FriendService;
 import com.Gongdae9.user.service.UserService;
@@ -34,15 +34,15 @@ public class FriendApiController {
     }
 
     @PostMapping("/api/friend/add")
-    public boolean addFriend(@RequestBody friendIdDto to, HttpServletRequest req){
+    public boolean addFriend(Long id, HttpServletRequest req){
         long fromId = (Long)req.getSession().getAttribute("userId");
-        return friendService.addFriend(fromId,to.getId());
+        return friendService.addFriend(fromId,id);
     }
   
     @PostMapping("/api/friend/delete/")
     public boolean deleteFriend(@RequestBody friendIdDto to, HttpServletRequest req){
         long fromId = (Long)req.getSession().getAttribute("userId");
-        return friendService.deleteFriend(fromId, toId);
+        return friendService.deleteFriend(fromId, to.getId());
     }
 
     @Data
