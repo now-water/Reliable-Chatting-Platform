@@ -34,19 +34,14 @@ public class FriendApiController {
     }
 
     @PostMapping("/api/friend/add")
-    public boolean addFriend(Long id, HttpServletRequest req){
+    public boolean addFriend(long to, HttpServletRequest req){
         long fromId = (Long)req.getSession().getAttribute("userId");
-        return friendService.addFriend(fromId,id);
+        return friendService.addFriend(fromId,to);
     }
   
     @PostMapping("/api/friend/delete/")
-    public boolean deleteFriend(@RequestBody friendIdDto to, HttpServletRequest req){
+    public boolean deleteFriend(long to, HttpServletRequest req){
         long fromId = (Long)req.getSession().getAttribute("userId");
-        return friendService.deleteFriend(fromId, to.getId());
-    }
-
-    @Data
-    static class friendIdDto{
-        long id;
+        return friendService.deleteFriend(fromId, to);
     }
 }
