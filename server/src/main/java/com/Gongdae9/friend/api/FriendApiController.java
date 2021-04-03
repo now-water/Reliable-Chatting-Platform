@@ -1,9 +1,8 @@
 package com.Gongdae9.friend.api;
 
-import com.Gongdae9.domain.Friend;
+
 import com.Gongdae9.domain.User;
 import com.Gongdae9.friend.dto.FriendDto;
-import com.Gongdae9.friend.repository.FriendRepository;
 import com.Gongdae9.friend.service.FriendService;
 import com.Gongdae9.friend.service.UserService;
 import java.util.List;

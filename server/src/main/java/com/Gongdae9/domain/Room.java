@@ -10,9 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Room {
 
     @Id
@@ -21,12 +23,16 @@ public class Room {
     private Long roomId;
 
     private String roomName;
-    private String state;
+
 
     @OneToMany(mappedBy="room")
     private List<JoinRoom> joinRooms = new ArrayList<JoinRoom>();
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL) // persist 전파
     private List<Message> messages;
+
+    public Room(String name){
+        this.roomName=name;
+    }
 
 }

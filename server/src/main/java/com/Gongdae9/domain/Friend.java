@@ -45,4 +45,9 @@ public class Friend {
 
         return ret;
     }
+
+    public void updateAll(Friend other){
+        this.user=other.user;
+        this.friend=other.friend;
+    }
 }

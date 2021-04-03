@@ -14,11 +14,18 @@ public class FriendRepository {
 
     private final EntityManager em;
 
-    public void save(Friend friend) {
-        if(friend.getId() != null)
-            em.merge(friend);
-        else
-            em.persist(friend);
+    public void save(Friend inputFriend) {
+        if(inputFriend.getId() != null) {
+            updateAll(inputFriend);
+        }
+        else {
+            em.persist(inputFriend);
+        }
+    }
+
+    public void updateAll(Friend inputFriend){
+        Friend friend = em.find(Friend.class,inputFriend.getId());
+        friend.updateAll(inputFriend);
     }
 
     @Transactional(readOnly = true)
