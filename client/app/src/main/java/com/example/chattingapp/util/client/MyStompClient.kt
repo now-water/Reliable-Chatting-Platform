@@ -1,7 +1,10 @@
-package com.example.chattingapp.system.client
+package com.example.chattingapp.util.client
 
+import android.annotation.SuppressLint
 import com.gmail.bishoybasily.stomp.lib.StompClient
+import io.reactivex.functions.Consumer
 import okhttp3.OkHttpClient
+import org.json.JSONObject
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
@@ -15,9 +18,9 @@ object MyStompClient {
     private val INTERVAL_MILLIS = 5000L
     private val TIME_OUT_SECONDS = 10L
 
-    private val messageBuffer = MessageBuffer<String>()
     private lateinit var stomp:StompClient
 
+    @SuppressLint("CheckResult")
     fun connect() {
         val client = OkHttpClient.Builder()
             .readTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
@@ -32,23 +35,20 @@ object MyStompClient {
         }
     }
 
-    fun send(topic:String, message: String){
+    @SuppressLint("CheckResult")
+    fun send(topic:String, message: String, callback : Consumer<Boolean>){
         stomp.send(topic, message).subscribe(){
-            logger.info("send status : " + it)
+            logger.info("send message to server via stomp status : ${it}")
+            callback.accept(it)
         }
     }
 
-    fun subscribe(topic: String){
+    @SuppressLint("CheckResult")
+    fun subscribe(topic: String, callback: Consumer<String>){
         stomp.join(topic).subscribe(){
-            it -> {
-                messageBuffer.addMessage(topic, it)
-                logger.info("received : " + it)
-                println(it)
-            }
+            val message = JSONObject(it).getString("content")
+            logger.info("get message from server via stomp : ${message}")
+            callback.accept(message)
         }
-    }
-
-    fun getData(topic: String):List<String>{
-        return messageBuffer.getMessages(topic)
     }
 }
