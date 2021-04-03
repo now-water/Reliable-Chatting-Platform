@@ -1,15 +1,17 @@
-package com.Gongdae9.friend.api;
+package com.Gongdae9.user.api;
 
 import com.Gongdae9.domain.User;
-import com.Gongdae9.friend.dto.FriendDto;
-import com.Gongdae9.friend.service.UserService;
-import com.Gongdae9.user.dto.CreateUserRequest;
+import com.Gongdae9.user.dto.LoginRequestDto;
+import com.Gongdae9.user.service.UserService;
+import com.Gongdae9.user.dto.SignupRequestDto;
 import com.Gongdae9.user.dto.UserDto;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,16 +31,33 @@ public class UserApiController {
         return users;
     }
 
-    @PostMapping("/api/user/create")
-    public long createUser(@RequestBody @Valid CreateUserRequest request){
-        User user = User.builder()
-            .name(request.getName())
-            .phoneNum(request.getPhoneNum())
-            .nickName(request.getNickName())
-            .accountId(request.getAccountId())
-            .password(request.getPassword())
-            .build();
-        userService.save(user);
-        return user.getUserId();
+    @GetMapping("/api/user/checkSession")
+    public long checkSession(HttpServletRequest req){
+        Object userId = req.getSession().getAttribute("userId");
+        return (long)userId;
     }
+
+    @PostMapping("/api/user/login")
+    public long signIn(@RequestBody @Valid LoginRequestDto req, HttpServletRequest servletRequest){
+        return userService.login(req, servletRequest.getSession());
+    }
+
+    @PostMapping("/api/user/signup")
+    public long signUp(@RequestBody @Valid SignupRequestDto req, Errors errors){
+
+        if(errors.hasErrors()){
+            return -1;
+        }
+
+        User user = User.builder()
+            .name(req.getName())
+            .phoneNum(req.getPhoneNum())
+            .nickName(req.getNickName())
+            .accountId(req.getAccountId())
+            .password(req.getPassword())
+            .build();
+
+        return userService.signUp(user);
+    }
+
 }
