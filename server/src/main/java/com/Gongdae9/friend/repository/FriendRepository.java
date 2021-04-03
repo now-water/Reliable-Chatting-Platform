@@ -33,7 +33,9 @@ public class FriendRepository {
     }
 
     public void remove(Long id) {
-        em.remove(em.find(Friend.class, id));
+        Friend friend = em.find(Friend.class,id);
+        friend.getUser().getFriends().remove(friend);
+        em.remove(friend);
     }
 
     @Transactional(readOnly = true)
