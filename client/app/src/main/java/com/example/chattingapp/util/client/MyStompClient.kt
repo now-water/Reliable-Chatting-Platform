@@ -12,8 +12,8 @@ import java.util.logging.Logger
 object MyStompClient {
     private val logger = Logger.getLogger(MyStompClient.javaClass.name)
 
-    private val EMULATOR_URL = "ws://10.0.2.2:8080"
-    private val END_POINT = "/endpoint/websocket"
+    private val EMULATOR_URL = "ws://10.0.2.2:8080/"
+    private val END_POINT = "endpoint/websocket"
 
     private val INTERVAL_MILLIS = 5000L
     private val TIME_OUT_SECONDS = 10L

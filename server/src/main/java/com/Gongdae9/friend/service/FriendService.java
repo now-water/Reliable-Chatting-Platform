@@ -5,6 +5,8 @@ import com.Gongdae9.domain.User;
 import com.Gongdae9.friend.repository.FriendRepository;
 import com.Gongdae9.user.repository.UserRepository;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +46,25 @@ public class FriendService {
         if(!check){
             Friend friend = Friend.createFriendShip(from, to);
             friendRepository.save(friend);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Transactional
+    public boolean deleteFriend(long fromId,long toId){
+        User from = userRepository.findById(fromId);
+
+        if(fromId==toId) return false;
+
+        Optional<Friend> first = from.getFriends().stream()
+            .filter(a -> a.getFriend().getUserId() == toId)
+            .findFirst();
+
+        if(first.isPresent()){
+            Friend friend = first.get();
+            friendRepository.remove(friend.getId());
             return true;
         }
 
