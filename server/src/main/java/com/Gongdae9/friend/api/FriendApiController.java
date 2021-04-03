@@ -34,4 +34,9 @@ public class FriendApiController {
     public boolean addFriend(@PathVariable("from") long fromId, @PathVariable("to") long toId){
         return friendService.addFriend(fromId,toId);
     }
+
+    @PostMapping("/api/friend/delete/{from}/{to}")
+    public boolean deleteFriend(@PathVariable("from") long fromId, @PathVariable("to") long toId){
+        return friendService.deleteFriend(fromId,toId);
+    }
 }
