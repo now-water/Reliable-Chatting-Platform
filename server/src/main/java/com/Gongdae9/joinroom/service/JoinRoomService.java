@@ -1,12 +1,14 @@
 package com.Gongdae9.joinroom.service;
 
 
+
 import com.Gongdae9.domain.JoinRoom;
 import com.Gongdae9.domain.Room;
 import com.Gongdae9.domain.User;
 import com.Gongdae9.user.service.UserService;
 import com.Gongdae9.joinroom.repository.JoinRoomRepository;
 import com.Gongdae9.room.service.RoomService;
+import com.Gongdae9.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,9 @@
-package com.Gongdae9.domain;
+package com.Gongdae9.joinroom.domain;
 
 
+import com.Gongdae9.bookmark.domain.Bookmark;
+import com.Gongdae9.room.domain.Room;
+import com.Gongdae9.user.domain.User;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

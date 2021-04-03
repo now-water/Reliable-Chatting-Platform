@@ -1,15 +1,12 @@
 package com.Gongdae9.user.service;
 
-import com.Gongdae9.domain.Friend;
-import com.Gongdae9.domain.User;
-import com.Gongdae9.friend.repository.FriendRepository;
+import com.Gongdae9.user.domain.User;
 import com.Gongdae9.user.dto.LoginRequestDto;
 import com.Gongdae9.user.repository.UserRepository;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

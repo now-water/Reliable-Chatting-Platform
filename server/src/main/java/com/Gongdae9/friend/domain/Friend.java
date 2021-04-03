@@ -1,9 +1,8 @@
-package com.Gongdae9.domain;
+package com.Gongdae9.friend.domain;
 
 import static javax.persistence.FetchType.LAZY;
 
-import com.Gongdae9.domain.User;
-import javax.persistence.CascadeType;
+import com.Gongdae9.user.domain.User;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Getter

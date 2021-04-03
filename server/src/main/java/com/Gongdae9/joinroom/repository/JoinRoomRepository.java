@@ -1,8 +1,7 @@
 package com.Gongdae9.joinroom.repository;
 
 
-import com.Gongdae9.domain.Friend;
-import com.Gongdae9.domain.JoinRoom;
+import com.Gongdae9.joinroom.domain.JoinRoom;
 import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

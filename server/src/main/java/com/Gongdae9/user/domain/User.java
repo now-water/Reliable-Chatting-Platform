@@ -1,6 +1,9 @@
-package com.Gongdae9.domain;
+package com.Gongdae9.user.domain;
 
 
+import com.Gongdae9.friend.domain.Friend;
+import com.Gongdae9.joinroom.domain.JoinRoom;
+import com.Gongdae9.message.domain.Message;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -12,7 +15,6 @@ import javax.persistence.OneToMany;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Getter
@@ -47,6 +49,4 @@ public class User {
         this.accountId = accountId;
         this.password = password;
     }
-
-    
 }

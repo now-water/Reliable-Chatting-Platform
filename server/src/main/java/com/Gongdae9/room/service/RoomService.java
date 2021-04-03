@@ -1,7 +1,7 @@
 package com.Gongdae9.room.service;
 
 
-import com.Gongdae9.domain.Room;
+import com.Gongdae9.room.domain.Room;
 import com.Gongdae9.room.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
