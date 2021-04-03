@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/red_214_81_71">
+
+        <LinearLayout
+            android:id="@+id/widget_action_bar_back_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/back" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/widget_title_bar_basic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:letterSpacing="-0.1"
+            android:text="비밀번호 변경"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="21dp"
+        android:text="기존 비밀번호"
+        android:textColor="#333333"
+        android:textSize="13sp">
+    </TextView>
+
+    <EditText
+        android:id="@+id/input_old_pass"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/transparent"
+        android:hint="기존 비밀번호를 입력해주세요."
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textSize="14sp">
+
+    </EditText>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#e9e9e9"></View>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="21dp"
+        android:text="새로운 비밀번호"
+        android:textColor="#333333"
+        android:textSize="13sp">
+
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/input_new_pass"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/transparent"
+        android:hint="비밀번호 (영문,숫자 혼합 8자 이상)"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textSize="14sp">
+
+    </EditText>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#e9e9e9"></View>
+
+    <EditText
+        android:id="@+id/input_new_pass_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginRight="15dp"
+        android:background="@android:color/transparent"
+        android:hint="비밀번호 확인"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textSize="14sp">
+
+    </EditText>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#e9e9e9"></View>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/pass_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15.7dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/corner_radius_red"
+            android:text="저장하기"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold">
+
+        </Button>
+
+    </LinearLayout>
+
+</LinearLayout>
