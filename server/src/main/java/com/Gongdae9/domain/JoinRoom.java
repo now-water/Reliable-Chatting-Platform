@@ -32,6 +32,11 @@ public class JoinRoom {
     @OneToMany(mappedBy = "joinRoom", cascade = CascadeType.ALL) // persist 전파
     private List<Bookmark> bookmarks;
 
+    public JoinRoom(User user,Room room){
+        setUser(user);
+        setRoom(room);
+    }
+
     // 연관관계 편의 메소드
     public void setUser(User user){
         if(this.user!=null){
