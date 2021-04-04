@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_border">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -22,7 +23,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/sym_def_app_icon" />
+            app:srcCompat="@android:color/holo_red_light" />
     </androidx.cardview.widget.CardView>
 
     <TextView
