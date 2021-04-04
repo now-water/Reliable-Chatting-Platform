@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.e("MSG", "TEST")
-        setContentView(R.layout.activity_main)
-
+        setContentView(R.layout.activity_message_chat)
+        //테스트를 위해서 수정
         setFrag(0)
 
         btn_userlist.setOnClickListener {

@@ -7,4 +7,14 @@
     <color name="red_214_81_71">#D65147</color>
     <color name="white">#ffffff</color>
 
+
+    <!--투명도-->
+    <color name="color_Opacity60">#66000000</color>
+    <color name="color_Opacity20">#22000000</color>
+    <color name="color_Opacity10">#11000000</color>
+    <color name="color_Opacity30">#33000000</color>
+    <color name="color_Opacity40">#44000000</color>
+    <color name="color_Opacity80">#CC000000</color>
+    <color name="color_Opacity100">#00000000</color>
+
 </resources>
