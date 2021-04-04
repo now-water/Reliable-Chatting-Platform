@@ -26,6 +26,7 @@
         android:orientation="horizontal">
 
         <RelativeLayout
+            android:id="@+id/btn_userlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -39,6 +40,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/btn_chatlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -52,6 +54,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/btn_setting"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
