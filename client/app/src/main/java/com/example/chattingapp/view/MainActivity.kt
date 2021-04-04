@@ -14,19 +14,19 @@ class MainActivity : AppCompatActivity() {
         Log.e("MSG", "TEST")
         setContentView(R.layout.activity_message_chat)
         //테스트를 위해서 수정
-        setFrag(0)
-
-        btn_userlist.setOnClickListener {
-            setFrag(0)
-        }
-
-        btn_chatlist.setOnClickListener {
-            setFrag(1)
-        }
-
-        btn_setting.setOnClickListener {
-            setFrag(2)
-        }
+//        setFrag(0)
+//
+//        btn_userlist.setOnClickListener {
+//            setFrag(0)
+//        }
+//
+//        btn_chatlist.setOnClickListener {
+//            setFrag(1)
+//        }
+//
+//        btn_setting.setOnClickListener {
+//            setFrag(2)
+//        }
 
     }
 

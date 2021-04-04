@@ -14,7 +14,7 @@
         android:layout_height="35dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="7dp"
-        android:src="@drawable/chat_camera" />
+        android:src="@drawable/sample_pro" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
