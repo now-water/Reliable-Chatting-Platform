@@ -1,4 +1,4 @@
-package com.example.chattingapp.view
+package com.example.chattingapp.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
