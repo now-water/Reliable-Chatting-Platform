@@ -2,18 +2,16 @@ package com.example.chattingapp.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.chattingapp.dto.User
-import com.example.chattingapp.util.client.RestServiceGenerator
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.TimeUnit
 
 
 @RunWith(AndroidJUnit4::class)
-class UserServiceTest {
+class UserApiTest {
     @Test
-    fun getUsersTest(){
-        userService.getUsers().enqueue(ServiceCallback<List<User>>(){
+    fun testGetAll(){
+        restApiService.getUsers().enqueue(ServiceCallback<List<User>>(){
             val users = it.body() as List<User>
             println(users.toString())
             val user1 = users.get(0)
@@ -24,30 +22,30 @@ class UserServiceTest {
 
 
     @Test
-    fun signUpTest(){
+    fun testSignUp(){
         val user = User("ma", "jasin", "itna", "123", "1234")
-        userService.signUp(user).enqueue(ServiceCallback<String>(){
+        restApiService.signUp(user).enqueue(ServiceCallback<String>(){
             assertEquals(it.code(), 200)
         })
     }
 
     @Test
-    fun signInTest(){
+    fun testSignIn(){
         val user = User("ma", "jasin", "itna", "123", "1234")
-        userService.loginUser(user).enqueue(ServiceCallback<Integer>(){
+        restApiService.loginUser(user).enqueue(ServiceCallback<Integer>(){
             assertEquals(it.code(), 200)
             assertNotEquals(it.body() as Int, -1)
         })
     }
 
     @Test
-    fun checkSession(){
+    fun testSession(){
         val user = User("ma", "jasin", "itna", "123", "1234")
-        userService.loginUser(user).enqueue(ServiceCallback<Integer>(){ it ->
+        restApiService.loginUser(user).enqueue(ServiceCallback<Integer>(){ it ->
             assertEquals(it.code(), 200)
             assertNotEquals(it.body() as Int, -1)
 
-            userService.isLogined().enqueue(ServiceCallback<Integer>(){
+            restApiService.isLogined().enqueue(ServiceCallback<Integer>(){
                 assertEquals(it.code(), 200)
             })
         })
@@ -55,7 +53,7 @@ class UserServiceTest {
 
     companion object {
         @JvmStatic
-        var userService : UserService = UserService.instance
+        var restApiService : RestApiService = RestApiService.instance
     }
 }
 

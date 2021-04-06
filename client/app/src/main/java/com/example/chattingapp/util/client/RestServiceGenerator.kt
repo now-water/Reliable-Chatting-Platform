@@ -35,22 +35,4 @@ object RestServiceGenerator {
         val retrofit = builder.build()
         return retrofit.create(serviceClass)
     }
-
-    private class SessionCookieJar : CookieJar {
-        private lateinit var cookies : List<Cookie>
-
-        override fun saveFromResponse(url: HttpUrl, cookies: MutableList<Cookie>) {
-            if (url.encodedPath().endsWith("login")) {
-                this.cookies = cookies
-            }
-        }
-
-        override fun loadForRequest(url: HttpUrl): List<Cookie> {
-            if (!url.encodedPath().endsWith("login") && cookies != null) {
-                return cookies;
-            }
-            return Collections.emptyList();
-        }
-
-    }
 }
