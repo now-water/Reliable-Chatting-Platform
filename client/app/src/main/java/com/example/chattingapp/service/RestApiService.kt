@@ -19,6 +19,10 @@ interface RestApiService {
     @POST("/api/friend/add") fun addFriend(@Query("to") toId : Int) : Call<String>
     @POST("/api/friend/delete/") fun deleteFriend(@Query("to") toId : Int) : Call<String>
 
+
+    // Room Api
+    @POST("/api/room/create") fun createRoom(@Query("roomName") roomName : String) : Call<String>
+
     companion object {
         val instance = RestServiceGenerator.createService(RestApiService::class.java)
     }

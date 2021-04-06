@@ -23,7 +23,6 @@ class UserApiTest {
 
     @Test
     fun testSignUp(){
-        val user = User("ma", "jasin", "itna", "123", "1234")
         restApiService.signUp(user).enqueue(ServiceCallback<String>(){
             assertEquals(it.code(), 200)
         })
@@ -31,7 +30,6 @@ class UserApiTest {
 
     @Test
     fun testSignIn(){
-        val user = User("ma", "jasin", "itna", "123", "1234")
         restApiService.loginUser(user).enqueue(ServiceCallback<Integer>(){
             assertEquals(it.code(), 200)
             assertNotEquals(it.body() as Int, -1)
@@ -40,20 +38,17 @@ class UserApiTest {
 
     @Test
     fun testSession(){
-        val user = User("ma", "jasin", "itna", "123", "1234")
-        restApiService.loginUser(user).enqueue(ServiceCallback<Integer>(){ it ->
-            assertEquals(it.code(), 200)
-            assertNotEquals(it.body() as Int, -1)
-
+        ServiceTestUtils.loginAndDo(restApiService, user){
             restApiService.isLogined().enqueue(ServiceCallback<Integer>(){
                 assertEquals(it.code(), 200)
             })
-        })
+        }
     }
 
     companion object {
         @JvmStatic
         var restApiService : RestApiService = RestApiService.instance
+        val user = User("ma", "jasin", "itna", "123", "1234")
     }
 }
 
