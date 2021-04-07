@@ -9,8 +9,8 @@ import com.example.chattingapp.R
 import com.example.chattingapp.model.User
 
 // Main Userlist type Adapter
-class UserListAdapter(val context: Context, val userList: ArrayList<User>) :
-    RecyclerView.Adapter<UserListAdapter.Holder>() {
+class UserlistAdapter(val context: Context, val userList: ArrayList<User>) :
+    RecyclerView.Adapter<UserlistAdapter.Holder>() {
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val nameText = itemView?.findViewById<TextView>(R.id.nameText)
