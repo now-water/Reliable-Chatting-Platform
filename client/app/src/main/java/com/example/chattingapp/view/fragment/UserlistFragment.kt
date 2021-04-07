@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chattingapp.R
-import com.example.chattingapp.adapter.UserListAdapter
+import com.example.chattingapp.adapter.UserlistAdapter
 import com.example.chattingapp.model.User
 import kotlinx.android.synthetic.main.fragment_userlist.*
 
@@ -28,15 +28,15 @@ class UserlistFragment : Fragment() {
         userList.add(User("ostar", "I'm ostar", "1.jpg"))
         userList.add(User("mook", "hihi", "2.jpg"))
         userList.add(User("hyunmin", "I'm hyunmin", "3.jpg"))
-        userList.add(User("hyunmin", "I'm hyunmin", "3.jpg"))
-        userList.add(User("hyunmin", "I'm hyunmin", "3.jpg"))
-        userList.add(User("hyunmin", "I'm hyunmin", "3.jpg"))
+        userList.add(User("hyunsu", "답장 늦을수도..", "3.jpg"))
+        userList.add(User("nowwater", "I'm nowwater", "3.jpg"))
+        userList.add(User("hyolong", "데헷", "3.jpg"))
         userList.add(User("hyunmin", "I'm hyunmin", "3.jpg"))
         userList.add(User("hyunmin", "I'm hyunmin", "3.jpg"))
         userList.add(User("hyunmin", "I'm hyunmin", "3.jpg"))
         // temporary data setting
 
-        recyclerUserlist.adapter = UserListAdapter(requireContext(), userList)
+        recyclerUserlist.adapter = UserlistAdapter(requireContext(), userList)
         recyclerUserlist.layoutManager = LinearLayoutManager(requireContext())
         recyclerUserlist.setHasFixedSize(true)
     }

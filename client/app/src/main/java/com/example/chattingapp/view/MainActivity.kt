@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.chattingapp.R
+import com.example.chattingapp.view.fragment.ChatlistFragment
 import com.example.chattingapp.view.fragment.SettingFragment
 import com.example.chattingapp.view.fragment.UserlistFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -12,21 +13,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.e("MSG", "TEST")
-        setContentView(R.layout.activity_message_chat)
+        setContentView(R.layout.activity_main)
         //테스트를 위해서 수정
-//        setFrag(0)
-//
-//        btn_userlist.setOnClickListener {
-//            setFrag(0)
-//        }
-//
-//        btn_chatlist.setOnClickListener {
-//            setFrag(1)
-//        }
-//
-//        btn_setting.setOnClickListener {
-//            setFrag(2)
-//        }
+        setFrag(0)
+
+        btn_userlist.setOnClickListener {
+            setFrag(0)
+        }
+
+        btn_chatlist.setOnClickListener {
+            setFrag(1)
+        }
+
+        btn_setting.setOnClickListener {
+            setFrag(2)
+        }
 
     }
 
@@ -36,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         when (fragNum) {
             0 -> {
                 ft.replace(R.id.main_frame, UserlistFragment()).commit()
+            }
+            1 -> {
+                ft.replace(R.id.main_frame, ChatlistFragment()).commit()
             }
             2 -> {
                 ft.replace(R.id.main_frame, SettingFragment()).commit()
