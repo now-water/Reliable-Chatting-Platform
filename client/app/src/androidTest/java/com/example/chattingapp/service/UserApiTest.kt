@@ -2,6 +2,7 @@ package com.example.chattingapp.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.chattingapp.dto.User
+import com.example.chattingapp.service.user.UserApiService
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -11,43 +12,31 @@ import org.junit.runner.RunWith
 class UserApiTest {
     @Test
     fun testGetAll(){
-        restApiService.getUsers().enqueue(ServiceCallback<List<User>>(){
-            val users = it.body() as List<User>
-            println(users.toString())
-            val user1 = users.get(0)
-            assertTrue(user1.name.equals("mu"))
-            assertTrue(user1.accountId.equals("1"))
-        })
+        userApiService.getUsers(){
+            val user1 = it[0]
+            assertEquals(user1.name, "mu")
+            assertEquals(user1.accountId, "1")
+        }
     }
 
-
-    @Test
-    fun testSignUp(){
-        restApiService.signUp(user).enqueue(ServiceCallback<String>(){
-            assertEquals(it.code(), 200)
-        })
-    }
 
     @Test
     fun testSignIn(){
-        restApiService.loginUser(user).enqueue(ServiceCallback<Integer>(){
-            assertEquals(it.code(), 200)
-            assertNotEquals(it.body() as Int, -1)
-        })
+        userApiService.signIn(user){
+            assertNotEquals(it, -1)
+        }
     }
 
     @Test
-    fun testSession(){
-        ServiceTestUtils.loginAndDo(restApiService, user){
-            restApiService.isLogined().enqueue(ServiceCallback<Integer>(){
-                assertEquals(it.code(), 200)
-            })
+    fun testSignUp(){
+        userApiService.signUp(user){
+            assertNotEquals(it, -1)
         }
     }
 
     companion object {
         @JvmStatic
-        var restApiService : RestApiService = RestApiService.instance
+        val userApiService = UserApiService.instance
         val user = User("ma", "jasin", "itna", "123", "1234")
     }
 }

@@ -1,17 +1,16 @@
-package com.example.chattingapp.util.client
+package com.example.chattingapp.service.util.rest
 
 import okhttp3.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.CookieManager
 import java.net.CookiePolicy
-import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
 
 
-object RestServiceGenerator {
-    private val logger = Logger.getLogger(RestServiceGenerator.javaClass.name)
+object RestApiServiceGenerator {
+    private val logger = Logger.getLogger(RestApiServiceGenerator.javaClass.name)
 
     private val EMULATOR_URL = "http://10.0.2.2:8080/"
 
