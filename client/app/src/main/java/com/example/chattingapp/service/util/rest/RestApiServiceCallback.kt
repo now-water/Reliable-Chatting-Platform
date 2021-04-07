@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RestServiceCallback<T : Any?>(val callbackOnResponse: Consumer<T>) : Callback<T> {
+class RestApiServiceCallback<T : Any?>(val callbackOnResponse: Consumer<T>) : Callback<T> {
     override fun onResponse(call: Call<T>, response: Response<T>){
         if(response.code() != 200)
             throw IllegalStateException("status code is not 200")

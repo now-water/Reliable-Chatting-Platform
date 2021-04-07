@@ -23,6 +23,6 @@ interface RestApiService {
     @POST("/api/room/create") fun createRoom(@Query("roomName") roomName : String) : Call<String>
 
     companion object {
-        val instance = RestServiceGenerator.createService(RestApiService::class.java)
+        val instance = RestApiServiceGenerator.createService(RestApiService::class.java)
     }
 }

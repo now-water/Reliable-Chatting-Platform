@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
 
 
-object RestServiceGenerator {
-    private val logger = Logger.getLogger(RestServiceGenerator.javaClass.name)
+object RestApiServiceGenerator {
+    private val logger = Logger.getLogger(RestApiServiceGenerator.javaClass.name)
 
     private val EMULATOR_URL = "http://10.0.2.2:8080/"
 
