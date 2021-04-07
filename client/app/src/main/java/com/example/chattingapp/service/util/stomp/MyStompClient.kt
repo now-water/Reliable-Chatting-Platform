@@ -1,4 +1,4 @@
-package com.example.chattingapp.util.client
+package com.example.chattingapp.service.util.stomp
 
 import android.annotation.SuppressLint
 import com.gmail.bishoybasily.stomp.lib.StompClient

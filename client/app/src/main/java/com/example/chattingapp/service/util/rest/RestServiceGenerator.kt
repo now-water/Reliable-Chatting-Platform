@@ -1,11 +1,10 @@
-package com.example.chattingapp.util.client
+package com.example.chattingapp.service.util.rest
 
 import okhttp3.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.CookieManager
 import java.net.CookiePolicy
-import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
 

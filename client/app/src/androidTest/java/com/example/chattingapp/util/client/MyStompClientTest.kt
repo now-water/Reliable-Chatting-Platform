@@ -1,6 +1,7 @@
 package com.example.chattingapp.util.client
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.chattingapp.service.util.stomp.MyStompClient
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
