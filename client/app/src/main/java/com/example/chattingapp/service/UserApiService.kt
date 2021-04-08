@@ -1,4 +1,4 @@
-package com.example.chattingapp.service.user
+package com.example.chattingapp.service
 
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.util.rest.RestApiService
@@ -6,6 +6,7 @@ import com.example.chattingapp.service.util.rest.RestApiServiceCallback
 import io.reactivex.functions.Consumer
 
 class UserApiService(private val restApiService: RestApiService) {
+
     fun getUsers(callback : Consumer<List<User>>){
         restApiService.getUsers().enqueue(RestApiServiceCallback(callback))
     }
