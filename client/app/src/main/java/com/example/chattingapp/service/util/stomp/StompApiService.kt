@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import com.gmail.bishoybasily.stomp.lib.StompClient
 import io.reactivex.functions.Consumer
 import okhttp3.OkHttpClient
-import org.json.JSONObject
+import java.lang.IllegalStateException
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
 
-object MyStompClient {
-    private val logger = Logger.getLogger(MyStompClient.javaClass.name)
+class StompApiService {
+    private val logger = Logger.getLogger(StompApiService::class.java.name)
 
     private val EMULATOR_URL = "ws://10.0.2.2:8080/"
     private val END_POINT = "endpoint/websocket"
@@ -19,6 +19,10 @@ object MyStompClient {
     private val TIME_OUT_SECONDS = 10L
 
     private lateinit var stomp:StompClient
+
+    init {
+        connect()
+    }
 
     @SuppressLint("CheckResult")
     fun connect() {
@@ -31,6 +35,7 @@ object MyStompClient {
         stomp = StompClient(client, INTERVAL_MILLIS).apply { this@apply.url = EMULATOR_URL + END_POINT }
         println(stomp.url)
         stomp.connect().subscribe(){
+            throw IllegalStateException("cannot connect to server with stomp protocol")
             logger.info(it.type.toString())
         }
     }
@@ -38,7 +43,6 @@ object MyStompClient {
     @SuppressLint("CheckResult")
     fun send(topic:String, message: String, callback : Consumer<Boolean>){
         stomp.send(topic, message).subscribe(){
-            logger.info("send message to server via stomp status : ${it}")
             callback.accept(it)
         }
     }
@@ -46,9 +50,7 @@ object MyStompClient {
     @SuppressLint("CheckResult")
     fun subscribe(topic: String, callback: Consumer<String>){
         stomp.join(topic).subscribe(){
-            val message = JSONObject(it).getString("content")
-            logger.info("get message from server via stomp : ${message}")
-            callback.accept(message)
+            callback.accept(it)
         }
     }
 }

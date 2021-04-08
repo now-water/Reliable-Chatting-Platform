@@ -1,4 +1,4 @@
-package com.example.chattingapp.service.user
+package com.example.chattingapp.service
 
 import com.example.chattingapp.service.util.rest.RestApiService
 import com.example.chattingapp.service.util.rest.RestApiServiceCallback
