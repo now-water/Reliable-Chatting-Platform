@@ -8,10 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
 import com.example.chattingapp.model.ChatRoom
+import io.reactivex.functions.BiConsumer
 
 // Main Chatlist type Adapter
-class ChatlistAdapter(val context: Context, val chatList: ArrayList<ChatRoom>) : RecyclerView.Adapter<ChatlistAdapter.Holder>() {
-
+class ChatlistAdapter(val context: Context, val chatList: ArrayList<ChatRoom>, val onClickListener: BiConsumer<View, ChatRoom>) : RecyclerView.Adapter<ChatlistAdapter.Holder>() {
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val roomnameText = itemView?.findViewById<TextView>(R.id.roomname)
         val curmessageText = itemView?.findViewById<TextView>(R.id.curmessage)
@@ -31,6 +31,9 @@ class ChatlistAdapter(val context: Context, val chatList: ArrayList<ChatRoom>) :
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder?.bind(chatList[position], context)
+        holder?.itemView.setOnClickListener{
+            onClickListener.accept(it, chatList[position])
+        }
     }
 
     override fun getItemCount(): Int {

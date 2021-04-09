@@ -7,7 +7,7 @@ data class ChatMessage (
     val roomId : Long,
 
     @SerializedName("userId")
-    val userId : Long,
+    val userId : Int,
 
     @SerializedName("bookmarkId")
     val bookmarkId : Long,

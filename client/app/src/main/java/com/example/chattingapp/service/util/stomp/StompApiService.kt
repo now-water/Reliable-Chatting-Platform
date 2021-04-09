@@ -1,6 +1,7 @@
 package com.example.chattingapp.service.util.stomp
 
 import android.annotation.SuppressLint
+import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
 import io.reactivex.functions.Consumer
 import okhttp3.OkHttpClient
@@ -35,7 +36,8 @@ class StompApiService {
         stomp = StompClient(client, INTERVAL_MILLIS).apply { this@apply.url = EMULATOR_URL + END_POINT }
         println(stomp.url)
         stomp.connect().subscribe(){
-            throw IllegalStateException("cannot connect to server with stomp protocol")
+            if(it.type != Event.Type.OPENED)
+                throw IllegalStateException("cannot connect to server with stomp protocol")
             logger.info(it.type.toString())
         }
     }
