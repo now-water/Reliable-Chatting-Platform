@@ -6,243 +6,298 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.SettingFragment">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:context=".view.SettingActivity">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="328dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:context=".view.SettingActivity">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="280dp"
-                    android:background="@android:color/white">
+                    android:layout_height="328dp"
+                    android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout2"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:layout_marginTop="120dp"
-                        android:background="#D65147"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1.0"
-                        tools:layout_editor_absoluteX="-16dp">
+                        android:layout_height="280dp"
+                        android:background="@android:color/white">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraintLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"
+                            android:layout_marginTop="120dp"
+                            android:background="#ED9282"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0"
+                            tools:layout_editor_absoluteX="-16dp">
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="150dp"
+                            android:layout_height="30dp"
+                            android:layout_below="@+id/profile_photo"
+                            android:layout_alignParentEnd="false"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="sans-serif"
+                            android:gravity="center"
+                            android:text="프로필이름"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/profile_photo" />
+
+                        <ImageView
+                            android:id="@+id/profile_photo"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="70dp"
+                            android:adjustViewBounds="false"
+                            android:background="#FFFFFF"
+                            android:src="@mipmap/ic_launcher"
+
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.498"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/tv_name"
-                        android:layout_width="150dp"
-                        android:layout_height="30dp"
-                        android:layout_below="@+id/profile_photo"
-                        android:layout_alignParentEnd="false"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
-                        android:gravity="center"
-                        android:text="프로필이름"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/profile_photo" />
-
-                    <ImageView
-                        android:id="@+id/profile_photo"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_centerInParent="true"
-                        android:layout_marginTop="70dp"
-                        android:adjustViewBounds="false"
-                        android:background="#FFFFFF"
-                        android:src="@mipmap/ic_launcher"
-
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="403dp"
-                android:background="#FFFFFF"
-                android:orientation="vertical">
-
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="17dp"
-                    android:orientation="horizontal">
+                    android:layout_height="403dp"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="23dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@android:drawable/list_selector_background"
+                            android:text="내 정보 수정"
+                            android:textColor="#1b1b1b"
+                            android:textSize="15.8sp">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="8.7dp"
+                        android:background="#F6F6F6">
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="23dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@android:drawable/list_selector_background"
+                            android:text="공지사항"
+                            android:textColor="#1b1b1b"
+                            android:textSize="15.8sp">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="8.7dp"
+                        android:background="#F6F6F6">
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="23dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@android:drawable/list_selector_background"
+                            android:text="버전정보"
+                            android:textColor="#1b1b1b"
+                            android:textSize="15.8sp">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="8.7dp"
+                        android:background="#F6F6F6">
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="23dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="17dp"
                         android:background="@android:drawable/list_selector_background"
-                        android:text="내 정보 수정"
-                        android:textColor="#1b1b1b"
-                        android:textSize="15.8sp">
+                        android:orientation="horizontal">
 
-                    </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="보안"
+                            android:textColor="#1b1b1b"
+                            android:textSize="15.8sp">
 
-                </LinearLayout>
+                        </TextView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="8.7dp"
-                    android:background="#F6F6F6">
+                    </LinearLayout>
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="8.7dp"
+                        android:background="#F6F6F6">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="17dp"
-                    android:orientation="horizontal">
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@android:drawable/list_selector_background"
-                        android:text="공지사항"
-                        android:textColor="#1b1b1b"
-                        android:textSize="15.8sp">
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="23dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="17dp"
+                        android:orientation="horizontal">
 
-                    </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@android:drawable/list_selector_background"
+                            android:text="메시지 통계"
+                            android:textColor="#1b1b1b"
+                            android:textSize="15.8sp">
 
-                </LinearLayout>
+                        </TextView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="8.7dp"
-                    android:background="#F6F6F6">
+                    </LinearLayout>
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="8.7dp"
+                        android:background="#F6F6F6">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="17dp"
-                    android:orientation="horizontal">
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@android:drawable/list_selector_background"
-                        android:text="버전정보"
-                        android:textColor="#1b1b1b"
-                        android:textSize="15.8sp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#F6F6F6">
 
-                    </TextView>
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="8.7dp"
-                    android:background="#F6F6F6">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="17dp"
-                    android:background="@android:drawable/list_selector_background"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="보안"
-                        android:textColor="#1b1b1b"
-                        android:textSize="15.8sp">
-
-                    </TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="8.7dp"
-                    android:background="#F6F6F6">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="23dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="17dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@android:drawable/list_selector_background"
-                        android:text="메시지 통계"
-                        android:textColor="#1b1b1b"
-                        android:textSize="15.8sp">
-
-                    </TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="8.7dp"
-                    android:background="#F6F6F6">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#F6F6F6">
-
-                </LinearLayout>
 
             </LinearLayout>
 
 
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F16B6F">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/orbitron"
+            android:text="Setting"
+            android:textColor="#f8ecc9"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_search" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_ivory_setting" />
         </LinearLayout>
 
-
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
