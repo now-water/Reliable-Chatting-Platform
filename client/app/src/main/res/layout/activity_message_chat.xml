@@ -13,6 +13,7 @@
         layout="@layout/widget_bar_title_back" />
 
     <RelativeLayout
+        android:id="@+id/frag_chat_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/chat_input_layout"

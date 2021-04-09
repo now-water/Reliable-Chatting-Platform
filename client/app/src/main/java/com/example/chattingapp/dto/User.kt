@@ -3,6 +3,9 @@ package com.example.chattingapp.dto
 import com.google.gson.annotations.SerializedName
 
 data class User (
+    @SerializedName("userId")
+    val userId : Int,
+
     @SerializedName("accountId")
     val accountId : String,
 
