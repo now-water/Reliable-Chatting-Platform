@@ -14,6 +14,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".view.MainActivity"></activity>
         <activity android:name=".view.MessageChatActivity" />
+        <activity android:name=".view.LoginActivity"/>
         <activity android:name=".view.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
