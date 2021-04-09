@@ -9,7 +9,8 @@ import com.example.chattingapp.R
 class IntroActivity : AppCompatActivity() {
 
     val r = Runnable() {
-        intent = Intent(this, MainActivity::class.java)
+//        intent = Intent(this, MainActivity::class.java)
+        intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
