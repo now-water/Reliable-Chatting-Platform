@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     // 로그인 요청
-    fun requestLogin(id: String?, password: String?) {
+    fun requestLogin(id: String, password: String) {
         //사용자 앱 memType = P
         //password error = 409
 //        RetrofitClient.getInstance(this)

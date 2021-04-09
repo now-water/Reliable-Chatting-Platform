@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.chattingapp.R
-import com.example.chattingapp.view.fragment.ChatlistFragment
-import com.example.chattingapp.view.fragment.SettingFragment
-import com.example.chattingapp.view.fragment.UserlistFragment
+import com.example.chattingapp.view.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
