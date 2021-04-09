@@ -19,4 +19,11 @@ public class JoinRoomApiController {
         long userId = (Long)req.getSession().getAttribute("userId");
         return joinRoomService.createRoom(userId,roomName);
     }
+
+
+    @PostMapping("/api/room/invite")
+    public boolean inviteRoom(HttpServletRequest req,Long toId,Long roomId){
+        long fromId= (Long)req.getSession().getAttribute("userId");
+        return joinRoomService.inviteRoom(fromId,toId,roomId);
+    }
 }
