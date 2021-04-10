@@ -1,7 +1,9 @@
 package com.Gongdae9.joinroom.repository;
 
 
+import com.Gongdae9.friend.domain.Friend;
 import com.Gongdae9.joinroom.domain.JoinRoom;
+import com.Gongdae9.room.domain.Room;
 import java.util.List;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +24,7 @@ public class JoinRoomRepository {
 
     @Transactional(readOnly=true)
     public List<JoinRoom> findAll(){
-        return em.createQuery("select j from joinRoom j")
+        return em.createQuery("select j from JoinRoom j")
             .getResultList();
     }
 
@@ -33,6 +35,12 @@ public class JoinRoomRepository {
         }
 
         return false;
+    }
+
+    public void remove(JoinRoom deleteJoinRoom) {
+        deleteJoinRoom.getUser().getJoinRooms().remove(deleteJoinRoom);
+        deleteJoinRoom.getRoom().getJoinRooms().remove(deleteJoinRoom);
+        em.remove(deleteJoinRoom);
     }
 
 
