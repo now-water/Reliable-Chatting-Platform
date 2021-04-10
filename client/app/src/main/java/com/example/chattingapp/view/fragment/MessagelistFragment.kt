@@ -13,8 +13,6 @@ import com.example.chattingapp.service.ChatMessageApiService
 import kotlinx.android.synthetic.main.fragment_messagelist.*
 
 class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String) : Fragment(){
-    private val chatMessageList = ArrayList<ChatMessage>()
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_messagelist, container, false)
     }
@@ -22,12 +20,14 @@ class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ChatMessageApiService.instance.subscribeRoom(roomId){
-            chatMessageList.add(it)
-        }
+        val adapter =  MessagelistAdapter(userId)
 
-        recyclerMessagelist.adapter = MessagelistAdapter(userId, chatMessageList)
+        recyclerMessagelist.adapter = adapter
         recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
         recyclerMessagelist.setHasFixedSize(true)
+
+        ChatMessageApiService.instance.subscribeRoom(roomId){
+            adapter.addItem(it)
+        }
     }
 }
