@@ -39,8 +39,16 @@ public class JoinRoomRepository {
 
     public void remove(JoinRoom deleteJoinRoom) {
         deleteJoinRoom.getUser().getJoinRooms().remove(deleteJoinRoom);
-        deleteJoinRoom.getRoom().getJoinRooms().remove(deleteJoinRoom);
-        em.remove(deleteJoinRoom);
+
+        Room room = deleteJoinRoom.getRoom();
+        if(room.getJoinRooms().size()==1){
+            em.remove(deleteJoinRoom);
+            em.remove(room);
+        }
+        else {
+            deleteJoinRoom.getRoom().getJoinRooms().remove(deleteJoinRoom);
+            em.remove(deleteJoinRoom);
+        }
     }
 
 
