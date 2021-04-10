@@ -9,23 +9,29 @@ import com.example.chattingapp.R
 import com.example.chattingapp.dto.ChatMessage
 import com.example.chattingapp.dto.User
 
-class MessagelistAdapter(val userId : Int, val messageList: List<ChatMessage>) :  RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     companion object{
         val MY_CHATTING = 0
         val OTHER_CHATTING = 1
         val ENTER = 2
     }
 
-    inner class OtherChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_content)!!
-        val timeView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_date)!!
+    lateinit var messageList : ArrayList<ChatMessage>;
+
+    init {
+        messageList = ArrayList<ChatMessage>()
+    }
+
+    inner class MyChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+        val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_content)!!
+        val timeView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_date)!!
 
         fun bind(chatMessage : ChatMessage){
             messageView.text = chatMessage.content
         }
     }
 
-    inner class MyChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+    inner class OtherChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_content)!!
         val timeView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_date)!!
 
@@ -38,11 +44,11 @@ class MessagelistAdapter(val userId : Int, val messageList: List<ChatMessage>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if(viewType == MY_CHATTING) {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.widget_chat_customer, parent, false)
+                .inflate(R.layout.widget_chat_company, parent, false)
             return MyChatHolder(view)
         }
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.widget_chat_company, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.widget_chat_customer, parent, false)
         return OtherChatHolder(view)
     }
 
@@ -63,5 +69,14 @@ class MessagelistAdapter(val userId : Int, val messageList: List<ChatMessage>) :
             return MY_CHATTING
         }
         return OTHER_CHATTING
+    }
+
+    fun addItem(chatMessage : ChatMessage){
+        messageList.add(chatMessage)
+        notifyItemInserted(messageList.size-1);
+    }
+
+    fun clear(){
+        messageList.clear()
     }
 }
