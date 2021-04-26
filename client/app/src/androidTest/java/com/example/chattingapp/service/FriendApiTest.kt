@@ -46,6 +46,6 @@ class FriendApiTest {
         @JvmStatic
         val userApiService = UserApiService.instance
         val friendApiService = FriendApiService.instance
-        val user = User("ma", "jasin", "itna", "123", "1234")
+        val user = User(1, "jasin", "itna", "123", "1234", "010-1234-5678")
     }
 }
