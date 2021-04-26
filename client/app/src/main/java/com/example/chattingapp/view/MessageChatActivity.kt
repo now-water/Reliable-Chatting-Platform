@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.ChatMessage
+import com.example.chattingapp.model.ChatRoom
 import com.example.chattingapp.service.ChatMessageApiService
 import com.example.chattingapp.view.fragment.MessagelistFragment
 import kotlinx.android.synthetic.main.activity_main.*

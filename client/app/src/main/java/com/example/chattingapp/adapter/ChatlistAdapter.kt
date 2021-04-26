@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
-import com.example.chattingapp.dto.ChatRoom
+import com.example.chattingapp.model.ChatRoom
 import io.reactivex.functions.BiConsumer
 
 // Main Chatlist type Adapter
@@ -18,9 +18,9 @@ class ChatlistAdapter(val context: Context, val chatList: ArrayList<ChatRoom>, v
         val recenttimeText = itemView?.findViewById<TextView>(R.id.recenttime)
 
         fun bind(chatroom: ChatRoom, context: Context) {
-            roomnameText?.text = chatroom.roomName
-            curmessageText?.text = chatroom.curMessage
-            recenttimeText?.text = chatroom.recentTime
+            roomnameText?.text = chatroom.roomname
+            curmessageText?.text = chatroom.curmessage
+            recenttimeText?.text = chatroom.recenttime
         }
     }
 

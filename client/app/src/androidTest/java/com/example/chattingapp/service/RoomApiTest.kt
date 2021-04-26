@@ -24,6 +24,6 @@ class RoomApiTest {
         @JvmStatic
         val roomApiService = RoomApiService.instance
         val userApiService = UserApiService.instance
-        val user = User(1, "jasin", "itna", "123", "1234", "010-1234-5678")
+        val user = User("ma", "jasin", "itna", "123", "1234")
     }
 }

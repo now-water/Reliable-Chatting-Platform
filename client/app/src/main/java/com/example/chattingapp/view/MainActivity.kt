@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val ft = supportFragmentManager.beginTransaction()
         when (fragNum) {
             0 -> {
-                ft.replace(R.id.main_frame, FriendlistFragment()).commit()
+                ft.replace(R.id.main_frame, UserlistFragment()).commit()
             }
             1 -> {
                 ft.replace(R.id.main_frame, ChatlistFragment(userId)).commit()
