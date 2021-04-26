@@ -3,6 +3,7 @@ package com.Gongdae9.joinroom.service;
 
 
 
+import com.Gongdae9.friend.domain.Friend;
 import com.Gongdae9.friend.service.FriendService;
 import com.Gongdae9.joinroom.domain.JoinRoom;
 import com.Gongdae9.room.domain.Room;
@@ -10,6 +11,7 @@ import com.Gongdae9.user.domain.User;
 import com.Gongdae9.user.service.UserService;
 import com.Gongdae9.joinroom.repository.JoinRoomRepository;
 import com.Gongdae9.room.service.RoomService;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,10 +56,33 @@ public class JoinRoomService {
 
     @Transactional
     public boolean joinRoom(User user,Room room){
-        JoinRoom joinRoom=new JoinRoom(user,room);
-        room.getJoinRooms().add(joinRoom);
-        user.getJoinRooms().add(joinRoom);
+        JoinRoom joinRoom=new JoinRoom(user,room); // 연관관계 편의 메소드 생성자 안에 지정
 
         return joinRoomRepository.save(joinRoom);
     }
+
+
+    @Transactional
+    public boolean outRoom(Long userId,Long roomId){
+        User user=userService.findById(userId);
+
+        Optional<JoinRoom> first = user.getJoinRooms().stream()
+            .filter(a -> a.getRoom().getRoomId() == roomId)
+            .findFirst();
+
+        if(!first.isPresent()){
+            return false;
+        }
+
+        remove(first.get());
+
+        return true;
+    }
+
+    @Transactional
+    public void remove(JoinRoom cur){
+        joinRoomRepository.remove(cur);
+    }
+
+
 }
