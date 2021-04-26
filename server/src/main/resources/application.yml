@@ -25,3 +25,32 @@ spring:
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace
+
+--- # dev 환경
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+logging:
+  level:
+    root: info
+
+server:
+  port: 8080
+---
+
+--- # prod 환경
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+logging:
+  level:
+    root: info
+
+server:
+  port: 8089
+
+---
