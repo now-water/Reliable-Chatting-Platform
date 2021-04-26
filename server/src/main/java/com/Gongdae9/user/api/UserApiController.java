@@ -1,5 +1,6 @@
 package com.Gongdae9.user.api;
 
+import com.Gongdae9.joinroom.domain.JoinRoom;
 import com.Gongdae9.user.domain.User;
 import com.Gongdae9.user.dto.LoginRequestDto;
 import com.Gongdae9.user.service.UserService;
@@ -7,6 +8,7 @@ import com.Gongdae9.user.dto.SignupRequestDto;
 import com.Gongdae9.user.dto.UserDto;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -60,4 +62,12 @@ public class UserApiController {
         return userService.signUp(user);
     }
 
+    @GetMapping("/api/user/chatRooms")
+    public List<Long> getChatRooms(HttpServletRequest req){
+        long fromId = (Long)req.getSession().getAttribute("userId");
+        User user = userService.findById(fromId);
+        return user.getJoinRooms()
+                    .stream().map(JoinRoom::getJoinRoomId)
+                    .collect(Collectors.toList());
+    }
 }
