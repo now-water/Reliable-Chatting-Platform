@@ -65,7 +65,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerUserlist"
+        android:id="@+id/recyclerFriendlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/widget_userlist_item"/>
