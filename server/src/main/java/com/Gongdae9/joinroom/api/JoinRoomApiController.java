@@ -21,4 +21,17 @@ public class JoinRoomApiController {
         return joinRoomService.createRoom(userId,roomName);
     }
 
+
+
+    @PostMapping("/api/room/invite")
+    public boolean inviteRoom(HttpServletRequest req,Long toId,Long roomId){
+        long fromId= (Long)req.getSession().getAttribute("userId");
+        return joinRoomService.inviteRoom(fromId,toId,roomId);
+    }
+
+    @PostMapping("/api/room/out")
+    public boolean outRoom(HttpServletRequest req,Long roomId){
+        long fromId= (Long)req.getSession().getAttribute("userId");
+        return joinRoomService.outRoom(fromId,roomId);
+    }
 }
