@@ -51,6 +51,9 @@ public class FriendService {
         return false;
     }
 
+
+
+
     @Transactional
     public boolean deleteFriend(long fromId,long toId){
         User from = userRepository.findById(fromId);
@@ -69,4 +72,25 @@ public class FriendService {
 
         return false;
     }
+
+
+    // 04.09 금 by 창
+    @Transactional
+    public boolean isFriend(long fromId,long toId){
+        User from = userRepository.findById(fromId);
+
+        if(fromId==toId) return false;
+
+        Optional<Friend> first = from.getFriends().stream()
+            .filter(a -> a.getFriend().getUserId() == toId)
+            .findFirst();
+
+        if(first.isPresent()){
+            return true;
+        }
+
+        return false;
+    }
+
+
 }
