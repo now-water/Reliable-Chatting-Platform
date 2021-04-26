@@ -6,21 +6,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
-import com.example.chattingapp.dto.ChatMessage
-import com.example.chattingapp.dto.Friend
+import com.example.chattingapp.model.User
 
 // Main Userlist type Adapter
-class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>) :
-    RecyclerView.Adapter<FriendlistAdapter.Holder>() {
-
+class UserlistAdapter(val context: Context, val userList: ArrayList<User>) :
+    RecyclerView.Adapter<UserlistAdapter.Holder>() {
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val nameText = itemView?.findViewById<TextView>(R.id.nameText)
         val statusText = itemView?.findViewById<TextView>(R.id.statusText)
 
-        fun bind(friend: Friend, context: Context) {
-            nameText?.text = friend.name
-            statusText?.text = friend.statusMessage
+        fun bind(user: User, context: Context) {
+            nameText?.text = user.name
+            statusText?.text = user.statusMessage
         }
     }
 
@@ -30,14 +28,10 @@ class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(friendList[position], context)
+        holder?.bind(userList[position], context)
     }
 
     override fun getItemCount(): Int {
-        return friendList.size
-    }
-
-    fun addItem(friend: Friend){
-        friendList.add(friend)
+        return userList.size
     }
 }
