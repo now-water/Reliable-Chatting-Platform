@@ -28,7 +28,7 @@ public class Room {
 
 
     @OneToMany(mappedBy="room")
-    private List<JoinRoom> joinRooms = new ArrayList<JoinRoom>();
+    private List<JoinRoom> joinRooms=new ArrayList<>();
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL) // persist 전파
     private List<Message> messages;
