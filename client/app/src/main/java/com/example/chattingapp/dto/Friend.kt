@@ -13,5 +13,8 @@ data class Friend(
     val phoneNum : String,
 
     @SerializedName("nickName")
-    val nickName : String
+    val nickName : String,
+
+    @SerializedName("statusMessage")
+    val statusMessage : String
 )
