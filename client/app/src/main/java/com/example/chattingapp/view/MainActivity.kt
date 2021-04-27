@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 ft.replace(R.id.main_frame, FriendlistFragment()).commit()
             }
             1 -> {
-                ft.replace(R.id.main_frame, ChatlistFragment(userId)).commit()
+                ft.replace(R.id.main_frame, RoomlistFragment(userId)).commit()
             }
             2 -> {
                 ft.replace(R.id.main_frame, SettingFragment()).commit()

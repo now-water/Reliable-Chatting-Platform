@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
+import com.example.chattingapp.dto.ChatMessage
 import com.example.chattingapp.dto.ChatRoom
 import io.reactivex.functions.BiConsumer
 
 // Main Chatlist type Adapter
-class ChatlistAdapter(val context: Context, val chatList: ArrayList<ChatRoom>, val onClickListener: BiConsumer<View, ChatRoom>) : RecyclerView.Adapter<ChatlistAdapter.Holder>() {
+class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, val onClickListener: BiConsumer<View, ChatRoom>) : RecyclerView.Adapter<RoomlistAdapter.Holder>() {
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val roomnameText = itemView?.findViewById<TextView>(R.id.roomname)
         val curmessageText = itemView?.findViewById<TextView>(R.id.curmessage)
@@ -25,18 +26,23 @@ class ChatlistAdapter(val context: Context, val chatList: ArrayList<ChatRoom>, v
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.widget_chatlist_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.widget_roomlist_item, parent, false)
         return Holder(view)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(chatList[position], context)
+        holder?.bind(roomList[position], context)
         holder?.itemView.setOnClickListener{
-            onClickListener.accept(it, chatList[position])
+            onClickListener.accept(it, roomList[position])
         }
     }
 
+    fun addItem(chatroom: ChatRoom){
+        roomList.add(chatroom)
+        notifyItemInserted(roomList.size-1);
+    }
+
     override fun getItemCount(): Int {
-        return chatList.size
+        return roomList.size
     }
 }

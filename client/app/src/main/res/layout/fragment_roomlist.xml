@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +20,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/orbitron"
-            android:text="Users"
+            android:text="Rooms"
             android:textColor="#f8ecc9"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -51,7 +52,7 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_useradd" />
+                android:src="@drawable/ic_newroom" />
 
             <ImageView
                 android:id="@+id/imageView8"
@@ -65,8 +66,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerFriendlist"
+        android:id="@+id/recyclerRoomlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/widget_userlist_item"/>
+        tools:listitem="@layout/widget_roomlist_item" />
 </LinearLayout>

@@ -10,7 +10,7 @@ import com.example.chattingapp.R
 import com.example.chattingapp.adapter.FriendlistAdapter
 import com.example.chattingapp.dto.Friend
 import com.example.chattingapp.service.FriendApiService
-import kotlinx.android.synthetic.main.fragment_userlist.*
+import kotlinx.android.synthetic.main.fragment_friendlist.*
 
 //test for fragment visibility
 class FriendlistFragment : Fragment() {
@@ -19,17 +19,12 @@ class FriendlistFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_userlist, container, false)
+        return inflater.inflate(R.layout.fragment_friendlist, container, false)
         //R.layout.fragment_setting 부분을 경우에 따라 수정할 것
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-        //userList.add(Friend("ostar", "I'm ostar", "1.jpg"))
-
-        // temporary data setting
 
         val adapter =  FriendlistAdapter(requireContext(), friendList)
 
