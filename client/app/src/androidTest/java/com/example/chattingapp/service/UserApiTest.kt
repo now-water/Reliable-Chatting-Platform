@@ -13,7 +13,7 @@ class UserApiTest {
     fun testGetAll(){
         userApiService.getUsers(){
             val user1 = it[0]
-            assertEquals(user1.name, "mu")
+            assertEquals(user1.name, "string")
             assertEquals(user1.accountId, "1")
         }
     }

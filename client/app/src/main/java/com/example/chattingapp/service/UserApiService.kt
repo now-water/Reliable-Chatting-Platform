@@ -1,5 +1,6 @@
 package com.example.chattingapp.service
 
+import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.util.rest.RestApiService
 import com.example.chattingapp.service.util.rest.RestApiServiceCallback
@@ -17,6 +18,10 @@ class UserApiService(private val restApiService: RestApiService) {
 
     fun signIn(user : User, callback: Consumer<Int>){
         restApiService.signIn(user).enqueue(RestApiServiceCallback(callback))
+    }
+
+    fun getRooms(callback : Consumer<List<Int>>){
+        restApiService.getRooms().enqueue(RestApiServiceCallback(callback))
     }
 
     companion object{

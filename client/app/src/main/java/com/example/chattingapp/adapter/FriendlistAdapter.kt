@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
-import com.example.chattingapp.dto.ChatMessage
 import com.example.chattingapp.dto.Friend
 
 // Main Userlist type Adapter
@@ -25,7 +24,7 @@ class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.widget_userlist_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.widget_friendlist_item, parent, false)
         return Holder(view)
     }
 
@@ -39,5 +38,6 @@ class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>)
 
     fun addItem(friend: Friend){
         friendList.add(friend)
+        notifyItemInserted(friendList.size-1);
     }
 }
