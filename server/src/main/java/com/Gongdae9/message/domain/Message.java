@@ -15,9 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Message {
     @Id
     @GeneratedValue
@@ -26,7 +28,7 @@ public class Message {
 
     private String content;
 
-    private Long unreadCnt;
+    private int unreadCnt;
 
     private LocalDateTime writtenAt;
 
@@ -58,4 +60,13 @@ public class Message {
         this.room = room;
         room.getMessages().add(this);
     }
+
+//    public Message (User user,Room room,String content){
+//        this.setUser(user);
+//        this.setRoom(room);
+//        this.content=content;
+//        this.unreadCnt=room.getJoinRooms().size();
+//        this.writtenAt= LocalDateTime.now();
+//    }
+
 }
