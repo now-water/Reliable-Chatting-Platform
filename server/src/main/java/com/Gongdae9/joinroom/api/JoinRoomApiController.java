@@ -2,6 +2,7 @@ package com.Gongdae9.joinroom.api;
 
 
 import com.Gongdae9.joinroom.service.JoinRoomService;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
