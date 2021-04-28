@@ -15,7 +15,7 @@ public class JoinRoomApiController {
     private final JoinRoomService joinRoomService;
 
     @PostMapping("/api/room/create")
-    public boolean createRoom(String roomName, HttpServletRequest req){
+    public Long createRoom(String roomName, HttpServletRequest req){
         long userId = (Long)req.getSession().getAttribute("userId");
         return joinRoomService.createRoom(userId,roomName);
     }
