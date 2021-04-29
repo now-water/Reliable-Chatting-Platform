@@ -65,12 +65,4 @@ public class UserApiController {
 
         return userService.signUp(user);
     }
-
-    @GetMapping("/api/user/chatRooms")
-    public List<RoomDto> getChatRooms(HttpServletRequest req){
-        long fromId = (Long)req.getSession().getAttribute("userId");
-        User user = userService.findById(fromId);
-
-        return roomService.getCheckingDto(user);
-    }
 }
