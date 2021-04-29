@@ -58,4 +58,8 @@ class StompApiService {
             callback.accept(it)
         }
     }
+
+    companion object {
+        val instance = StompApiService()
+    }
 }

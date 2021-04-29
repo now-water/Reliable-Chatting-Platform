@@ -20,7 +20,7 @@ class EventApiService(val stompApiService: StompApiService) {
         }
     }
 
-    fun subscribeToMyEvent(myId: String, callback: Consumer<EventInvite>){
+    fun subscribeToMyEvent(myId: Int, callback: Consumer<EventInvite>){
         stompApiService.subscribe(myEventPrefix + myId){
             try {
                 logger.info(it);
@@ -35,6 +35,6 @@ class EventApiService(val stompApiService: StompApiService) {
     }
 
     companion object{
-        val instance = MessageApiService(StompApiService())
+        val instance = EventApiService(StompApiService.instance)
     }
 }

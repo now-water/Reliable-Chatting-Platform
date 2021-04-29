@@ -40,12 +40,9 @@ class FriendlistFragment : Fragment() {
         recyclerFriendlist.setHasFixedSize(true)
 
         FriendApiService.instance.getFriendAll(){
-
             for(friend in it){
                 adapter.addItem(friend)
             }
         }
-
-
     }
 }
