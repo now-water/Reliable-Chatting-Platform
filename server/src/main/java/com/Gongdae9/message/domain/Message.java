@@ -61,12 +61,12 @@ public class Message {
         room.getMessages().add(this);
     }
 
-//    public Message (User user,Room room,String content){
-//        this.setUser(user);
-//        this.setRoom(room);
-//        this.content=content;
-//        this.unreadCnt=room.getJoinRooms().size();
-//        this.writtenAt= LocalDateTime.now();
-//    }
+    public Message (User user,Room room,String content){
+        this.setUser(user);
+        this.setRoom(room);
+        this.content=content;
+        this.unreadCnt=room.getJoinRooms().size();
+        this.writtenAt= LocalDateTime.now();
+    }
 
 }
