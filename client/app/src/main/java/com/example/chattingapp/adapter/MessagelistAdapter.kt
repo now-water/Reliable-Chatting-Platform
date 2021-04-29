@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
-import com.example.chattingapp.dto.ChatMessage
-import com.example.chattingapp.dto.User
+import com.example.chattingapp.dto.Message
 
 class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     companion object{
@@ -16,18 +15,18 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
         val ENTER = 2
     }
 
-    lateinit var messageList : ArrayList<ChatMessage>;
+    lateinit var messageList : ArrayList<Message>;
 
     init {
-        messageList = ArrayList<ChatMessage>()
+        messageList = ArrayList<Message>()
     }
 
     inner class MyChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_content)!!
         val timeView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_date)!!
 
-        fun bind(chatMessage : ChatMessage){
-            messageView.text = chatMessage.content
+        fun bind(message : Message){
+            messageView.text = message.content
         }
     }
 
@@ -35,8 +34,8 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
         val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_content)!!
         val timeView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_date)!!
 
-        fun bind(chatMessage : ChatMessage){
-            messageView.text = chatMessage.content
+        fun bind(message : Message){
+            messageView.text = message.content
         }
     }
 
@@ -71,8 +70,8 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
         return OTHER_CHATTING
     }
 
-    fun addItem(chatMessage : ChatMessage){
-        messageList.add(chatMessage)
+    fun addItem(message : Message){
+        messageList.add(message)
         notifyItemInserted(messageList.size-1);
     }
 

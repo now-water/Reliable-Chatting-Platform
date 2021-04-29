@@ -127,7 +127,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             }else{
                 Toast.makeText(this, "로그인에 성공하였다링.", Toast.LENGTH_SHORT).show()
 
+                user.userId = it
                 intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("user", user)
                 startActivity(intent)
                 finish()
             }

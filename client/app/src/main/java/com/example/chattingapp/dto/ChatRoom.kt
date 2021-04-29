@@ -1,7 +1,10 @@
 package com.example.chattingapp.dto
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class ChatRoom(
 
     @SerializedName("roomName")
@@ -15,4 +18,4 @@ data class ChatRoom(
 
     @SerializedName("roomId")
     val roomId: Int
-)
+):Parcelable

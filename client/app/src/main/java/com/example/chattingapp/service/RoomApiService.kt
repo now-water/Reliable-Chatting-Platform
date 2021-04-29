@@ -15,12 +15,17 @@ class RoomApiService(private val restApiService: RestApiService) {
         restApiService.createRoom(roomName).enqueue(RestApiServiceCallback(callback))
     }
 
+
+    fun getRooms(callback : Consumer<List<ChatRoom>>){
+        restApiService.getRooms().enqueue(RestApiServiceCallback(callback))
+      
     fun inviteRoom(roomId: Int, told: Int, callback : Consumer<String>){
         restApiService.inviteRoom(roomId, told).enqueue(RestApiServiceCallback(callback))
     }
 
     fun outRoom(roomId: Int, callback : Consumer<String>){
         restApiService.outRoom(roomId).enqueue(RestApiServiceCallback(callback))
+
     }
 
     companion object{

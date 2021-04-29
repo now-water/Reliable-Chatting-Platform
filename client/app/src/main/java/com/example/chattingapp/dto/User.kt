@@ -1,10 +1,13 @@
 package com.example.chattingapp.dto
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User (
     @SerializedName("userId")
-    val userId : Int,
+    var userId : Int,
 
     @SerializedName("accountId")
     val accountId : String,
@@ -20,4 +23,4 @@ data class User (
 
     @SerializedName("phoneNum")
     val phoneNum : String
-)
+) : Parcelable
