@@ -12,6 +12,7 @@ import com.Gongdae9.user.service.UserService;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +28,7 @@ public class MessageService {
         return message;
     }
 
+    @Transactional
     public Message createMessage(Long userId,Long roomId,String content){
         User user = userService.findById(userId);
         Room room = roomService.findById(roomId);
