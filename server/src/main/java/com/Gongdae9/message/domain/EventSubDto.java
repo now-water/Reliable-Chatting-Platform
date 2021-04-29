@@ -2,9 +2,10 @@ package com.Gongdae9.message.domain;
 
 
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+
+@Data
 public class EventSubDto {
 
     private String roomName;
