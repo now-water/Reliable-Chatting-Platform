@@ -21,7 +21,7 @@ public class MessageController {
     private final MessageService messageService;
 
     @MessageMapping("/chat/message/{userId}/{roomId}")
-    @SendTo("/chat/room/{roomId}")
+    @SendTo("/sub/chat/room/{roomId}")
     public MessageDto greeting(@DestinationVariable("userId") Long userId,@DestinationVariable("roomId") Long roomId, @Payload String content) throws Exception {
         Thread.sleep(100); // delay
         content=content.substring(0,content.length()-2);
@@ -33,7 +33,7 @@ public class MessageController {
     }
 
     @MessageMapping("/event/sub/{fromId}/{toId}")
-    @SendTo("/{toId}")
+    @SendTo("/sub/{toId}")
     public EventSubDto greeting(@DestinationVariable("fromId") Long fromId,@DestinationVariable("toId") Long toId,@Payload EventSubDto event) throws Exception {
         Thread.sleep(100); // delay
         return event;
