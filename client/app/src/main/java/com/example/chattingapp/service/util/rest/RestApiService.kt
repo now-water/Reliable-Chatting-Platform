@@ -12,7 +12,6 @@ interface RestApiService {
     @GET("/api/user/checkSession") fun checkLogin() : Call<Int>
     @POST("/api/user/signup") fun signUp(@Body user:User) : Call<String>
     @POST("/api/user/login") fun signIn(@Body user:User) : Call<Int>
-    @GET("/api/user/chatRooms") fun getRooms() : Call<List<ChatRoom>>
 
     // Friend Api
     @GET("/api/friend/all") fun getFriends() : Call<List<Friend>>
@@ -21,7 +20,10 @@ interface RestApiService {
 
 
     // Room Api
-    @POST("/api/room/create") fun createRoom(@Query("roomName") roomName : String) : Call<String>
+    @GET("/api/room/getRooms") fun getRooms() : Call<List<ChatRoom>>
+    @POST("/api/room/create") fun createRoom(@Query("roomName") roomName : String) : Call<Int>
+    @POST("/api/room/invite") fun inviteRoom(@Query("roomId") roomId : Int, @Query("toId") toId: Int) : Call<String>
+    @POST("/api/room/out") fun outRoom(@Query("roomId") roomId: Int) : Call<String>
 
     companion object {
         val instance = RestApiServiceGenerator.createService(RestApiService::class.java)
