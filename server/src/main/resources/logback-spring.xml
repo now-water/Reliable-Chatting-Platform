@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
   <property name="LOG_DIR" value="./logs/local"></property>
-  <property name="LOG_PREFIX" value="pc-web"></property>
+  <property name="LOG_PREFIX" value="chat_server"></property>
 
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${LOG_DIR}/${LOG_PREFIX}.log</file>
