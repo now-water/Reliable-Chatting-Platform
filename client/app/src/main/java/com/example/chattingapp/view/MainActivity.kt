@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 ft.replace(R.id.main_frame, FriendlistFragment()).commit()
             }
             1 -> {
+                Log.d("user", "1번 누르기")
                 val user = intent.getParcelableExtra<User>("user")!!
                 ft.replace(R.id.main_frame, RoomlistFragment(user)).commit()
             }
@@ -51,7 +52,8 @@ class MainActivity : AppCompatActivity() {
                 ft.replace(R.id.main_frame, SettingFragment()).commit()
             }
             3 -> {
-                ft.replace(R.id.main_frame, AddRoomFragment()).commit()
+                val user = intent.getParcelableExtra<User>("user")!!
+                ft.replace(R.id.main_frame, AddRoomFragment(user)).commit()
             }
         }
     }

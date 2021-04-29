@@ -1,5 +1,6 @@
 package com.example.chattingapp.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
@@ -15,11 +16,14 @@ import java.util.logging.Logger
 
 class MessageChatActivity : AppCompatActivity() {
 
+    lateinit var user: User
+    lateinit var room: ChatRoom
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val user = intent.getParcelableExtra<User>("user")!!
-        val room = intent.getParcelableExtra<ChatRoom>("room")!!
+        user = intent.getParcelableExtra<User>("user")!!
+        room = intent.getParcelableExtra<ChatRoom>("room")!!
 
         setContentView(R.layout.activity_message_chat)
 
@@ -36,5 +40,12 @@ class MessageChatActivity : AppCompatActivity() {
         val fragmentTransaction = fm.beginTransaction()
         fragmentTransaction.add(R.id.frag_chat_message, MessagelistFragment(userId, roomId, roomName))
         fragmentTransaction.commit()
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("user", user)
+        startActivity(intent)
+        finish()
     }
 }

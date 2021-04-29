@@ -123,9 +123,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         UserApiService.instance.signIn(user){
             if(it == -1){
-                Toast.makeText(this, "해당 id나 pwd가 없습니다링.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "해당 id나 pwd가 없습니다.", Toast.LENGTH_SHORT).show()
             }else{
-                Toast.makeText(this, "로그인에 성공하였다링.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
 
                 user.userId = it
                 intent = Intent(this, MainActivity::class.java)
