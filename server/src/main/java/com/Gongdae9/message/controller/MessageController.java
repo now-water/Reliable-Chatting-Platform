@@ -1,6 +1,7 @@
 package com.Gongdae9.message.controller;
 
 
+import com.Gongdae9.message.domain.EventSubDto;
 import com.Gongdae9.message.domain.Message;
 import com.Gongdae9.message.service.MessageService;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 @Controller
@@ -23,14 +24,15 @@ public class MessageController {
     @SendTo("/chat/room/{roomId}")
     public Message greeting(@DestinationVariable("roomId") Long roomId, @Payload Message message) throws Exception {
         Thread.sleep(100); // delay
+        messageService.save(message);
         return message;
     }
 
-    @MessageMapping("/event/sub")
-    @SendTo("/{userId}")
-    public String greeting(@DestinationVariable("userId") Long userId) throws Exception {
+    @MessageMapping("/event/sub/{fromId}/{toId}")
+    @SendTo("/{toId}")
+    public EventSubDto greeting(@DestinationVariable("fromId") Long userId,@DestinationVariable("toId") Long toId,@Payload EventSubDto event) throws Exception {
         Thread.sleep(100); // delay
-        return "클라이언트에게 보내야할 메세지?";
+        return event;
     }
 
 
@@ -46,11 +48,6 @@ public class MessageController {
 
 
      */
-
-
-
-
-
 
 //    @PostMapping("/api/message/create")
 //    public Message createMessage(String content,Long roomId, HttpServletRequest req){

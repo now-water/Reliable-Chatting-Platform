@@ -16,15 +16,9 @@ import org.springframework.stereotype.Service;
 public class MessageService {
 
     private final MessageRepository messageRepository;
-    private final UserRepository userRepository;
-    private final RoomRepository roomRepository;
 
-    public Message save(Long userId,Long roomId,Message message){
 
-        User user=userRepository.findById(userId);
-        Room room=roomRepository.findById(roomId);
-
-//        Message message = new Message(user, room, content);
+    public Message save(Message message){
         messageRepository.save(message);
 
         return message;
