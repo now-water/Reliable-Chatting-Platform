@@ -45,4 +45,9 @@ public class RoomApiContoller {
         });
         return chattingUsers;
     }
+
+    @GetMapping("/api/room/{roomId}")
+    public RoomDto getChatRoom(@PathVariable(name ="roomId") Long roomId){
+        return roomService.getRoom(roomId);
+    }
 }

@@ -54,4 +54,18 @@ public class RoomService {
 
         return roomDtos;
     }
+
+
+    public RoomDto getRoom(Long roomId){
+        Room room = roomRepository.findById(roomId);
+        String curMessage="";
+        String recentTime = "";
+        int size = room.getMessages().size();
+        if(size!=0){
+            Message msg = room.getMessages().get(size - 1);
+            curMessage=msg.getContent();
+            recentTime = msg.getWrittenAt().toString();
+        }
+        return new RoomDto(room.getRoomId(),room.getRoomName(),curMessage,recentTime);
+    }
 }
