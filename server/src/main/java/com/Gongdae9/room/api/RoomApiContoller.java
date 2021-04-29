@@ -1,6 +1,7 @@
 package com.Gongdae9.room.api;
 
 import com.Gongdae9.joinroom.domain.JoinRoom;
+import com.Gongdae9.message.domain.MessageDto;
 import com.Gongdae9.room.domain.Room;
 import com.Gongdae9.room.dto.ChattingUserDto;
 import com.Gongdae9.room.dto.RoomDto;
@@ -49,5 +50,16 @@ public class RoomApiContoller {
     @GetMapping("/api/room/{roomId}")
     public RoomDto getChatRoom(@PathVariable(name ="roomId") Long roomId){
         return roomService.getRoom(roomId);
+    }
+
+    @GetMapping("/api/room/{roomId}")
+    public List<MessageDto> getMessages(@PathVariable(name="roomId") Long roomId){
+        Room room = roomService.findById(roomId);
+        List<MessageDto> messageDtos = new ArrayList<>();
+        room.getMessages().forEach(m -> {
+            User user = m.getUser();
+            messageDtos.add(new MessageDto(user.getUserId(), m.getContent(), user.getName(), m.getWrittenAt()));
+        });
+        return messageDtos;
     }
 }
