@@ -25,14 +25,19 @@ public class JoinRoomService {
     private final RoomService roomService;
     private final UserService userService;
 
-    public boolean createRoom(Long id,String roomName){
+    @Transactional
+    public Long createRoom(Long id,String roomName){
 
         Room room = new Room(roomName);
         User user = userService.findById(id);
         roomService.createRoom(room);
 
         // 04.09 joinRoom 으로 합침 by 창
-        return joinRoom(user,room);
+        if(joinRoom(user,room)){
+            return room.getRoomId();
+        }
+
+        return -1L;
     }
 
 

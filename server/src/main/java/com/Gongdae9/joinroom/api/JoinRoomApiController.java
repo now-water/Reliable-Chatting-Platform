@@ -2,6 +2,7 @@ package com.Gongdae9.joinroom.api;
 
 
 import com.Gongdae9.joinroom.service.JoinRoomService;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ public class JoinRoomApiController {
     private final JoinRoomService joinRoomService;
 
     @PostMapping("/api/room/create")
-    public boolean createRoom(String roomName, HttpServletRequest req){
+    public Long createRoom(String roomName, HttpServletRequest req){
         long userId = (Long)req.getSession().getAttribute("userId");
         return joinRoomService.createRoom(userId,roomName);
     }
