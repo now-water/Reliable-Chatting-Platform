@@ -52,7 +52,7 @@ public class RoomApiContoller {
         return roomService.getRoom(roomId);
     }
 
-    @GetMapping("/api/room/{roomId}")
+    @GetMapping("/api/room/message/{roomId}")
     public List<MessageDto> getMessages(@PathVariable(name="roomId") Long roomId){
         Room room = roomService.findById(roomId);
         List<MessageDto> messageDtos = new ArrayList<>();
