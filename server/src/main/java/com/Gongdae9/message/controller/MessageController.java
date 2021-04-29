@@ -5,7 +5,6 @@ import com.Gongdae9.message.domain.EventSubDto;
 import com.Gongdae9.message.domain.Message;
 import com.Gongdae9.message.domain.MessageDto;
 import com.Gongdae9.message.service.MessageService;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -22,9 +21,10 @@ public class MessageController {
     private final MessageService messageService;
 
     @MessageMapping("/chat/message/{userId}/{roomId}")
-    @SendTo("/chat/room/{roomId}")
+    @SendTo("/sub/chat/room/{roomId}")
     public MessageDto greeting(@DestinationVariable("userId") Long userId,@DestinationVariable("roomId") Long roomId, @Payload String content) throws Exception {
         Thread.sleep(100); // delay
+        content=content.substring(0,content.length()-2);
         Message message = messageService.createMessage(userId, roomId, content);
         messageService.save(message);
 
@@ -33,7 +33,7 @@ public class MessageController {
     }
 
     @MessageMapping("/event/sub/{fromId}/{toId}")
-    @SendTo("/{toId}")
+    @SendTo("/sub/{toId}")
     public EventSubDto greeting(@DestinationVariable("fromId") Long fromId,@DestinationVariable("toId") Long toId,@Payload EventSubDto event) throws Exception {
         Thread.sleep(100); // delay
         return event;
@@ -49,14 +49,5 @@ public class MessageController {
 
     4. 클라이언트쪽에서 채팅을 보냈을때 상대방이 웹소켓에 연결이되어있다면 그냥 채팅리스트에 업데이트가 될 것이다.
     다만 상대방 클라이언트가 웹소켓에 연결이 되어있지 않으면?? => 서버에서 상대방이 웹소켓에 연결이 될때 자동으로 메세지를 뿌려주어야하나? 이것을 어떻게 개발할것인가?
-
-
      */
-
-//    @PostMapping("/api/message/create")
-//    public Message createMessage(String content,Long roomId, HttpServletRequest req){
-//        long userId = (Long)req.getSession().getAttribute("userId");
-//        return messageService.save(userId,roomId,content);
-//    }
-
 }
