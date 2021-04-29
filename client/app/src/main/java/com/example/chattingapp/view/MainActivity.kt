@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.chattingapp.R
+import com.example.chattingapp.dto.User
 import com.example.chattingapp.view.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -40,7 +41,8 @@ class MainActivity : AppCompatActivity() {
                 ft.replace(R.id.main_frame, FriendlistFragment()).commit()
             }
             1 -> {
-                ft.replace(R.id.main_frame, RoomlistFragment(userId)).commit()
+                val user = intent.getParcelableExtra<User>("user")!!
+                ft.replace(R.id.main_frame, RoomlistFragment(user)).commit()
             }
             2 -> {
                 ft.replace(R.id.main_frame, SettingFragment()).commit()

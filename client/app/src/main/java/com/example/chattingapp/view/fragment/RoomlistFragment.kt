@@ -12,11 +12,13 @@ import com.example.chattingapp.adapter.FriendlistAdapter
 import com.example.chattingapp.adapter.MessagelistAdapter
 import com.example.chattingapp.adapter.RoomlistAdapter
 import com.example.chattingapp.dto.ChatRoom
+import com.example.chattingapp.dto.User
+import com.example.chattingapp.service.RoomApiService
 import com.example.chattingapp.service.UserApiService
 import com.example.chattingapp.view.MessageChatActivity
 import kotlinx.android.synthetic.main.fragment_roomlist.*
 
-class RoomlistFragment(val userId : Int) : Fragment() {
+class RoomlistFragment(val user : User) : Fragment() {
 
     var roomlist = ArrayList<ChatRoom>()  //temporary array
 
@@ -28,12 +30,11 @@ class RoomlistFragment(val userId : Int) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RoomlistAdapter(requireContext(), roomlist){
-            view:View, chatRoom:ChatRoom ->
+        val adapter = RoomlistAdapter(requireContext(), roomlist){ view:View, chatRoom:ChatRoom ->
             val intent = Intent(activity, MessageChatActivity::class.java)
-            intent.putExtra("userId", userId)
-            intent.putExtra("roomId", chatRoom.roomId)
-            intent.putExtra("roomName", chatRoom.roomName)
+            intent.putExtra("user", user)
+            intent.putExtra("room", chatRoom)
+
             startActivity(intent)
         }
 
@@ -41,7 +42,7 @@ class RoomlistFragment(val userId : Int) : Fragment() {
         recyclerRoomlist.layoutManager = LinearLayoutManager(requireContext())
         recyclerRoomlist.setHasFixedSize(true)
 
-        UserApiService.instance.getRooms(){
+        RoomApiService.instance.getRooms(){
             adapter.addItem(it)
         }
     }

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
-import com.example.chattingapp.dto.ChatMessage
 import com.example.chattingapp.dto.ChatRoom
 import io.reactivex.functions.BiConsumer
 
