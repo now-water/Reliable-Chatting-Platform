@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chattingapp.R
+import com.example.chattingapp.adapter.FriendlistAdapter
+import com.example.chattingapp.adapter.MessagelistAdapter
 import com.example.chattingapp.adapter.RoomlistAdapter
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.service.UserApiService
@@ -26,7 +28,7 @@ class RoomlistFragment(val userId : Int) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerRoomlist.adapter = RoomlistAdapter(requireContext(), roomlist){
+        val adapter = RoomlistAdapter(requireContext(), roomlist){
             view:View, chatRoom:ChatRoom ->
             val intent = Intent(activity, MessageChatActivity::class.java)
             intent.putExtra("userId", userId)
@@ -35,12 +37,12 @@ class RoomlistFragment(val userId : Int) : Fragment() {
             startActivity(intent)
         }
 
+        recyclerRoomlist.adapter = adapter
         recyclerRoomlist.layoutManager = LinearLayoutManager(requireContext())
         recyclerRoomlist.setHasFixedSize(true)
 
         UserApiService.instance.getRooms(){
-
-
+            adapter.addItem(it)
         }
     }
 }
