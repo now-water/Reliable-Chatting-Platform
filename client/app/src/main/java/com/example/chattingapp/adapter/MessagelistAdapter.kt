@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Message
 
-class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MessagelistAdapter(val userId : Int, val messages: ArrayList<Message>) :  RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     companion object{
         val MY_CHATTING = 0
         val OTHER_CHATTING = 1
@@ -18,7 +18,7 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
     lateinit var messageList : ArrayList<Message>;
 
     init {
-        messageList = ArrayList<Message>()
+        messageList = messages
     }
 
     inner class MyChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {

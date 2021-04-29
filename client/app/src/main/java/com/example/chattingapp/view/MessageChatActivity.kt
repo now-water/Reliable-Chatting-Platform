@@ -22,9 +22,9 @@ class MessageChatActivity : AppCompatActivity() {
         val room = intent.getParcelableExtra<ChatRoom>("room")!!
 
         setContentView(R.layout.activity_message_chat)
-
         setFragment(user.userId, room.roomId, room.roomName)
 
+        // button click, send message
         findViewById<ImageView>(R.id.chat_send_btn).setOnClickListener{
             val text = findViewById<EditText>(R.id.chat_input).text.toString()
             MessageApiService.instance.sendMessage(user.userId, room.roomId, text)

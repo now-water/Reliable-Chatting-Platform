@@ -1,6 +1,8 @@
 package com.example.chattingapp.service
 
 import com.example.chattingapp.dto.Message
+import com.example.chattingapp.service.util.rest.RestApiService
+import com.example.chattingapp.service.util.rest.RestApiServiceCallback
 import com.example.chattingapp.service.util.stomp.StompApiService
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
@@ -8,7 +10,7 @@ import io.reactivex.functions.Consumer
 import java.lang.Exception
 import java.util.logging.Logger
 
-class MessageApiService(val stompApiService: StompApiService) {
+class MessageApiService(val stompApiService: StompApiService, val restApiService: RestApiService) {
     private val logger = Logger.getLogger(MessageApiService.javaClass.name)
 
     private val sendEndpointPrefix = "/pub/chat/message/"
@@ -34,7 +36,11 @@ class MessageApiService(val stompApiService: StompApiService) {
         }
     }
 
+    fun getAllMessages(roomId: Int, callback: Consumer<List<Message>>){
+        restApiService.getMessages(roomId).enqueue(RestApiServiceCallback(callback))
+    }
+
     companion object{
-        val instance = MessageApiService(StompApiService())
+        val instance = MessageApiService(StompApiService.instance, RestApiService.instance)
     }
 }
