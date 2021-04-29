@@ -1,5 +1,6 @@
 package com.example.chattingapp.view.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,14 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chattingapp.R
 import com.example.chattingapp.adapter.AddRoomAdapter
 import com.example.chattingapp.dto.Friend
+import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.FriendApiService
 import com.example.chattingapp.service.RoomApiService
+import com.example.chattingapp.view.MessageChatActivity
 
 import kotlinx.android.synthetic.main.fragment_addroom.*
 import kotlinx.android.synthetic.main.fragment_friendlist.recyclerFriendlist
 
 //test for fragment visibility
-class AddRoomFragment : Fragment() {
+class AddRoomFragment(val user: User) : Fragment() {
 
     var friendList = ArrayList<Friend>()
     var inviteList = ArrayList<Friend>()
@@ -35,8 +38,6 @@ class AddRoomFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       // val adapter =  AddRoomAdapter(requireContext(), friendList)
-
         val adapter = AddRoomAdapter(requireContext(), friendList, inviteList)
 
         recyclerFriendlist.adapter = adapter
@@ -50,8 +51,6 @@ class AddRoomFragment : Fragment() {
             }
         }
 
-
-        //val view:View = inflater.inflate(R.layout.fragment_addroom, container, false)
         val btn_make: ImageView = view.findViewById(R.id.btn_make)
 
         btn_make.setOnClickListener {
@@ -60,8 +59,18 @@ class AddRoomFragment : Fragment() {
                 Log.d("inviteList 회전 시작", "inviteList 회전 시작")
                 for(invited in inviteList){
                     RoomApiService.instance.inviteRoom(it, invited.userId.toInt()){
-
                     }
+                }
+
+                Log.d("터지니?","응")
+
+                RoomApiService.instance.getRoom(it){
+                    Log.d("터지니?", it.toString())
+
+                    val intent = Intent(activity, MessageChatActivity::class.java)
+                    intent.putExtra("user", user)
+                    intent.putExtra("room", it)
+                    startActivity(intent)
                 }
             }
         }
