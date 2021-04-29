@@ -23,7 +23,7 @@ public class MessageController {
 
     @MessageMapping("/chat/message/{userId}/{roomId}")
     @SendTo("/chat/room/{roomId}")
-    public MessageDto greeting(@DestinationVariable("roomId") Long userId,@DestinationVariable("roomId") Long roomId, @Payload String content) throws Exception {
+    public MessageDto greeting(@DestinationVariable("userId") Long userId,@DestinationVariable("roomId") Long roomId, @Payload String content) throws Exception {
         Thread.sleep(100); // delay
         Message message = messageService.createMessage(userId, roomId, content);
         messageService.save(message);
