@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chattingapp.R
 import com.example.chattingapp.adapter.FriendlistAdapter
 import com.example.chattingapp.dto.Friend
-import com.example.chattingapp.service.ChatMessageApiService
 import com.example.chattingapp.service.FriendApiService
 import com.example.chattingapp.view.MainActivity
 import kotlinx.android.synthetic.main.activity_main.*
