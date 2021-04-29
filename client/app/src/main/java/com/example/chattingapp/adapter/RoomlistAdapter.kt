@@ -37,8 +37,8 @@ class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, v
         }
     }
 
-    fun addItem(chatroom: ChatRoom){
-        roomList.add(chatroom)
+    fun addItem(chatrooms: List<ChatRoom>){
+        roomList.addAll(chatrooms)
         notifyItemInserted(roomList.size-1);
     }
 

@@ -20,7 +20,7 @@ class UserApiService(private val restApiService: RestApiService) {
         restApiService.signIn(user).enqueue(RestApiServiceCallback(callback))
     }
 
-    fun getRooms(callback : Consumer<List<Int>>){
+    fun getRooms(callback : Consumer<List<ChatRoom>>){
         restApiService.getRooms().enqueue(RestApiServiceCallback(callback))
     }
 
