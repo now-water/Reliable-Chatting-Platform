@@ -3,6 +3,7 @@ package com.Gongdae9.message.controller;
 
 import com.Gongdae9.message.domain.EventSubDto;
 import com.Gongdae9.message.domain.Message;
+import com.Gongdae9.message.domain.MessageDto;
 import com.Gongdae9.message.service.MessageService;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +21,15 @@ public class MessageController {
 
     private final MessageService messageService;
 
-    @MessageMapping("/chat/message/{roomId}")
+    @MessageMapping("/chat/message/{userId}/{roomId}")
     @SendTo("/chat/room/{roomId}")
-    public Message greeting(@DestinationVariable("roomId") Long roomId, @Payload Message message) throws Exception {
+    public MessageDto greeting(@DestinationVariable("roomId") Long userId,@DestinationVariable("roomId") Long roomId, @Payload String content) throws Exception {
         Thread.sleep(100); // delay
+        Message message = messageService.createMessage(userId, roomId, content);
         messageService.save(message);
-        return message;
+
+        MessageDto messageDto = new MessageDto(userId,content,message.getUser().getName(),message.getWrittenAt());
+        return messageDto;
     }
 
     @MessageMapping("/event/sub/{fromId}/{toId}")
