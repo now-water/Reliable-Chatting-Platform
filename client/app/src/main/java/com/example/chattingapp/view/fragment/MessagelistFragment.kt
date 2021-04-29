@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chattingapp.R
 import com.example.chattingapp.adapter.MessagelistAdapter
-import com.example.chattingapp.dto.ChatMessage
-import com.example.chattingapp.service.ChatMessageApiService
+import com.example.chattingapp.service.MessageApiService
+import com.example.chattingapp.view.MessageChatActivity
 import kotlinx.android.synthetic.main.fragment_messagelist.*
+import java.util.logging.Logger
 
 class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String) : Fragment(){
+    val logger = Logger.getLogger(MessageChatActivity::class.java.name)
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_messagelist, container, false)
     }
@@ -26,7 +29,7 @@ class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String
         recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
         recyclerMessagelist.setHasFixedSize(true)
 
-        ChatMessageApiService.instance.subscribeRoom(roomId){
+        MessageApiService.instance.subscribeRoom(roomId){
             adapter.addItem(it)
         }
     }

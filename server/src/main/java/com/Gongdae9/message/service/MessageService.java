@@ -30,11 +30,8 @@ public class MessageService {
     public Message createMessage(Long userId,Long roomId,String content){
         User user = userService.findById(userId);
         Room room = roomService.findById(roomId);
-
+        user.getUserId(); room.getRoomId();
         Message message = new Message(user,room,content);
         return message;
     }
-
-
-
 }

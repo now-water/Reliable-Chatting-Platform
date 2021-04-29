@@ -1,6 +1,8 @@
 package com.example.chattingapp.view.fragment
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +12,15 @@ import com.example.chattingapp.R
 import com.example.chattingapp.adapter.FriendlistAdapter
 import com.example.chattingapp.dto.Friend
 import com.example.chattingapp.service.FriendApiService
+import com.example.chattingapp.view.MainActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_friendlist.*
+import kotlinx.android.synthetic.main.fragment_roomlist.*
+import java.util.logging.Logger
 
 //test for fragment visibility
 class FriendlistFragment : Fragment() {
+    private val logger = Logger.getLogger(FriendlistFragment::class.java.name)
 
     var friendList = ArrayList<Friend>()  // temporary data array
 
@@ -38,5 +45,7 @@ class FriendlistFragment : Fragment() {
                 adapter.addItem(friend)
             }
         }
+
+
     }
 }

@@ -1,7 +1,7 @@
 package com.example.chattingapp.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.chattingapp.dto.ChatMessage
+import com.example.chattingapp.dto.Message
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,7 +22,7 @@ class MessageApiTest {
     }
 
     companion object {
-        val chatMessageApiService = ChatMessageApiService.instance
-        val chatMessage = ChatMessage(1, 1, 0, "muyaho~", 1, "muyaho-아저씨")
+        val chatMessageApiService = MessageApiService.instance
+        val chatMessage = Message(1, 1, 0, "muyaho~", 1, "muyaho-아저씨")
     }
 }

@@ -14,7 +14,7 @@ class StompApiService {
     private val logger = Logger.getLogger(StompApiService::class.java.name)
 
     private val EMULATOR_URL = "ws://ec2-15-164-94-45.ap-northeast-2.compute.amazonaws.com:3000/"
-    private val END_POINT = "endpoint/websocket"
+    private val END_POINT = "ws/websocket"
 
     private val INTERVAL_MILLIS = 5000L
     private val TIME_OUT_SECONDS = 10L
@@ -44,6 +44,8 @@ class StompApiService {
 
     @SuppressLint("CheckResult")
     fun send(topic:String, message: String, callback : Consumer<Boolean>){
+        logger.info("send topic via stomp : $topic")
+        logger.info("send message via stomp : $message")
         stomp.send(topic, message).subscribe(){
             callback.accept(it)
         }
@@ -51,6 +53,7 @@ class StompApiService {
 
     @SuppressLint("CheckResult")
     fun subscribe(topic: String, callback: Consumer<String>){
+        logger.info("subscribe topic : $topic")
         stomp.join(topic).subscribe(){
             callback.accept(it)
         }
