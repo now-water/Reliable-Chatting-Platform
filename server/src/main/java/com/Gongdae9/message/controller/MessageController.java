@@ -20,7 +20,7 @@ public class MessageController {
 
     private final MessageService messageService;
 
-    @MessageMapping("/chat/message")
+    @MessageMapping("/chat/message/{roomId}")
     @SendTo("/chat/room/{roomId}")
     public Message greeting(@DestinationVariable("roomId") Long roomId, @Payload Message message) throws Exception {
         Thread.sleep(100); // delay
@@ -30,7 +30,7 @@ public class MessageController {
 
     @MessageMapping("/event/sub/{fromId}/{toId}")
     @SendTo("/{toId}")
-    public EventSubDto greeting(@DestinationVariable("fromId") Long userId,@DestinationVariable("toId") Long toId,@Payload EventSubDto event) throws Exception {
+    public EventSubDto greeting(@DestinationVariable("fromId") Long fromId,@DestinationVariable("toId") Long toId,@Payload EventSubDto event) throws Exception {
         Thread.sleep(100); // delay
         return event;
     }
