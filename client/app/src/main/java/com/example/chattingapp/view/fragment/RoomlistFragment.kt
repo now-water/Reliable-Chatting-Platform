@@ -6,23 +6,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chattingapp.R
-import com.example.chattingapp.adapter.FriendlistAdapter
-import com.example.chattingapp.adapter.MessagelistAdapter
 import com.example.chattingapp.adapter.RoomlistAdapter
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.EventApiService
-import com.example.chattingapp.service.MessageApiService
 import com.example.chattingapp.service.RoomApiService
-import com.example.chattingapp.service.UserApiService
 import com.example.chattingapp.view.MainActivity
 import com.example.chattingapp.view.MessageChatActivity
 import kotlinx.android.synthetic.main.fragment_roomlist.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class RoomlistFragment(val user : User) : Fragment() {
 
@@ -58,14 +55,14 @@ class RoomlistFragment(val user : User) : Fragment() {
         recyclerRoomlist.setHasFixedSize(true)
 
         RoomApiService.instance.getRooms(){
-            adapter.addItem(it)
+            adapter.addItems(it)
         }
 
-
-
-
         EventApiService.instance.subscribeToMyEvent(user.userId){
-
+            RoomApiService.instance.getRoom(it.roomId){
+                adapter.addItemAtFirst(it)
+                recyclerRoomlist.scrollToPosition(0)
+            }
         }
     }
 }
