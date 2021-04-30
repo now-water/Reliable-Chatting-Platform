@@ -38,14 +38,14 @@ class StompApiService {
         stomp.connect().subscribe(){
             if(it.type != Event.Type.OPENED)
                 throw IllegalStateException("cannot connect to server with stomp protocol")
-            logger.info(it.type.toString())
+//            logger.info(it.type.toString())
         }
     }
 
     @SuppressLint("CheckResult")
     fun send(topic:String, message: String, callback : Consumer<Boolean>){
-        logger.info("send topic via stomp : $topic")
-        logger.info("send message via stomp : $message")
+//        logger.info("[STOMP] send topic : $topic")
+//        logger.info("[STOMP] send message : $message")
         stomp.send(topic, message).subscribe(){
             callback.accept(it)
         }
@@ -53,8 +53,10 @@ class StompApiService {
 
     @SuppressLint("CheckResult")
     fun subscribe(topic: String, callback: Consumer<String>){
-        logger.info("subscribe topic : $topic")
+//        logger.info("[STOMP] subscribe topic : $topic")
+
         stomp.join(topic).subscribe(){
+//            logger.info("[STOMP] [$topic] received message : $it")
             callback.accept(it)
         }
     }

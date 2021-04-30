@@ -16,25 +16,26 @@ import java.util.logging.Logger
 
 class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String) : Fragment(){
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val adapter = MessagelistAdapter(userId, ArrayList<Message>())
+        MessageApiService.instance.getAllMessages(roomId){
+            recyclerMessagelist.adapter = adapter
+            recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
+            recyclerMessagelist.setHasFixedSize(true)
+        }
+
+        MessageApiService.instance.subscribeRoom(roomId){
+            adapter.addItem(it)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_messagelist, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        MessageApiService.instance.getAllMessages(roomId){
-            val adapter = MessagelistAdapter(userId, ArrayList(it))
-
-            recyclerMessagelist.adapter = adapter
-            recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
-            recyclerMessagelist.setHasFixedSize(true)
-
-            MessageApiService.instance.subscribeRoom(roomId){
-                adapter.addItem(it)
-            }
-
-
-        }
     }
 }
