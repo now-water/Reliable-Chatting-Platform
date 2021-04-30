@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".view.MainActivity"></activity>
-        <activity android:name=".view.MessageChatActivity" />
+        <activity android:name=".view.MessageChatActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.LoginActivity"/>
         <activity android:name=".view.IntroActivity">
             <intent-filter>
