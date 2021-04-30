@@ -30,7 +30,9 @@ class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String
             recyclerMessagelist.adapter = adapter
             recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
             recyclerMessagelist.setHasFixedSize(true)
-            recyclerMessagelist.smoothScrollToPosition(adapter.getItemCount() - 1)
+
+            if(adapter.itemCount > 0)
+                recyclerMessagelist.smoothScrollToPosition(adapter.getItemCount() - 1)
         }
 
         MessageApiService.instance.subscribeRoom(roomId){
