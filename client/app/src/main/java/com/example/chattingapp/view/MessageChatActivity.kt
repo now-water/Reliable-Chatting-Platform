@@ -1,10 +1,14 @@
 package com.example.chattingapp.view
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.ChatRoom
@@ -12,7 +16,6 @@ import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.MessageApiService
 import com.example.chattingapp.view.fragment.MessagelistFragment
 import kotlinx.android.synthetic.main.widget_bar_title_back.*
-import java.util.logging.Logger
 
 
 class MessageChatActivity : AppCompatActivity() {
@@ -43,12 +46,26 @@ class MessageChatActivity : AppCompatActivity() {
             chatInput.setText("")
             MessageApiService.instance.sendMessage(user.userId, room.roomId, text)
         }
+
+        findViewById<RelativeLayout>(R.id.frag_chat_message).setOnClickListener{
+            if (true) (this.getSystemService(
+                Context.INPUT_METHOD_SERVICE
+            ) as InputMethodManager).hideSoftInputFromWindow(
+                this.window.decorView.applicationWindowToken, 0
+            )
+        }
     }
 
-    private fun setFragment(userId : Int, roomId:Int, roomName:String){
+    private fun setFragment(userId: Int, roomId: Int, roomName: String){
         val fm = supportFragmentManager
         val fragmentTransaction = fm.beginTransaction()
-        fragmentTransaction.add(R.id.frag_chat_message, MessagelistFragment(user.userId, room.roomId, room.roomName))
+        fragmentTransaction.add(
+            R.id.frag_chat_message, MessagelistFragment(
+                user.userId,
+                room.roomId,
+                room.roomName
+            )
+        )
         fragmentTransaction.commit()
     }
 
