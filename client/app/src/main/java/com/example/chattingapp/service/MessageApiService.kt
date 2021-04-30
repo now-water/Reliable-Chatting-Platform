@@ -36,6 +36,10 @@ class MessageApiService(val stompApiService: StompApiService, val restApiService
         }
     }
 
+    fun deSubscribeRoom(roomId: Int){
+        stompApiService.disposeTopic(receiveEndPointPrefix + roomId)
+    }
+
     fun getAllMessages(roomId: Int, callback: Consumer<List<Message>>){
         restApiService.getMessages(roomId).enqueue(RestApiServiceCallback(callback))
     }

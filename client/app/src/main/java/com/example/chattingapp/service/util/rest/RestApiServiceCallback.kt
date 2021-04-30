@@ -13,8 +13,7 @@ class RestApiServiceCallback<T : Any?>(val callbackOnResponse: Consumer<T>) : Ca
         if(response.code() != 200)
             throw IllegalStateException("status code is not 200")
 
-        logger.info("status code is " + response.code().toString())
-        logger.info(response.body().toString())
+        logger.info("[RestApi] : status code is " + response.code().toString())
         callbackOnResponse.accept(response.body() as T)
     }
 

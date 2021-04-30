@@ -34,6 +34,10 @@ class EventApiService(private val stompApiService: StompApiService) {
         }
     }
 
+    fun unSubscribeToMyEvent(myId: Int){
+        stompApiService.disposeTopic(myEventPrefix + myId)
+    }
+
     companion object{
         val instance = EventApiService(StompApiService())
     }

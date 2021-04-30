@@ -12,15 +12,21 @@ import com.example.chattingapp.dto.Message
 import com.example.chattingapp.service.MessageApiService
 import com.example.chattingapp.view.MessageChatActivity
 import kotlinx.android.synthetic.main.fragment_messagelist.*
+import java.util.*
 import java.util.logging.Logger
+import kotlin.collections.ArrayList
 
 class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String) : Fragment(){
+    private val logger = Logger.getLogger(MessagelistFragment::class.java.name)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        logger.info("maked messagelist fragment")
+
         val adapter = MessagelistAdapter(userId, ArrayList<Message>())
         MessageApiService.instance.getAllMessages(roomId){
+            adapter.addItems(it)
             recyclerMessagelist.adapter = adapter
             recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
             recyclerMessagelist.setHasFixedSize(true)
@@ -37,5 +43,11 @@ class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDestroy() {
+        logger.info("deleted messagelist fragment")
+        MessageApiService.instance.deSubscribeRoom(roomId)
+        super.onDestroy()
     }
 }
