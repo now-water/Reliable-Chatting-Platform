@@ -1,20 +1,18 @@
 package com.example.chattingapp.view
 
-import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.MessageApiService
 import com.example.chattingapp.view.fragment.MessagelistFragment
+import kotlinx.android.synthetic.main.activity_message_chat.*
 import kotlinx.android.synthetic.main.widget_bar_title_back.*
 
 
@@ -40,23 +38,15 @@ class MessageChatActivity : AppCompatActivity() {
         }
 
         // button click, send message
-        findViewById<ImageView>(R.id.chat_send_btn).setOnClickListener{
+        findViewById<ImageView>(R.id.chat_send_btn).setOnClickListener {
             val chatInput = findViewById<EditText>(R.id.chat_input)
             val text = chatInput.text.toString()
             chatInput.setText("")
             MessageApiService.instance.sendMessage(user.userId, room.roomId, text)
         }
-
-        findViewById<RelativeLayout>(R.id.frag_chat_message).setOnClickListener{
-            if (true) (this.getSystemService(
-                Context.INPUT_METHOD_SERVICE
-            ) as InputMethodManager).hideSoftInputFromWindow(
-                this.window.decorView.applicationWindowToken, 0
-            )
-        }
     }
 
-    private fun setFragment(userId: Int, roomId: Int, roomName: String){
+    private fun setFragment(userId: Int, roomId: Int, roomName: String) {
         val fm = supportFragmentManager
         val fragmentTransaction = fm.beginTransaction()
         fragmentTransaction.add(
@@ -71,5 +61,18 @@ class MessageChatActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         finish()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val rect = Rect()
+        keyboard_bar.getGlobalVisibleRect(rect)
+        val x = ev!!.x.toInt()
+        val y = ev.y.toInt()
+        if (!rect.contains(x, y)) {
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm?.hideSoftInputFromWindow(keyboard_bar.windowToken, 0)
+            keyboard_bar.clearFocus()
+        }
+        return super.dispatchTouchEvent(ev)
     }
 }
