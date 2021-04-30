@@ -41,10 +41,10 @@ class MainActivity : AppCompatActivity() {
         val ft = supportFragmentManager.beginTransaction()
         when (fragNum) {
             0 -> {
-                ft.replace(R.id.main_frame, FriendlistFragment()).commit()
+                val user = intent.getParcelableExtra<User>("user")!!
+                ft.replace(R.id.main_frame, FriendlistFragment(user)).commit()
             }
             1 -> {
-                Log.d("user", "1번 누르기")
                 val user = intent.getParcelableExtra<User>("user")!!
                 ft.replace(R.id.main_frame, RoomlistFragment(user)).commit()
             }
