@@ -1,6 +1,8 @@
 package com.example.chattingapp.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,15 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.Message
+import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.MessageApiService
+import com.example.chattingapp.service.RoomApiService
 import com.example.chattingapp.service.util.rest.RestApiService
 import com.example.chattingapp.service.util.stomp.StompApiService
+import com.example.chattingapp.view.MessageChatActivity
 import io.reactivex.functions.BiConsumer
+import kotlinx.android.synthetic.main.fragment_roomlist.*
 import java.util.*
 import java.util.logging.Logger
 
 // Main Chatlist type Adapter
-class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, val onClickListener: BiConsumer<View, ChatRoom>) : RecyclerView.Adapter<RoomlistAdapter.Holder>() {
+class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, val user : User, val activity: Activity) : RecyclerView.Adapter<RoomlistAdapter.Holder>() {
     private val logger = Logger.getLogger(RoomlistAdapter::class.java.name)
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
@@ -47,20 +53,22 @@ class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, v
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder?.bind(roomList[position], context)
         holder?.itemView.setOnClickListener{
-            onClickListener.accept(it, roomList[position])
+            val intent = Intent(activity, MessageChatActivity::class.java)
+            intent.putExtra("user", user)
+            intent.putExtra("room", roomList[position])
+
+            context.startActivity(intent)
         }
 
         // 바꿔야함 땜빵용
         // change room info when new message received
         val messageApiService =MessageApiService(StompApiService(), RestApiService.instance)
         messageApiService.subscribeRoom(roomList[position].roomId){
-            logger.info("get content : ${it.content}")
-            logger.info("get time : ${it.time}")
-
+//            logger.info("get content : ${it.content}")
+//            logger.info("get time : ${it.time}")
             notifyItemChanged(position, it)
         }
     }
-
 
     override fun onBindViewHolder(holder: Holder, position: Int, payloads: MutableList<Any>) {
         if(payloads.isEmpty()){

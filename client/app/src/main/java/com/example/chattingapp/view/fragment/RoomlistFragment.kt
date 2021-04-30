@@ -24,6 +24,19 @@ import kotlin.collections.ArrayList
 class RoomlistFragment(val user : User) : Fragment() {
 
     var roomlist = ArrayList<ChatRoom>()  //temporary array
+    lateinit var adapter : RoomlistAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        adapter = RoomlistAdapter(requireContext(), roomlist, user, activity!!)
+        EventApiService.instance.subscribeToMyEvent(user.userId){
+            RoomApiService.instance.getRoom(it.roomId){
+                adapter.addItemAtFirst(it)
+                recyclerRoomlist.scrollToPosition(0)
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -42,27 +55,12 @@ class RoomlistFragment(val user : User) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RoomlistAdapter(requireContext(), roomlist){ view:View, chatRoom:ChatRoom ->
-            val intent = Intent(activity, MessageChatActivity::class.java)
-            intent.putExtra("user", user)
-            intent.putExtra("room", chatRoom)
-
-            startActivity(intent)
-        }
-
         recyclerRoomlist.adapter = adapter
         recyclerRoomlist.layoutManager = LinearLayoutManager(requireContext())
         recyclerRoomlist.setHasFixedSize(true)
 
         RoomApiService.instance.getRooms(){
             adapter.addItems(it)
-        }
-
-        EventApiService.instance.subscribeToMyEvent(user.userId){
-            RoomApiService.instance.getRoom(it.roomId){
-                adapter.addItemAtFirst(it)
-                recyclerRoomlist.scrollToPosition(0)
-            }
         }
     }
 }

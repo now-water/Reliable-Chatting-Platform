@@ -15,18 +15,13 @@ class MessagelistAdapter(val userId : Int, val messages: ArrayList<Message>) :  
         val ENTER = 2
     }
 
-    lateinit var messageList : ArrayList<Message>;
-
-    init {
-        messageList = messages
-    }
-
     inner class MyChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_content)!!
         val timeView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_date)!!
 
         fun bind(message : Message){
             messageView.text = message.content
+            timeView.text = message.time
         }
     }
 
@@ -36,6 +31,7 @@ class MessagelistAdapter(val userId : Int, val messages: ArrayList<Message>) :  
 
         fun bind(message : Message){
             messageView.text = message.content
+            timeView.text = message.time
         }
     }
 
@@ -53,30 +49,29 @@ class MessagelistAdapter(val userId : Int, val messages: ArrayList<Message>) :  
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(holder is MyChatHolder) {
-            holder.bind(messageList[position])
+            holder.bind(this.messages[position])
         }else if(holder is OtherChatHolder){
-            holder.bind(messageList[position])
+            holder.bind(this.messages[position])
         }
     }
 
     override fun getItemCount(): Int {
-        return messageList.size;
+        return this.messages.size;
     }
 
-
     override fun getItemViewType(position: Int): Int {
-        if (userId == messageList[position].userId){
+        if (userId == this.messages[position].userId){
             return MY_CHATTING
         }
         return OTHER_CHATTING
     }
 
     fun addItem(message : Message){
-        messageList.add(message)
-        notifyItemInserted(messageList.size-1);
+        this.messages.add(message)
+        notifyItemInserted(this.messages.size-1);
     }
 
     fun clear(){
-        messageList.clear()
+        this.messages.clear()
     }
 }

@@ -8,7 +8,7 @@ import io.reactivex.functions.Consumer
 import java.lang.Exception
 import java.util.logging.Logger
 
-class EventApiService(val stompApiService: StompApiService) {
+class EventApiService(private val stompApiService: StompApiService) {
     private val logger = Logger.getLogger(MessageApiService.javaClass.name)
 
     private val invitePrefix = "/pub/event/sub/"
@@ -35,6 +35,6 @@ class EventApiService(val stompApiService: StompApiService) {
     }
 
     companion object{
-        val instance = EventApiService(StompApiService.instance)
+        val instance = EventApiService(StompApiService())
     }
 }
