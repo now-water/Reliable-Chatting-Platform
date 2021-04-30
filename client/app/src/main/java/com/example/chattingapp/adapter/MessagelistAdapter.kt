@@ -63,6 +63,7 @@ class MessagelistAdapter(val userId : Int, val messages: ArrayList<Message>) :  
         return messageList.size;
     }
 
+
     override fun getItemViewType(position: Int): Int {
         if (userId == messageList[position].userId){
             return MY_CHATTING

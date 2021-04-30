@@ -17,6 +17,7 @@ import com.example.chattingapp.adapter.RoomlistAdapter
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.EventApiService
+import com.example.chattingapp.service.MessageApiService
 import com.example.chattingapp.service.RoomApiService
 import com.example.chattingapp.service.UserApiService
 import com.example.chattingapp.view.MainActivity
@@ -59,6 +60,9 @@ class RoomlistFragment(val user : User) : Fragment() {
         RoomApiService.instance.getRooms(){
             adapter.addItem(it)
         }
+
+
+
 
         EventApiService.instance.subscribeToMyEvent(user.userId){
 
