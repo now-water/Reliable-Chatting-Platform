@@ -30,7 +30,9 @@ class MessageChatActivity : AppCompatActivity() {
 
         // button click, send message
         findViewById<ImageView>(R.id.chat_send_btn).setOnClickListener{
-            val text = findViewById<EditText>(R.id.chat_input).text.toString()
+            val chatInput = findViewById<EditText>(R.id.chat_input)
+            val text = chatInput.text.toString()
+            chatInput.setText("")
             MessageApiService.instance.sendMessage(user.userId, room.roomId, text)
         }
     }
