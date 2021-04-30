@@ -19,15 +19,19 @@ import com.example.chattingapp.view.MainActivity
 import com.example.chattingapp.view.MessageChatActivity
 import kotlinx.android.synthetic.main.fragment_roomlist.*
 import java.util.*
+import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
 class RoomlistFragment(val user : User) : Fragment() {
+    private val logger = Logger.getLogger(RoomlistFragment::class.java.name)
 
     var roomlist = ArrayList<ChatRoom>()  //temporary array
     lateinit var adapter : RoomlistAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        logger.info("maked roomlist fragment")
 
         adapter = RoomlistAdapter(requireContext(), roomlist, user, activity!!)
         EventApiService.instance.subscribeToMyEvent(user.userId){
@@ -62,5 +66,10 @@ class RoomlistFragment(val user : User) : Fragment() {
         RoomApiService.instance.getRooms(){
             adapter.addItems(it)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventApiService.instance.unSubscribeToMyEvent(user.userId)
     }
 }

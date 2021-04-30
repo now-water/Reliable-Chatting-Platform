@@ -16,7 +16,6 @@ import java.util.logging.Logger
 
 
 class MessageChatActivity : AppCompatActivity() {
-
     lateinit var user: User
     lateinit var room: ChatRoom
 
@@ -49,7 +48,7 @@ class MessageChatActivity : AppCompatActivity() {
     private fun setFragment(userId : Int, roomId:Int, roomName:String){
         val fm = supportFragmentManager
         val fragmentTransaction = fm.beginTransaction()
-        fragmentTransaction.add(R.id.frag_chat_message, MessagelistFragment(userId, roomId, roomName))
+        fragmentTransaction.add(R.id.frag_chat_message, MessagelistFragment(user.userId, room.roomId, room.roomName))
         fragmentTransaction.commit()
     }
 

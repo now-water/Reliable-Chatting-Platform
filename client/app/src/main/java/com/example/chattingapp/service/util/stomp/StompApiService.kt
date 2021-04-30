@@ -1,8 +1,10 @@
 package com.example.chattingapp.service.util.stomp
 
 import android.annotation.SuppressLint
+import android.database.Observable
 import com.gmail.bishoybasily.stomp.lib.Event
 import com.gmail.bishoybasily.stomp.lib.StompClient
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import okhttp3.OkHttpClient
 import java.lang.IllegalStateException
@@ -53,15 +55,25 @@ class StompApiService {
 
     @SuppressLint("CheckResult")
     fun subscribe(topic: String, callback: Consumer<String>){
-//        logger.info("[STOMP] subscribe topic : $topic")
-
-        stomp.join(topic).subscribe(){
-//            logger.info("[STOMP] [$topic] received message : $it")
+        val topicDispose = stomp.join(topic).subscribe(){
             callback.accept(it)
+        }
+
+        topics[topic] = topicDispose
+        logger.info("subscribe topic save : ${topics.get(topic)}")
+    }
+
+
+    @SuppressLint("CheckResult")
+    fun disposeTopic(topic:String){
+        if(topics.containsKey(topic)){
+            logger.info("subscribe topic save : ${topics.get(topic)}")
+            topics.remove(topic)?.dispose()
         }
     }
 
     companion object {
         val instance = StompApiService()
+        val topics = Hashtable<String, Disposable>()
     }
 }

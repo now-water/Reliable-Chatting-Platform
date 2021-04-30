@@ -71,6 +71,13 @@ class MessagelistAdapter(val userId : Int, val messages: ArrayList<Message>) :  
         notifyItemInserted(this.messages.size-1);
     }
 
+
+    fun addItems(message: List<Message>){
+        val startIdx = this.messages.size
+        this.messages.addAll(message)
+        notifyItemRangeInserted(startIdx, message.size)
+    }
+
     fun clear(){
         this.messages.clear()
     }
