@@ -23,9 +23,9 @@ class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter : MessagelistAdapter
         MessageApiService.instance.getAllMessages(roomId){
             val adapter = MessagelistAdapter(userId, ArrayList(it))
+
             recyclerMessagelist.adapter = adapter
             recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
             recyclerMessagelist.setHasFixedSize(true)
@@ -33,6 +33,8 @@ class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String
             MessageApiService.instance.subscribeRoom(roomId){
                 adapter.addItem(it)
             }
+
+
         }
     }
 }
