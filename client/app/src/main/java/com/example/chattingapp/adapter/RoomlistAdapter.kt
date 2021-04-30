@@ -13,8 +13,8 @@ import com.example.chattingapp.service.MessageApiService
 import com.example.chattingapp.service.util.rest.RestApiService
 import com.example.chattingapp.service.util.stomp.StompApiService
 import io.reactivex.functions.BiConsumer
+import java.util.*
 import java.util.logging.Logger
-import kotlin.properties.Delegates
 
 // Main Chatlist type Adapter
 class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, val onClickListener: BiConsumer<View, ChatRoom>) : RecyclerView.Adapter<RoomlistAdapter.Holder>() {
@@ -57,27 +57,27 @@ class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, v
             logger.info("get content : ${it.content}")
             logger.info("get time : ${it.time}")
 
-            holder?.bind(it.content, it.time)
-            notifyItemChanged(position)
+            notifyItemChanged(position, it)
         }
     }
+
 
     override fun onBindViewHolder(holder: Holder, position: Int, payloads: MutableList<Any>) {
         if(payloads.isEmpty()){
-            onBindViewHolder(holder, position)
-            return
+            onBindViewHolder(holder,position)
+            return;
         }
 
-        if(payloads.isNotEmpty()){
-            for(message in payloads){
-                if(message is Message){
-                    holder?.bind(message.content, message.time)
-                }
-            }
-        }
+        val message = payloads.get(0) as Message
+        holder?.bind(message.content, message.time)
     }
 
-    fun addItem(chatrooms: List<ChatRoom>){
+    fun addItemAtFirst(chatRoom: ChatRoom){
+        roomList.add(0, chatRoom)
+        notifyItemInserted(0)
+    }
+
+    fun addItems(chatrooms: List<ChatRoom>){
         roomList.addAll(chatrooms)
         notifyItemInserted(roomList.size-1);
     }

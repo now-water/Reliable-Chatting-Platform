@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chattingapp.R
 import com.example.chattingapp.adapter.AddRoomAdapter
+import com.example.chattingapp.dto.EventInvite
 import com.example.chattingapp.dto.Friend
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.FriendApiService
@@ -57,9 +58,13 @@ class AddRoomFragment(val user: User) : Fragment() {
             Log.d("확인 버튼 클릭", "확인 버튼 클릭")
             RoomApiService.instance.createRoom(input_roomname_text.text.toString()){
                 Log.d("inviteList 회전 시작", "inviteList 회전 시작")
+                val roomId = it;
                 for(invited in inviteList){
                     RoomApiService.instance.inviteRoom(it, invited.userId.toInt()){
                     }
+
+                    val eventInvite = EventInvite(input_roomname_text.text.toString(), user.name, roomId)
+                    RoomApiService.instance.sendGreetingEvent(user.userId, invited.userId.toInt(), eventInvite)
                 }
 
                 Log.d("터지니?","응")
@@ -72,6 +77,7 @@ class AddRoomFragment(val user: User) : Fragment() {
                     intent.putExtra("room", it)
                     startActivity(intent)
                 }
+
             }
         }
     }
