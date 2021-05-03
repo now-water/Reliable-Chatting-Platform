@@ -6,7 +6,7 @@ import com.example.chattingapp.dto.ChatRoom
 
 @Dao
 interface RoomDao {
-    @Query("SELECT * FROM room")
+    @Query("SELECT * FROM ROOM")
     fun getAll() : LiveData<List<ChatRoom>>
 
     @Insert
@@ -18,6 +18,6 @@ interface RoomDao {
     @Delete
     fun delete(chatRoom: ChatRoom)
 
-    @Query("DELETE FROM room")
+    @Query("DELETE FROM ROOM")
     fun deleteAll()
 }
