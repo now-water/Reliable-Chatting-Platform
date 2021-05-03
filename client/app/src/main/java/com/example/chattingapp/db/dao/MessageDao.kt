@@ -6,7 +6,7 @@ import com.example.chattingapp.dto.Message
 
 @Dao
 interface MessageDao {
-    @Query("SELECT * FROM message")
+    @Query("SELECT * FROM MESSAGE")
     fun getAll() : LiveData<List<Message>>
 
     @Insert
@@ -18,6 +18,6 @@ interface MessageDao {
     @Delete
     fun delete(message: Message)
 
-    @Query("DELETE FROM message")
+    @Query("DELETE FROM MESSAGE")
     fun deleteAll()
 }

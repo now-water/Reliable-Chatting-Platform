@@ -55,7 +55,6 @@ class MessageChatActivity : AppCompatActivity() {
             R.id.frag_chat_message, MessagelistFragment(
                 user.userId,
                 room.roomId,
-                room.roomName
             )
         )
         fragmentTransaction.commit()
