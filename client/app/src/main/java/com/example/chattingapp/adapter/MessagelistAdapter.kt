@@ -23,7 +23,7 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
 
         fun bind(message : Message){
             messageView.text = message.content
-            timeView.text = message.time
+            timeView.text = message.writtenAt
         }
     }
 
@@ -33,7 +33,7 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
 
         fun bind(message : Message){
             messageView.text = message.content
-            timeView.text = message.time
+            timeView.text = message.writtenAt
         }
     }
 

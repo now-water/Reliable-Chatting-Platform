@@ -68,7 +68,7 @@ class RoomlistAdapter(val context: Context,  val user : User, val activity: Acti
         }
 
         val message = payloads.get(0) as Message
-        holder?.bind(message.content, message.time)
+        holder?.bind(message.content, message.writtenAt)
     }
 
     override fun getItemCount(): Int {
