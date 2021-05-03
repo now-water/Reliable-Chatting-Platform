@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Message
 
-class MessagelistAdapter(val userId : Int, val messages: ArrayList<Message>) :  RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     companion object{
         val MY_CHATTING = 0
         val OTHER_CHATTING = 1
         val ENTER = 2
     }
+
+    private val messages = ArrayList<Message>()
 
     inner class MyChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_content)!!
@@ -34,7 +36,6 @@ class MessagelistAdapter(val userId : Int, val messages: ArrayList<Message>) :  
             timeView.text = message.time
         }
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if(viewType == MY_CHATTING) {

@@ -19,27 +19,7 @@ import kotlin.collections.ArrayList
 class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String) : Fragment(){
     private val logger = Logger.getLogger(MessagelistFragment::class.java.name)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        logger.info("maked messagelist fragment")
-
-        val adapter = MessagelistAdapter(userId, ArrayList<Message>())
-        MessageApiService.instance.getAllMessages(roomId){
-            adapter.addItems(it)
-            recyclerMessagelist.adapter = adapter
-            recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
-            recyclerMessagelist.setHasFixedSize(true)
-
-            if(adapter.itemCount > 0)
-                recyclerMessagelist.smoothScrollToPosition(adapter.getItemCount() - 1)
-        }
-
-        MessageApiService.instance.subscribeRoom(roomId){
-            adapter.addItem(it)
-            recyclerMessagelist.smoothScrollToPosition(adapter.getItemCount() - 1)
-        }
-    }
+    private val messageApiService = MessageApiService.getNewInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_messagelist, container, false)
@@ -47,11 +27,27 @@ class MessagelistFragment(val userId: Int, val roomId: Int, val roomName: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adapter = MessagelistAdapter(userId)
+        recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
+        recyclerMessagelist.adapter = adapter
+        recyclerMessagelist.setHasFixedSize(true)
+
+        messageApiService.getAllMessages(roomId){
+            adapter.addItems(it)
+            if(adapter.itemCount > 0)
+                recyclerMessagelist.smoothScrollToPosition(adapter.getItemCount() - 1)
+        }
+
+        messageApiService.subscribeRoom(roomId){
+            adapter.addItem(it)
+            recyclerMessagelist.smoothScrollToPosition(adapter.getItemCount() - 1)
+        }
     }
 
     override fun onDestroy() {
         logger.info("deleted messagelist fragment")
-        MessageApiService.instance.deSubscribeRoom(roomId)
+        messageApiService.deSubscribeRoom(roomId)
         super.onDestroy()
     }
 }
