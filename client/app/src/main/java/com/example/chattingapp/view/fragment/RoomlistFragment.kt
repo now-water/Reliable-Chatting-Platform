@@ -49,6 +49,11 @@ class RoomlistFragment(val user : User) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = RoomlistAdapter(requireContext(), user, activity!!)
+
+        recyclerRoomlist.adapter = adapter
+        recyclerRoomlist.layoutManager = LinearLayoutManager(requireContext())
+        recyclerRoomlist.setHasFixedSize(true)
+
         eventApiService.subscribeToMyEvent(user.userId){
             RoomApiService.instance.getRoom(it.roomId){
                 adapter.addItemAtFirst(it)
@@ -56,10 +61,6 @@ class RoomlistFragment(val user : User) : Fragment() {
                 recyclerRoomlist.scrollToPosition(0)
             }
         }
-
-        recyclerRoomlist.adapter = adapter
-        recyclerRoomlist.layoutManager = LinearLayoutManager(requireContext())
-        recyclerRoomlist.setHasFixedSize(true)
 
         RoomApiService.instance.getRooms(){
             adapter.addItems(it)
