@@ -3,28 +3,28 @@ package com.example.chattingapp.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.Message
 import com.example.chattingapp.dto.User
-import com.example.chattingapp.service.MessageApiService
-import com.example.chattingapp.service.RoomApiService
-import com.example.chattingapp.service.util.rest.RestApiService
-import com.example.chattingapp.service.util.stomp.StompApiService
 import com.example.chattingapp.view.MessageChatActivity
-import io.reactivex.functions.BiConsumer
-import kotlinx.android.synthetic.main.fragment_roomlist.*
+import java.lang.IllegalArgumentException
 import java.util.*
 import java.util.logging.Logger
 
 // Main Chatlist type Adapter
-class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, val user : User, val activity: Activity) : RecyclerView.Adapter<RoomlistAdapter.Holder>() {
+class RoomlistAdapter(val context: Context,  val user : User, val activity: Activity) : RecyclerView.Adapter<RoomlistAdapter.Holder>() {
     private val logger = Logger.getLogger(RoomlistAdapter::class.java.name)
+
+    private val roomPositionTable = HashMap<Int,Int>()
+    private val roomList = ArrayList<ChatRoom>()
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         var roomId = -1
@@ -59,15 +59,6 @@ class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, v
 
             context.startActivity(intent)
         }
-
-        // 바꿔야함 땜빵용
-        // change room info when new message received
-        val messageApiService =MessageApiService(StompApiService(), RestApiService.instance)
-        messageApiService.subscribeRoom(roomList[position].roomId){
-//            logger.info("get content : ${it.content}")
-//            logger.info("get time : ${it.time}")
-            notifyItemChanged(position, it)
-        }
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int, payloads: MutableList<Any>) {
@@ -80,17 +71,36 @@ class RoomlistAdapter(val context: Context, val roomList: ArrayList<ChatRoom>, v
         holder?.bind(message.content, message.time)
     }
 
+    override fun getItemCount(): Int {
+        return roomList.size
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
     fun addItemAtFirst(chatRoom: ChatRoom){
         roomList.add(0, chatRoom)
+
+        roomPositionTable.forEach(){
+            roomPositionTable.replace(it.key, it.value+1)
+        }
+        roomPositionTable.put(chatRoom.roomId, 0)
+
         notifyItemInserted(0)
     }
 
     fun addItems(chatrooms: List<ChatRoom>){
+        for(i in 0 until chatrooms.size)
+            roomPositionTable.put(chatrooms[i].roomId, roomList.size + i)
         roomList.addAll(chatrooms)
+
         notifyItemInserted(roomList.size-1);
     }
 
-    override fun getItemCount(): Int {
-        return roomList.size
+    fun notifyItemChangedBy(roomId:Int, message:Message){
+        if(!roomPositionTable.containsKey(roomId))
+            throw IllegalArgumentException("adapter does not have roomId")
+
+        logger.info("roomtable index is ${roomPositionTable.get(roomId)}" )
+
+        notifyItemChanged(roomPositionTable.get(roomId)!!, message)
     }
 }

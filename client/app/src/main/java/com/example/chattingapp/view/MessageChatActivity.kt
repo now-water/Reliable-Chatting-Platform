@@ -17,8 +17,10 @@ import kotlinx.android.synthetic.main.widget_bar_title_back.*
 
 
 class MessageChatActivity : AppCompatActivity() {
-    lateinit var user: User
-    lateinit var room: ChatRoom
+    private lateinit var user: User
+    private lateinit var room: ChatRoom
+
+    private val messageApiService = MessageApiService.getNewInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +44,7 @@ class MessageChatActivity : AppCompatActivity() {
             val chatInput = findViewById<EditText>(R.id.chat_input)
             val text = chatInput.text.toString()
             chatInput.setText("")
-            MessageApiService.instance.sendMessage(user.userId, room.roomId, text)
+            messageApiService.sendMessage(user.userId, room.roomId, text)
         }
     }
 

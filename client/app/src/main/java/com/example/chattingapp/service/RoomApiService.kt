@@ -4,11 +4,11 @@ import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.EventInvite
 import com.example.chattingapp.service.util.rest.RestApiService
 import com.example.chattingapp.service.util.rest.RestApiServiceCallback
-import com.example.chattingapp.service.util.stomp.StompApiService
+import com.example.chattingapp.service.util.stomp.MyStompClient
 import com.google.gson.Gson
 import io.reactivex.functions.Consumer
 
-class RoomApiService(private val restApiService: RestApiService, private val stompApiService: StompApiService) {
+class RoomApiService(private val restApiService: RestApiService, private val myStompService: MyStompClient) {
 
     fun getRooms(callback : Consumer<List<ChatRoom>>){
         restApiService.getRooms().enqueue(RestApiServiceCallback(callback))
@@ -27,7 +27,7 @@ class RoomApiService(private val restApiService: RestApiService, private val sto
     }
 
     fun sendGreetingEvent(myId:Int, toId:Int, eventInvite: EventInvite){
-        stompApiService.send("/pub/event/sub/$myId/$toId", Gson().toJson(eventInvite)){
+        myStompService.send("/pub/event/sub/$myId/$toId", Gson().toJson(eventInvite)){
 
         }
     }
@@ -37,6 +37,6 @@ class RoomApiService(private val restApiService: RestApiService, private val sto
     }
 
     companion object{
-        val instance = RoomApiService(RestApiService.instance, StompApiService.instance)
+        val instance = RoomApiService(RestApiService.instance, MyStompClient.instance)
     }
 }
