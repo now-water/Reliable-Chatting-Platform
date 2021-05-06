@@ -14,6 +14,7 @@ public class UserDto {
     private String name;
     private String phoneNum;
     private String nickName;
+    private String statusMessage;
 
     public UserDto(User user) {
         this.userId = user.getUserId();
@@ -21,5 +22,8 @@ public class UserDto {
         this.name = user.getName();
         this.phoneNum = user.getPhoneNum();
         this.nickName = user.getNickName();
+
+        if(user.getStatusMessage() != null)
+            this.statusMessage = user.getStatusMessage();
     }
 }

@@ -11,6 +11,7 @@ public class FriendDto {
     private String name;
     private String phoneNum;
     private String nickName;
+    private String statusMessage;
 
     public FriendDto(Friend friend){
         User user = friend.getFriend();
@@ -18,5 +19,8 @@ public class FriendDto {
         this.name = user.getName();
         this.phoneNum = user.getPhoneNum();
         this.nickName = user.getNickName();
+
+        if(user.getStatusMessage() != null)
+            this.statusMessage = user.getStatusMessage();
     }
 }
