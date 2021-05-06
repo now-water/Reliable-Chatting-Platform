@@ -49,9 +49,14 @@ class MessagelistFragment(val userId: Int, val roomId: Int) : Fragment(){
         recyclerMessagelist.smoothScrollToPosition(adapter.getItemCount() - 1)
     }
 
-    override fun onDestroy() {
+    override fun onStop() {
         logger.info("deleted messagelist fragment")
         messageApiService.deSubscribeRoom(roomId)
-        super.onDestroy()
+        super.onStop()
     }
+//    override fun onDestroy() {
+//        logger.info("deleted messagelist fragment")
+//        messageApiService.deSubscribeRoom(roomId)
+//        super.onDestroy()
+//    }
 }
