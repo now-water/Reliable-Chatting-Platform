@@ -6,6 +6,7 @@ import com.Gongdae9.room.domain.Room;
 import com.Gongdae9.room.dto.RoomDto;
 import com.Gongdae9.room.service.RoomService;
 import com.Gongdae9.user.domain.User;
+import com.Gongdae9.user.dto.ChangeStatusRequestDto;
 import com.Gongdae9.user.dto.LoginRequestDto;
 import com.Gongdae9.user.service.UserService;
 import com.Gongdae9.user.dto.SignupRequestDto;
@@ -17,10 +18,7 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -44,12 +42,12 @@ public class UserApiController {
     }
 
     @PostMapping("/api/user/login")
-    public User signIn(@RequestBody @Valid LoginRequestDto req, HttpServletRequest servletRequest){
+    public UserDto signIn(@RequestBody @Valid LoginRequestDto req, HttpServletRequest servletRequest){
         return userService.login(req, servletRequest.getSession());
     }
 
     @PostMapping("/api/user/signup")
-    public User signUp(@RequestBody @Valid SignupRequestDto req, Errors errors){
+    public UserDto signUp(@RequestBody @Valid SignupRequestDto req, Errors errors){
 
         if(errors.hasErrors()){
             return null;
@@ -64,5 +62,15 @@ public class UserApiController {
             .build();
 
         return userService.signUp(user);
+    }
+
+    @PostMapping("/api/user/setStatus")
+    public boolean setStatusMessage(@RequestBody @Valid ChangeStatusRequestDto req, Errors errors){
+        if(errors.hasErrors()){
+            return false;
+        }
+
+        userService.setUserStatusMessage(req.getAccountId(), req.getStatusMessage());
+        return true;
     }
 }

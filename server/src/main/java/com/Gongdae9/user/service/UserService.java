@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.Gongdae9.user.dto.UserDto;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +30,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User signUp(User user) {
+    public UserDto signUp(User user) {
         List<User> accountIdCheck = userRepository.findByAccountId(user.getAccountId());
 
         /* Check duplicate accountId */
@@ -38,10 +40,10 @@ public class UserService {
 
         userRepository.save(user);
 
-        return user;
+        return new UserDto(user);
     }
 
-    public User login(LoginRequestDto req,  HttpSession session) {
+    public UserDto login(LoginRequestDto req,  HttpSession session) {
         User account = userRepository.findByAccountId(req.getAccountId()).get(0);
 
         if(!account.getPassword().equals(req.getPassword())){
@@ -51,6 +53,17 @@ public class UserService {
         /* Save session information */
         session.setAttribute("userId", account.getUserId());
 
-        return account;
+        return new UserDto(account);
+    }
+
+    @Transactional
+    public boolean setUserStatusMessage(String acconutId, String userStatusMessage){
+        List<User> accounts = userRepository.findByAccountId(acconutId);
+
+        if(accounts.size() <= 0) return false;
+
+        User account = accounts.get(0);
+        account.changeStatusMessage(userStatusMessage);
+        return true;
     }
 }

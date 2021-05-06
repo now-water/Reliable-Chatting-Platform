@@ -31,6 +31,7 @@ public class User {
     private String nickName;
     private String accountId;
     private String password;
+    private String statusMessage;
 
     @OneToMany(mappedBy = "user") // persist 전파
     private List<Friend> friends;
@@ -48,5 +49,18 @@ public class User {
         this.nickName = nickName;
         this.accountId = accountId;
         this.password = password;
+    }
+
+    public User(String name, String phoneNum, String nickName, String accountId, String password, String statusMessage){
+        this.name = name;
+        this.phoneNum = phoneNum;
+        this.nickName = nickName;
+        this.accountId = accountId;
+        this.password = password;
+        this.statusMessage = statusMessage;
+    }
+
+    public void changeStatusMessage(String statusMessage){
+        this.statusMessage = statusMessage;
     }
 }
