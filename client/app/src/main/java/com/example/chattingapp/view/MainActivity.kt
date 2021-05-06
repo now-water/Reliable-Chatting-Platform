@@ -49,7 +49,8 @@ class MainActivity : AppCompatActivity() {
                 ft.replace(R.id.main_frame, RoomlistFragment(user)).commit()
             }
             2 -> {
-                ft.replace(R.id.main_frame, SettingFragment()).commit()
+                val user = intent.getParcelableExtra<User>("user")!!
+                ft.replace(R.id.main_frame, SettingFragment(user)).commit()
             }
             3 -> {
                 val user = intent.getParcelableExtra<User>("user")!!
