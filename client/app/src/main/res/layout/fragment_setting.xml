@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FBE1E1"
     tools:context=".view.fragment.SettingFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,19 +24,20 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="328dp"
+                    android:background="#F8EBEB"
                     android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="280dp"
-                        android:background="@android:color/white">
+                        android:layout_height="280dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout2"
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
                             android:layout_marginTop="120dp"
-                            android:background="#ED9282"
+                            android:background="#DC9E94"
+                            android:elevation="-10dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="1.0"
@@ -44,39 +46,45 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
-                            android:id="@+id/tv_name"
+                            android:id="@+id/setting_myname"
                             android:layout_width="150dp"
                             android:layout_height="30dp"
-                            android:layout_below="@+id/profile_photo"
                             android:layout_alignParentEnd="false"
                             android:layout_alignParentBottom="true"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
                             android:fontFamily="sans-serif"
                             android:gravity="center"
                             android:text="프로필이름"
                             android:textAlignment="center"
                             android:textColor="@android:color/background_dark"
                             android:textSize="20sp"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/profile_photo" />
+                            app:layout_constraintTop_toBottomOf="@+id/cardView4" />
 
-                        <ImageView
-                            android:id="@+id/profile_photo"
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardView4"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
-                            android:layout_centerInParent="true"
-                            android:layout_marginTop="70dp"
-                            android:adjustViewBounds="false"
-                            android:background="#FFFFFF"
-                            android:src="@mipmap/ic_launcher"
-
+                            android:layout_marginTop="90dp"
+                            app:cardCornerRadius="20dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.498"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/profile_photo"
+                                android:layout_width="150dp"
+                                android:layout_height="150dp"
+                                android:layout_centerInParent="true"
+                                android:adjustViewBounds="false"
+                                android:background="#FFFFFF"
+                                android:elevation="10dp"
+
+                                android:src="@mipmap/ic_launcher" />
+                        </androidx.cardview.widget.CardView>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -99,13 +107,14 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@android:drawable/list_selector_background"
                             android:text="내 정보 수정"
-                            android:textColor="#1b1b1b"
-                            android:textSize="15.8sp">
+                            android:textColor="#777474"
+                            android:textSize="15.8sp"
+                            android:textStyle="bold">
 
                         </TextView>
 
@@ -114,7 +123,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="8.7dp"
-                        android:background="#F6F6F6">
+                        android:background="#F8EBEB">
 
                     </LinearLayout>
 
@@ -133,8 +142,9 @@
                             android:layout_weight="1"
                             android:background="@android:drawable/list_selector_background"
                             android:text="공지사항"
-                            android:textColor="#1b1b1b"
-                            android:textSize="15.8sp">
+                            android:textColor="#777474"
+                            android:textSize="15.8sp"
+                            android:textStyle="bold">
 
                         </TextView>
 
@@ -143,7 +153,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="8.7dp"
-                        android:background="#F6F6F6">
+                        android:background="#F8EBEB">
 
                     </LinearLayout>
 
@@ -162,8 +172,9 @@
                             android:layout_weight="1"
                             android:background="@android:drawable/list_selector_background"
                             android:text="버전정보"
-                            android:textColor="#1b1b1b"
-                            android:textSize="15.8sp">
+                            android:textColor="#777474"
+                            android:textSize="15.8sp"
+                            android:textStyle="bold">
 
                         </TextView>
 
@@ -172,7 +183,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="8.7dp"
-                        android:background="#F6F6F6">
+                        android:background="#F8EBEB">
 
                     </LinearLayout>
 
@@ -191,8 +202,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="보안"
-                            android:textColor="#1b1b1b"
-                            android:textSize="15.8sp">
+                            android:textColor="#777474"
+                            android:textSize="15.8sp"
+                            android:textStyle="bold">
 
                         </TextView>
 
@@ -201,7 +213,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="8.7dp"
-                        android:background="#F6F6F6">
+                        android:background="#F8EBEB">
 
                     </LinearLayout>
 
@@ -220,8 +232,9 @@
                             android:layout_weight="1"
                             android:background="@android:drawable/list_selector_background"
                             android:text="메시지 통계"
-                            android:textColor="#1b1b1b"
-                            android:textSize="15.8sp">
+                            android:textColor="#777474"
+                            android:textSize="15.8sp"
+                            android:textStyle="bold">
 
                         </TextView>
 
@@ -230,14 +243,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="8.7dp"
-                        android:background="#F6F6F6">
+                        android:background="#F8EBEB">
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="#F6F6F6">
+                        android:background="#F8EBEB">
 
                     </LinearLayout>
 
