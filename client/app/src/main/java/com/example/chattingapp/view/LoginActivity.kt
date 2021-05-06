@@ -119,7 +119,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 //                }
 //            })
 
-        var user = User(0, id, "효동", "쿠쿠루삥뽕", password,"")
+        var user = User(0, id, "정석", "쿠쿠루삥뽕", password,"")
 
         UserApiService.instance.signIn(user){
             if(it == -1){

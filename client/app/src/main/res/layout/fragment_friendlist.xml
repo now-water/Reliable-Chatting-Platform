@@ -65,6 +65,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/myprofile_layout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/bottom_border">
