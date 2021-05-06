@@ -44,15 +44,15 @@ public class UserApiController {
     }
 
     @PostMapping("/api/user/login")
-    public long signIn(@RequestBody @Valid LoginRequestDto req, HttpServletRequest servletRequest){
+    public User signIn(@RequestBody @Valid LoginRequestDto req, HttpServletRequest servletRequest){
         return userService.login(req, servletRequest.getSession());
     }
 
     @PostMapping("/api/user/signup")
-    public long signUp(@RequestBody @Valid SignupRequestDto req, Errors errors){
+    public User signUp(@RequestBody @Valid SignupRequestDto req, Errors errors){
 
         if(errors.hasErrors()){
-            return -1;
+            return null;
         }
 
         User user = User.builder()

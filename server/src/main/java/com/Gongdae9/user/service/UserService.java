@@ -28,29 +28,29 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public long signUp(User user) {
+    public User signUp(User user) {
         List<User> accountIdCheck = userRepository.findByAccountId(user.getAccountId());
 
         /* Check duplicate accountId */
         if(accountIdCheck.size() > 0){
-            return -1;
+            return null;
         }
 
         userRepository.save(user);
 
-        return user.getUserId();
+        return user;
     }
 
-    public long login(LoginRequestDto req,  HttpSession session) {
+    public User login(LoginRequestDto req,  HttpSession session) {
         User account = userRepository.findByAccountId(req.getAccountId()).get(0);
 
         if(!account.getPassword().equals(req.getPassword())){
-            return -1;
+            return null;
         }
 
         /* Save session information */
         session.setAttribute("userId", account.getUserId());
 
-        return account.getUserId();
+        return account;
     }
 }
