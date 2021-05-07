@@ -16,6 +16,7 @@
         <activity android:name=".view.MessageChatActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.LoginActivity"/>
+        <activity android:name=".view.SignUpActivity"/>
         <activity android:name=".view.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

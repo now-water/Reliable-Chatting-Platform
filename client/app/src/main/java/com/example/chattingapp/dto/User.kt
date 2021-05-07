@@ -22,5 +22,8 @@ data class User (
     val password : String,
 
     @SerializedName("phoneNum")
-    val phoneNum : String
+    val phoneNum : String,
+
+    @SerializedName("statusMessage")
+    val statusMessage : String
 ) : Parcelable
