@@ -2,6 +2,7 @@ package com.example.chattingapp.service
 
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
+import com.example.chattingapp.dto.request.LoginRequest
 import com.example.chattingapp.service.util.rest.RestApiService
 import com.example.chattingapp.service.util.rest.RestApiServiceCallback
 import io.reactivex.functions.Consumer
@@ -16,8 +17,8 @@ class UserApiService(private val restApiService: RestApiService) {
         restApiService.signUp(user).enqueue(RestApiServiceCallback(callback))
     }
 
-    fun signIn(user : User, callback: Consumer<User>){
-        restApiService.signIn(user).enqueue(RestApiServiceCallback(callback))
+    fun signIn(loginRequest: LoginRequest , successCallback: Consumer<User>, failureCallback : Runnable){
+        restApiService.signIn(loginRequest).enqueue(RestApiServiceCallback(successCallback, failureCallback))
     }
 
     companion object{

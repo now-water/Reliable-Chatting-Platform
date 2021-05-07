@@ -12,7 +12,8 @@ import java.util.logging.Logger
 object RestApiServiceGenerator {
     private val logger = Logger.getLogger(RestApiServiceGenerator.javaClass.name)
 
-    private val EMULATOR_URL = "http://ec2-15-164-94-45.ap-northeast-2.compute.amazonaws.com:3000/"
+    private val LOCAL_URL = "http://10.0.2.2:8080/"
+    private val EC2_URL = "http://ec2-15-164-94-45.ap-northeast-2.compute.amazonaws.com:3000/"
 
     fun <S> createService(serviceClass: Class<S>): S {
         val cookieManager = CookieManager()
@@ -29,7 +30,7 @@ object RestApiServiceGenerator {
 
         val builder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(EMULATOR_URL)
+            .baseUrl(EC2_URL)
             .client(okHttpClient)
         val retrofit = builder.build()
         return retrofit.create(serviceClass)

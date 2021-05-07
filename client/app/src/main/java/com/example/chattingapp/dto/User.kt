@@ -19,11 +19,11 @@ data class User (
     val nickName : String,
 
     @SerializedName("password")
-    val password : String,
+    val password : String?,
 
     @SerializedName("phoneNum")
     val phoneNum : String,
 
     @SerializedName("statusMessage")
-    val statusMessage : String
+    val statusMessage : String?
 ) : Parcelable

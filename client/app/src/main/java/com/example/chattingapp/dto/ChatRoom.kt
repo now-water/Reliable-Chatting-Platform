@@ -7,24 +7,29 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import java.time.LocalDateTime
 
 @Parcelize
-@Entity
+@Entity(tableName = "CHAT_ROOM")
 data class ChatRoom(
     @SerializedName("roomId")
     @PrimaryKey
-    @ColumnInfo(name ="room_id")
-    val roomId: Int,
+    var roomId: Int,
 
     @SerializedName("roomName")
-    @ColumnInfo(name="room_name")
-    val roomName: String,
+    var roomName: String,
 
+    @SerializedName("createdAt")
+    var createdAt : String,
+
+    // current message info
     @SerializedName("curMessage")
     @Ignore
-    val curMessage: String,
+    var curMessage: String,
 
     @SerializedName("recentTime")
     @Ignore
-    val recentTime: String
-):Parcelable
+    var recentTime: String,
+):Parcelable {
+    constructor() : this(-1, "", "", "", "")
+}

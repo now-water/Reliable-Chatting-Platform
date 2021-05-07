@@ -39,8 +39,7 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if(viewType == MY_CHATTING) {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.widget_chat_company, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.widget_chat_company, parent, false)
             return MyChatHolder(view)
         }
 
@@ -55,6 +54,7 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
             holder.bind(this.messages[position])
         }
     }
+
 
     override fun getItemCount(): Int {
         return this.messages.size;
@@ -81,5 +81,11 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
 
     fun clear(){
         this.messages.clear()
+    }
+
+    fun setMessages(messages: List<Message>){
+        this.messages.clear()
+        this.messages.addAll(messages)
+        notifyItemRangeChanged(0, messages.size-1)
     }
 }

@@ -6,10 +6,13 @@ import com.example.chattingapp.dto.Message
 
 @Dao
 interface MessageDao {
-    @Query("SELECT * FROM MESSAGE")
-    fun getAll() : LiveData<List<Message>>
+    @Query("SELECT * FROM MESSAGE") // 고쳐야함
+    fun getNextAll() : LiveData<List<Message>>
 
-    @Insert
+    @Query("SELECT * FROM MESSAGE")
+    fun getAll() : List<Message>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(message: Message)
 
     @Update
