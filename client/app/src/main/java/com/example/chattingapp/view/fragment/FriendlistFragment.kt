@@ -1,8 +1,7 @@
 package com.example.chattingapp.view.fragment
 
-import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +12,8 @@ import com.example.chattingapp.adapter.FriendlistAdapter
 import com.example.chattingapp.dto.Friend
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.FriendApiService
-import com.example.chattingapp.view.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.chattingapp.view.ProfileActivity
 import kotlinx.android.synthetic.main.fragment_friendlist.*
-import kotlinx.android.synthetic.main.fragment_roomlist.*
 import java.util.logging.Logger
 
 //test for fragment visibility
@@ -48,5 +45,14 @@ class FriendlistFragment(val user : User) : Fragment() {
                 adapter.addItem(friend)
             }
         }
+
+        // my profile 액티비티 실행
+        myprofile_layout.setOnClickListener {
+            val intent = Intent(activity, ProfileActivity::class.java)
+            intent.putExtra("user", user)
+
+            startActivity(intent)
+        }
+
     }
 }

@@ -124,7 +124,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
 //                }
 //            })
 
+
         user = User(0, id, "효동", "닉네임", password, "010-0000-0000", "답장 늦어요")
+
         UserApiService.instance.signIn(user){
             Log.d("it", it.toString())
             Log.d("user", user.toString())

@@ -45,7 +45,7 @@ public class loginSessionTest {
         MockHttpSession session = new MockHttpSession();
 
         //when
-        long id = userService.login(dto, session);
+        long id = userService.login(dto, session).getUserId();
         User user = userService.findByAccountId(dto.getAccountId()).get(0);
 
         //then
