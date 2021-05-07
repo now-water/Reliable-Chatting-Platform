@@ -12,7 +12,7 @@ interface RestApiService {
     @GET("/api/user/all") fun getUsers() : Call<List<User>>
     @GET("/api/user/checkSession") fun checkLogin() : Call<Int>
     @POST("/api/user/signup") fun signUp(@Body user:User) : Call<String>
-    @POST("/api/user/login") fun signIn(@Body user:User) : Call<Int>
+    @POST("/api/user/login") fun signIn(@Body user:User) : Call<User>
 
     // Friend Api
     @GET("/api/friend/all") fun getFriends() : Call<List<Friend>>

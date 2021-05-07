@@ -16,7 +16,7 @@ class UserApiService(private val restApiService: RestApiService) {
         restApiService.signUp(user).enqueue(RestApiServiceCallback(callback))
     }
 
-    fun signIn(user : User, callback: Consumer<Int>){
+    fun signIn(user : User, callback: Consumer<User>){
         restApiService.signIn(user).enqueue(RestApiServiceCallback(callback))
     }
 

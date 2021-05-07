@@ -11,17 +11,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.security.AccessControlContext
 
 class MainActivity : AppCompatActivity() {
-    private var userId : Int = -1
+    val user: User = intent.getParcelableArrayExtra("user")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.e("MSG", "TEST")
+        Log.d("user", user.toString())
+
         setContentView(R.layout.activity_main)
 
         //테스트를 위해서 수정
         setFrag(0)
-
-        userId = intent.getIntExtra("userId", -1)
 
         btn_userlist.setOnClickListener {
             setFrag(0)

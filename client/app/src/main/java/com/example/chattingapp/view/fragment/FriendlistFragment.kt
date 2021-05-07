@@ -32,7 +32,7 @@ class FriendlistFragment(val user : User) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         my_name.setText(user.name)
-        my_status_msg.setText("답장 늦어요")   // 상태메세지 항목없어서 임의로 시현때 보여주려고 암거나 넣음
+        my_status_msg.setText(user.statusMessage)   // 상태메세지 항목없어서 임의로 시현때 보여주려고 암거나 넣음
 
         val adapter =  FriendlistAdapter(requireContext(), friendList)
 
