@@ -28,7 +28,8 @@ public class MessageController {
         Message message = messageService.createMessage(userId, roomId, content);
         messageService.save(message);
 
-        MessageDto messageDto = new MessageDto(userId,content,message.getUser().getName(),message.getWrittenAt());
+//        MessageDto messageDto = new MessageDto(userId,content,message.getUser().getName(),message.getWrittenAt());
+        MessageDto messageDto = new MessageDto(message);
         return messageDto;
     }
 

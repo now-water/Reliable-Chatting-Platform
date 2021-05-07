@@ -4,6 +4,8 @@ package com.Gongdae9.message.domain;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 
 @Data
 public class EventSubDto {
@@ -17,4 +19,5 @@ public class EventSubDto {
         this.userName=userName;
         this.roomId=roomId;
     }
+
 }

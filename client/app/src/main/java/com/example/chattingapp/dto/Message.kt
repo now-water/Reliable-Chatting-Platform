@@ -1,9 +1,11 @@
 package com.example.chattingapp.dto
 
 import androidx.room.ColumnInfo
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "MESSAGE")
 data class Message (
     @SerializedName("messageId")
     @PrimaryKey
@@ -27,5 +29,9 @@ data class Message (
 
     @SerializedName("writtenAt")
     @ColumnInfo(name="written_at")
-    val writtenAt : String
+    val writtenAt : String,
+
+    @SerializedName("unreadCnt")
+    @ColumnInfo(name="unread_cnt")
+    val unreadCnt : Int
 )

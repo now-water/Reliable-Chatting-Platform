@@ -4,6 +4,7 @@ import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.Friend
 import com.example.chattingapp.dto.Message
 import com.example.chattingapp.dto.User
+import com.example.chattingapp.dto.request.LoginRequest
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,7 +13,7 @@ interface RestApiService {
     @GET("/api/user/all") fun getUsers() : Call<List<User>>
     @GET("/api/user/checkSession") fun checkLogin() : Call<Int>
     @POST("/api/user/signup") fun signUp(@Body user:User) : Call<String>
-    @POST("/api/user/login") fun signIn(@Body user:User) : Call<User>
+    @POST("/api/user/login") fun signIn(@Body loginRequest: LoginRequest) : Call<User>
 
     // Friend Api
     @GET("/api/friend/all") fun getFriends() : Call<List<Friend>>
