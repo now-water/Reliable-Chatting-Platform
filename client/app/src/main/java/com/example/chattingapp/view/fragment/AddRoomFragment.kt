@@ -56,20 +56,20 @@ class AddRoomFragment(val user: User) : Fragment() {
 
         btn_make.setOnClickListener {
             Log.d("확인 버튼 클릭", "확인 버튼 클릭")
-            RoomApiService.instance.createRoom(input_roomname_text.text.toString()){
+            RoomApiService.instance.createRoom(input_roomname_text.text.toString()){ roomId ->
                 Log.d("inviteList 회전 시작", "inviteList 회전 시작")
-                val roomId = it;
+                val eventInvite = EventInvite(input_roomname_text.text.toString(), user.name, roomId)
                 for(invited in inviteList){
-                    RoomApiService.instance.inviteRoom(it, invited.userId.toInt()){
+                    RoomApiService.instance.inviteRoom(roomId, invited.userId.toInt()){
                     }
 
-                    val eventInvite = EventInvite(input_roomname_text.text.toString(), user.name, roomId)
                     RoomApiService.instance.sendGreetingEvent(user.userId, invited.userId.toInt(), eventInvite)
                 }
+                RoomApiService.instance.sendGreetingEvent(user.userId, user.userId, eventInvite)
 
                 Log.d("터지니?","응")
 
-                RoomApiService.instance.getRoom(it){
+                RoomApiService.instance.getRoom(roomId){
                     Log.d("터지니?", it.toString())
 
                     val intent = Intent(activity, MessageChatActivity::class.java)

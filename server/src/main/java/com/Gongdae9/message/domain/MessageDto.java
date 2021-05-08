@@ -22,8 +22,6 @@ public class MessageDto {
         this.writtenAt=writtenAt;
     }
 
-
-
     public MessageDto(Message message){
         this.messageId = message.getId();
         this.userId = message.getUser().getUserId();

@@ -24,7 +24,7 @@ class RoomlistAdapter(val context: Context,  val user : User, val activity: Acti
     private val logger = Logger.getLogger(RoomlistAdapter::class.java.name)
 
     private val roomPositionTable = HashMap<Int,Int>()
-    private val roomList = ArrayList<ChatRoom>()
+    private var roomList = ArrayList<ChatRoom>()
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         var roomId = -1
@@ -61,6 +61,7 @@ class RoomlistAdapter(val context: Context,  val user : User, val activity: Acti
         }
     }
 
+    // this used for data set changed
     override fun onBindViewHolder(holder: Holder, position: Int, payloads: MutableList<Any>) {
         if(payloads.isEmpty()){
             onBindViewHolder(holder,position)
@@ -75,32 +76,18 @@ class RoomlistAdapter(val context: Context,  val user : User, val activity: Acti
         return roomList.size
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun addItemAtFirst(chatRoom: ChatRoom){
-        roomList.add(0, chatRoom)
-
-        roomPositionTable.forEach(){
-            roomPositionTable.replace(it.key, it.value+1)
-        }
-        roomPositionTable.put(chatRoom.roomId, 0)
-
-        notifyItemInserted(0)
-    }
-
-    fun addItems(chatrooms: List<ChatRoom>){
-        for(i in 0 until chatrooms.size)
-            roomPositionTable.put(chatrooms[i].roomId, roomList.size + i)
-        roomList.addAll(chatrooms)
-
-        notifyItemInserted(roomList.size-1);
-    }
-
     fun notifyItemChangedBy(roomId:Int, message:Message){
         if(!roomPositionTable.containsKey(roomId))
             throw IllegalArgumentException("adapter does not have roomId")
-
-        logger.info("roomtable index is ${roomPositionTable.get(roomId)}" )
-
         notifyItemChanged(roomPositionTable.get(roomId)!!, message)
+    }
+
+    fun setRooms(rooms : List<ChatRoom>){
+        this.roomList.clear()
+        this.roomList = rooms as ArrayList<ChatRoom>
+        for(i in 0 until roomList.size){
+            roomPositionTable[roomList[i].roomId] = i
+        }
+        notifyDataSetChanged()
     }
 }

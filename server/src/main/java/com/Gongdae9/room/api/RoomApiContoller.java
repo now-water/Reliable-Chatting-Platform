@@ -58,7 +58,8 @@ public class RoomApiContoller {
         List<MessageDto> messageDtos = new ArrayList<>();
         room.getMessages().forEach(m -> {
             User user = m.getUser();
-            messageDtos.add(new MessageDto(user.getUserId(), m.getContent(), user.getName(), m.getWrittenAt()));
+            messageDtos.add(new MessageDto(m));
+//            messageDtos.add(new MessageDto(user.getUserId(), m.getContent(), user.getName(), m.getWrittenAt()));
         });
         return messageDtos;
     }
