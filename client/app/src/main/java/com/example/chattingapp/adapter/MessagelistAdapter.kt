@@ -15,7 +15,7 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
         val ENTER = 2
     }
 
-    private val messages = ArrayList<Message>()
+    private var messages = ArrayList<Message>()
 
     inner class MyChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_content)!!
@@ -85,7 +85,7 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
 
     fun setMessages(messages: List<Message>){
         this.messages.clear()
-        this.messages.addAll(messages)
-        notifyItemRangeChanged(0, messages.size-1)
+        this.messages = messages as ArrayList<Message>
+        notifyDataSetChanged()
     }
 }

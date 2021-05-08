@@ -26,7 +26,7 @@ public class MessageController {
         Thread.sleep(100); // delay
         content=content.substring(0,content.length()-2);
         Message message = messageService.createMessage(userId, roomId, content);
-        messageService.save(message);
+        message = messageService.save(message);
 
 //        MessageDto messageDto = new MessageDto(userId,content,message.getUser().getName(),message.getWrittenAt());
         MessageDto messageDto = new MessageDto(message);
