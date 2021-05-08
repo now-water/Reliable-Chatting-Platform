@@ -21,6 +21,7 @@ class StompEventListener(context : Context) {
         MessageApiService.getNewInstance().getAllMessages(roomId){
             // db UI 쓰레드, 즉 메인 쓰레드에서 접근하면 안됨.
             Thread() {
+                appDatabase.messageDao().deleteAll()
                 for (message in it) {
                     logger.info("database add message : $message")
                     appDatabase.messageDao().insert(message)
@@ -29,7 +30,6 @@ class StompEventListener(context : Context) {
         }
 
         messageApiService.subscribeRoom(roomId){
-            logger.info("received message $it")
             appDatabase.messageDao().insert(it)
         }
     }
@@ -39,15 +39,18 @@ class StompEventListener(context : Context) {
         // 이친구도 마찬가지
         RoomApiService.instance.getRooms(){
             Thread() {
-                for (room in it)
+                appDatabase.roomDao().deleteAll()
+                for (room in it) {
                     appDatabase.roomDao().insert(room)
+                }
             }.start()
         }
 
         eventApiService.subscribeToMyEvent(myId){
-            logger.info("received invite $it")
+            logger.info("invite room : $it")
             val room = ChatRoom(it.roomId, it.roomName, LocalDateTime.now().toString(), "", "")
             appDatabase.roomDao().insert(room)
+            listenMessageAndInsertToDB(room.roomId)
         }
     }
 

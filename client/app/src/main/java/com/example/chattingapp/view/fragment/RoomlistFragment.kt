@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chattingapp.R
 import com.example.chattingapp.adapter.RoomlistAdapter
+import com.example.chattingapp.db.AppDatabase
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.EventApiService
@@ -27,10 +28,7 @@ import kotlin.collections.ArrayList
 
 class RoomlistFragment(val user : User) : Fragment() {
     private val logger = Logger.getLogger(RoomlistFragment::class.java.name)
-
     private lateinit var adapter : RoomlistAdapter
-    private val eventApiService = EventApiService.getNewInstance()
-    private val messageApiService = MessageApiService.getNewInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view:View = inflater.inflate(R.layout.fragment_roomlist, container, false)
@@ -54,31 +52,21 @@ class RoomlistFragment(val user : User) : Fragment() {
         recyclerRoomlist.layoutManager = LinearLayoutManager(requireContext())
         recyclerRoomlist.setHasFixedSize(true)
 
-        eventApiService.subscribeToMyEvent(user.userId){
-            RoomApiService.instance.getRoom(it.roomId){
-                adapter.addItemAtFirst(it)
-                observerNewMessage(it.roomId)
-                recyclerRoomlist.scrollToPosition(0)
-            }
-        }
-
-        RoomApiService.instance.getRooms(){
-            adapter.addItems(it)
-            for(room in it) {
-                observerNewMessage(room.roomId)
-            }
+        // 추후에 user ID를 기반으로 들고 올 수 있도록 조정해야함! 이것도 서버와 얘기해봐야하나
+        // 초대 받을 시 마지막으로 받는데, 이거는 어쩔 수 없음... 서버와 얘기해서 createdAt도 room에 추가해야함!
+        val db = AppDatabase.getInstance(context!!)
+        db.roomDao().getAll().observe(this){
+            adapter.setRooms(it)
+            observerNewMessage(it, db)
         }
     }
 
-    private fun observerNewMessage(roomId : Int){
-        messageApiService.subscribeRoom(roomId) {
-            adapter.notifyItemChangedBy(roomId, it)
+    private fun observerNewMessage(rooms : List<ChatRoom>, db : AppDatabase){
+        for(room in rooms) {
+            db.messageDao().getAll(room.roomId).observe(this) { messages ->
+                if(messages.isNotEmpty())
+                    adapter.notifyItemChangedBy(room.roomId, messages.last())
+            }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        eventApiService.unSubscribeToMyEvent(user.userId)
-        messageApiService.deSubscribeAll()
     }
 }

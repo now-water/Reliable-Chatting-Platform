@@ -19,9 +19,6 @@ import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
 class MessagelistFragment(val userId: Int, val roomId: Int) : Fragment(){
-    private val logger = Logger.getLogger(MessagelistFragment::class.java.name)
-
-    private val messageApiService = MessageApiService.getNewInstance()
     private val adapter = MessagelistAdapter(userId)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,13 +44,6 @@ class MessagelistFragment(val userId: Int, val roomId: Int) : Fragment(){
     }
 
     override fun onStop() {
-        logger.info("deleted messagelist fragment")
-        messageApiService.deSubscribeRoom(roomId)
         super.onStop()
     }
-//    override fun onDestroy() {
-//        logger.info("deleted messagelist fragment")
-//        messageApiService.deSubscribeRoom(roomId)
-//        super.onDestroy()
-//    }
 }
