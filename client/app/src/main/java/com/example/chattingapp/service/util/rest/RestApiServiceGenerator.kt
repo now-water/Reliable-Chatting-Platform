@@ -35,4 +35,5 @@ object RestApiServiceGenerator {
         val retrofit = builder.build()
         return retrofit.create(serviceClass)
     }
+
 }

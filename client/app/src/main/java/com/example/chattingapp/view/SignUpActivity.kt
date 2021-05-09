@@ -393,11 +393,17 @@ package com.example.chattingapp.view
 //    }
 //
 //    private val mIdTextWatcher: SimpleTextWatcher = object : SimpleTextWatcher {
+//        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//        }
+//
+//        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//        }
+//
 //        override fun afterTextChanged(s: Editable?) {
 //            inputIDcheck!!.visibility = View.VISIBLE
 //            val isCheckEmail = emailPattern(inputID!!.text.toString())
 //            if (isCheckEmail) {
-//                inputIDcheck!!.text = "사용할 수 있는 아이디 입니다."
+//                inputIDcheck!!.text = "적합한 형식의 아이디(이메일) 입니다."
 //                inputIDcheck!!.setTextColor(Color.parseColor("#df504a"))
 //            } else {
 //                inputIDcheck!!.text = "이메일 형식에 맞지 않습니다."
@@ -415,7 +421,7 @@ package com.example.chattingapp.view
 //
 //    // 비밀번호 패턴 검사
 //    fun pwPattern(pw: String): Boolean {
-//        val repExp = Regex("^([0-9a-zA-Z]).{1,20}$")
+//        val repExp = Regex("^([0-9a-zA-Z]).{3,20}$")
 //        return pw.matches(repExp)
 //    }
 //}
