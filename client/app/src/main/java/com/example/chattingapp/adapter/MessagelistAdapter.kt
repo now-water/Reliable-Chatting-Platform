@@ -16,6 +16,7 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
     }
 
     private var messages = ArrayList<Message>()
+    private val messageIdToIdx = HashMap<Int,Int>()
 
     inner class MyChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_content)!!
@@ -66,26 +67,30 @@ class MessagelistAdapter(val userId : Int) :  RecyclerView.Adapter<RecyclerView.
         }
         return OTHER_CHATTING
     }
+//
+//    private fun addItem(message : Message){
+//        this.messages.add(message)
+//        notifyItemInserted(this.messages.size-1);
+//    }
 
-    fun addItem(message : Message){
-        this.messages.add(message)
-        notifyItemInserted(this.messages.size-1);
+    private fun addItems(messages: List<Message>){
+        this.messages.addAll(messages)
+        for(i in 0 until messages.size)
+            messageIdToIdx[messages[i].messageId] = i
     }
 
-
-    fun addItems(message: List<Message>){
-        val startIdx = this.messages.size
-        this.messages.addAll(message)
-        notifyItemRangeInserted(startIdx, message.size)
-    }
-
-    fun clear(){
+    private fun clearData(){
         this.messages.clear()
+        this.messageIdToIdx.clear()
+    }
+
+    fun getIdx(messageId : Int) : Int? {
+        return messageIdToIdx[messageId]
     }
 
     fun setMessages(messages: List<Message>){
-        this.messages.clear()
-        this.messages = messages as ArrayList<Message>
+        clearData()
+        addItems(messages)
         notifyDataSetChanged()
     }
 }
