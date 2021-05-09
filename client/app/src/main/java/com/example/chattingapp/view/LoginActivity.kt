@@ -35,8 +35,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
     private lateinit var id: String
     private lateinit var password: String
 
-    private lateinit var user: User
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -63,8 +61,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
         findId!!.setOnClickListener(this)
         findPw!!.setOnClickListener(this)
         loginBtn!!.setOnClickListener(this)
-//        inputID!!.addTextChangedListener(mIdTextWatcher)
-//        inputPW!!.addTextChangedListener(mPwTextWatcher)
+        inputID!!.addTextChangedListener(mIdTextWatcher)
+        inputPW!!.addTextChangedListener(mPwTextWatcher)
     }
 
     override fun onClick(v: View) {
@@ -84,10 +82,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
             R.id.login_btn -> {
                 id = inputID!!.text.toString().trim { it <= ' ' }
                 password = inputPW!!.text.toString().trim { it <= ' ' }
-
-//                intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
-
                 requestLogin(id, password)
             }
         }
@@ -134,41 +128,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
                 startActivity(intent)
                 finish()
             }, {
-                Toast.makeText(this, "해당 id나 pwd가 없습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "아이디나 패스워드가 존재하지 않거나 잘못되었습니다.", Toast.LENGTH_SHORT).show()
             })
-
-//        UserApiService.instance.signIn(user){
-//            Log.d("it", it.toString())
-//            Log.d("user", user.toString())
-//
-//            Log.d("1", it.accountId)
-//            Log.d("1", user.accountId)
-//            Log.d("1", it.accountId.equals(user.accountId).toString())
-//
-////            Log.d("1", it.password)
-////            Log.d("1", user.password)
-////            Log.d("2", it.password.equals(user.password).toString())
-//
-//            //이부분!!!!!!!!!!!!!!!!!!!
-//            if(it.accountId.equals(user.accountId) ){
-//                Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-//
-//                user.userId = it.userId
-//                user.accountId.replace(user.accountId, it.accountId)
-//                user.name.replace(user.name, it.name)
-//                user.nickName.replace(user.nickName, it.nickName)
-//                //user.password.replace(user.password, it.password)
-//                user.phoneNum.replace(user.phoneNum, it.phoneNum)
-//                //user.statusMessage.replace(user.statusMessage, it.statusMessage)
-//
-//                intent = Intent(this, MainActivity::class.java)
-//                intent.putExtra("user", user)
-//                startActivity(intent)
-//                finish()
-//            }else{
-//                Toast.makeText(this, "해당 id나 pwd가 없습니다.", Toast.LENGTH_SHORT).show()
-//            }
-//        }
     }
 
     // meminfo 요청
@@ -224,32 +185,43 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
 //            })
     }
 
-//    private val mIdTextWatcher: SimpleTextWatcher = object : SimpleTextWatcher {
-//        override fun afterTextChanged(s: Editable?) {
-//            inputIDcheck!!.visibility = View.VISIBLE
-//            val isCheckEmail = emailPattern(inputID!!.text.toString())
-//            if (isCheckEmail) {
-//                inputIDcheck!!.text = "사용할 수 있는 아이디 입니다."
-//                inputIDcheck!!.setTextColor(Color.parseColor("#df504a"))
-//            } else {
-//                inputIDcheck!!.text = "이메일 형식에 맞지 않습니다."
-//                inputIDcheck!!.setTextColor(Color.parseColor("#6e6e6e"))
-//            }
-//        }
-//    }
-//    private val mPwTextWatcher: SimpleTextWatcher = object : SimpleTextWatcher {
-//        override fun afterTextChanged(s: Editable?) {
-//            val isCheckPw = pwPattern(inputPW!!.text.toString())
-//            Log.d("test", "aaaa == $isCheckPw")
-//            if (isCheckPw) {
-//                inputPWcheck!!.visibility = View.INVISIBLE
-//            } else {
-//                inputPWcheck!!.visibility = View.VISIBLE
-//                inputPWcheck!!.text = "비밀번호 형식에 맞지 않습니다."
-//                inputPWcheck!!.setTextColor(Color.parseColor("#6e6e6e"))
-//            }
-//        }
-//    }
+    private val mIdTextWatcher: SimpleTextWatcher = object : SimpleTextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            inputIDcheck!!.visibility = View.VISIBLE
+            val isCheckEmail = emailPattern(inputID!!.text.toString())
+            if (isCheckEmail) {
+                inputIDcheck!!.text = "적합한 형식의 아이디(이메일) 입니다."
+                inputIDcheck!!.setTextColor(Color.parseColor("#df504a"))
+            } else {
+                inputIDcheck!!.text = "이메일 형식에 맞지 않습니다."
+                inputIDcheck!!.setTextColor(Color.parseColor("#6e6e6e"))
+            }
+        }
+    }
+    private val mPwTextWatcher: SimpleTextWatcher = object : SimpleTextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            val isCheckPw = pwPattern(inputPW!!.text.toString())
+            if (isCheckPw) {
+                inputPWcheck!!.visibility = View.INVISIBLE
+            } else {
+                inputPWcheck!!.visibility = View.VISIBLE
+                inputPWcheck!!.text = "비밀번호 형식에 맞지 않습니다."
+                inputPWcheck!!.setTextColor(Color.parseColor("#6e6e6e"))
+            }
+        }
+    }
 
     // 이메일 패턴 검사
     fun emailPattern(email: String): Boolean {
@@ -260,7 +232,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
 
     // 비밀번호 패턴 검사
     fun pwPattern(pw: String): Boolean {
-        val repExp = Regex("^([0-9a-zA-Z]).{1,20}$")
+        val repExp = Regex("^([0-9a-zA-Z]).{3,20}$")
         return pw.matches(repExp)
     }
 }
