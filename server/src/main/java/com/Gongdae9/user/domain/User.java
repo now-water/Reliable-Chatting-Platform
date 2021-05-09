@@ -6,12 +6,7 @@ import com.Gongdae9.joinroom.domain.JoinRoom;
 import com.Gongdae9.message.domain.Message;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +27,9 @@ public class User {
     private String accountId;
     private String password;
     private String statusMessage;
+
+    @Lob @Basic(fetch = FetchType.EAGER)
+    private String profileImage;
 
     @OneToMany(mappedBy = "user") // persist 전파
     private List<Friend> friends;
