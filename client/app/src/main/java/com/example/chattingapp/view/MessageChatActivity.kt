@@ -3,16 +3,21 @@ package com.example.chattingapp.view
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.MessageApiService
 import com.example.chattingapp.view.fragment.MessagelistFragment
 import kotlinx.android.synthetic.main.activity_message_chat.*
+import kotlinx.android.synthetic.main.drawer_chatroom.*
 import kotlinx.android.synthetic.main.widget_bar_title_back.*
 
 
@@ -28,7 +33,7 @@ class MessageChatActivity : AppCompatActivity() {
         user = intent.getParcelableExtra<User>("user")!!
         room = intent.getParcelableExtra<ChatRoom>("room")!!
 
-        setContentView(R.layout.activity_message_chat)
+        setContentView(R.layout.drawer_chatroom)
         setFragment(user.userId, room.roomId, room.roomName)
 
         //room name TextView
@@ -38,6 +43,12 @@ class MessageChatActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.back_button).setOnClickListener {
             finish()
         }
+
+        //menu onclick listener
+        menu_button.setOnClickListener {
+            chatroom_drawer_layout.openDrawer(GravityCompat.END)
+        }
+
 
         // button click, send message
         findViewById<ImageView>(R.id.chat_send_btn).setOnClickListener {
