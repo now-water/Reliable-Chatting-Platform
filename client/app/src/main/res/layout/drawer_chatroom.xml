@@ -18,6 +18,7 @@
         android:background="#F3B4B4"
         app:itemTextAppearance="@style/TextAppearance.AppCompat.Medium"
         app:itemTextColor="#FFFFFF"
+        app:headerLayout="@layout/drawer_chatroom_header"
         app:menu="@menu/chatroom_menu" />
 
 
