@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
 
     <item
+        android:id="@+id/bookmark_btn"
         android:icon="@drawable/ic_baseline_bookmarks_24"
         android:title="북마크" />
     <item
+        android:id="@+id/adduser_btn"
         android:icon="@drawable/ic_baseline_person_add_alt_1_24"
-        android:title="친구 초대"></item>
+        android:title="친구 초대"/>
+    <item
+        android:id="@+id/room_set_btn"
+        android:icon="@drawable/ic_ivory_setting"
+        android:title="채팅방 세부 설정" />
 </menu>

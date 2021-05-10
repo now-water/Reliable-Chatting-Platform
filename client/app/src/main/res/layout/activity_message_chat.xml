@@ -5,7 +5,7 @@
     android:id="@+id/message_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DAE4EF"
+    android:background="#FAECEC"
     android:orientation="vertical"
     tools:context=".view.MessageChatActivity">
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:animateLayoutChanges="true"
-        android:background="@color/white"
+        android:background="#FFFFFF"
         android:orientation="vertical">
 
         <LinearLayout

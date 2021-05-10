@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/red_214_81_71">
+    android:background="#F16B6F">
 
     <LinearLayout
         android:id="@+id/widget_action_bar_back_btn"
