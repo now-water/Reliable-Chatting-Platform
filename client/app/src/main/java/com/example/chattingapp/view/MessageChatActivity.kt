@@ -1,27 +1,27 @@
 package com.example.chattingapp.view
 
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.MessageApiService
 import com.example.chattingapp.view.fragment.MessagelistFragment
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_message_chat.*
 import kotlinx.android.synthetic.main.drawer_chatroom.*
 import kotlinx.android.synthetic.main.widget_bar_title_back.*
 
 
-class MessageChatActivity : AppCompatActivity() {
+class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var user: User
     private lateinit var room: ChatRoom
 
@@ -48,6 +48,8 @@ class MessageChatActivity : AppCompatActivity() {
         menu_button.setOnClickListener {
             chatroom_drawer_layout.openDrawer(GravityCompat.END)
         }
+
+        chatroom_navigationView.setNavigationItemSelectedListener(this)
 
 
         // button click, send message
@@ -87,4 +89,15 @@ class MessageChatActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(ev)
     }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.bookmark_btn -> {
+                intent = Intent(this, BookmarkActivity::class.java)
+                startActivity(intent);
+            }
+        }
+        return false
+    }   //Drawer item 클릭시 이벤트 명세 함수
+
 }

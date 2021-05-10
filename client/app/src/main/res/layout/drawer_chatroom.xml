@@ -12,12 +12,13 @@
         layout="@layout/activity_message_chat" />
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/chatroom_navigationView"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:background="#F3B4B4"
         app:itemTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:itemTextColor="#FFFFFF"
+        app:itemTextColor="#FDF6F6"
         app:headerLayout="@layout/drawer_chatroom_header"
         app:menu="@menu/chatroom_menu" />
 
