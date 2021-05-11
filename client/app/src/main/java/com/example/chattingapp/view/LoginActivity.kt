@@ -38,7 +38,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         initView()
 
         setUpAdapter()
@@ -119,6 +118,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
 //                    Log.d("Login Failed = ", t.message!!)
 //                }
 //            })
+        //checkStatus()
 
 
             UserApiService.instance.signIn(LoginRequest(id, password), {
@@ -130,6 +130,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
             }, {
                 Toast.makeText(this, "아이디나 패스워드가 존재하지 않거나 잘못되었습니다.", Toast.LENGTH_SHORT).show()
             })
+
+        UserApiService.instance.checkSession({
+            Log.d("logincheck", it.toString())
+        },{
+            Log.d("logincheckfail", "꺼졍")
+        })
     }
 
     // meminfo 요청

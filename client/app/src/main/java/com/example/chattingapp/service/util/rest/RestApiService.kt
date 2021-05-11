@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface RestApiService {
     // User Api
     @GET("/api/user/all") fun getUsers() : Call<List<User>>
-    @GET("/api/user/checkSession") fun checkLogin() : Call<Int>
+    @GET("/api/user/checkSession") fun checkSession() : Call<Int>
     @POST("/api/user/signup") fun signUp(@Body user:User) : Call<String>
     @POST("/api/user/login") fun signIn(@Body loginRequest: LoginRequest) : Call<User>
 
