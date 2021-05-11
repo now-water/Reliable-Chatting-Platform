@@ -21,6 +21,10 @@ class UserApiService(private val restApiService: RestApiService) {
         restApiService.signIn(loginRequest).enqueue(RestApiServiceCallback(successCallback, failureCallback))
     }
 
+    fun checkSession(successCallback: Consumer<Int>, failureCallback: Runnable){
+        restApiService.checkSession().enqueue(RestApiServiceCallback(successCallback, failureCallback))
+    }
+
     companion object{
         val instance = UserApiService(RestApiService.instance)
     }
