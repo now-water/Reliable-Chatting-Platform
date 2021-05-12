@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.chattingapp.R
@@ -40,7 +41,7 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         widget_title_bar_basic.setText(room.roomName)
 
         //back button onclick func
-        findViewById<ImageView>(R.id.bookmark_back_btn).setOnClickListener {
+        findViewById<LinearLayout>(R.id.room_back_button).setOnClickListener {
             finish()
         }
 
