@@ -57,14 +57,25 @@ public class UserService {
     }
 
     @Transactional
-    public boolean setUserStatusMessage(String acconutId, String userStatusMessage){
-        List<User> accounts = userRepository.findByAccountId(acconutId);
+    public boolean updateUserStatusMessage(Long userId,String userStatusMessage){
+        User user = userRepository.findById(userId);
+        if(user!=null){
+            user.changeStatusMessage(userStatusMessage);
+            save(user);
+            return true;
+        }
+        return false;
+    }
 
-        if(accounts.size() <= 0) return false;
-
-        User account = accounts.get(0);
-        account.changeStatusMessage(userStatusMessage);
-        return true;
+    @Transactional
+    public boolean updateUserNickName(Long userId,String userNickName){
+        User user = userRepository.findById(userId);
+        if(user!=null){
+            user.changeUserNickName(userNickName);
+            save(user);
+            return true;
+        }
+        return false;
     }
 
     public boolean updateProfileImage(Long userId, String base64Image) {
