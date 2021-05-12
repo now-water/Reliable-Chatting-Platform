@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserApiController {
 
     private final UserService userService;
-    private final RoomService roomService;
 
     @GetMapping("/api/user/all")
     public List<UserDto> showAll(){
@@ -72,5 +71,11 @@ public class UserApiController {
 
         userService.setUserStatusMessage(req.getAccountId(), req.getStatusMessage());
         return true;
+    }
+
+    @PostMapping("/api/user/updateImage")
+    public boolean updateProfileImage(@RequestBody @Valid String base64Image, HttpServletRequest req){
+        Long userId = (Long)req.getSession().getAttribute("userId");
+        return userService.updateProfileImage(userId, base64Image);
     }
 }

@@ -66,4 +66,10 @@ public class UserService {
         account.changeStatusMessage(userStatusMessage);
         return true;
     }
+
+    public boolean updateProfileImage(Long userId, String base64Image) {
+        User user = userRepository.findById(userId);
+        user.updateProfileImage(base64Image);
+        return true;
+    }
 }
