@@ -43,11 +43,16 @@ public class UserService {
         return new UserDto(user);
     }
 
+    @Transactional
     public UserDto login(LoginRequestDto req,  HttpSession session) {
         User account = userRepository.findByAccountId(req.getAccountId()).get(0);
 
         if(!account.getPassword().equals(req.getPassword())){
             return null;
+        }
+
+        if(!account.getFcmToken().equals(req.getFcmToken())){
+            account.updateFcmToken(req.getFcmToken());
         }
 
         /* Save session information */
