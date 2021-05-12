@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "156329211933",
+    "project_id": "reliablemessage-168d1",
+    "storage_bucket": "reliablemessage-168d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156329211933:android:3dfc1e9392c95db67ceef4",
+        "android_client_info": {
+          "package_name": "com.example.chattingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156329211933-refsrc1qj8va5hhge6lrcovonnri7s6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnUoLz3nBpd8cwON2XQ7hgvcWx9jrHr9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156329211933-refsrc1qj8va5hhge6lrcovonnri7s6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
