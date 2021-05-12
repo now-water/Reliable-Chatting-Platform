@@ -62,5 +62,9 @@ public class User {
         this.statusMessage = statusMessage;
     }
 
+    public void changeUserNickName(String nickName){
+        this.nickName = nickName;
+    }
+
     public void updateProfileImage(String base64Image){ this.profileImage = base64Image; }
 }
