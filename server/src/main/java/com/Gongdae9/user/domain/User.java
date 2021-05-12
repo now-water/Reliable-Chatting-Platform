@@ -27,6 +27,7 @@ public class User {
     private String accountId;
     private String password;
     private String statusMessage;
+    private String fcmToken;
 
     @Lob @Basic(fetch = FetchType.EAGER)
     private String profileImage;
@@ -67,4 +68,8 @@ public class User {
     }
 
     public void updateProfileImage(String base64Image){ this.profileImage = base64Image; }
+
+    public void updateFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
 }
