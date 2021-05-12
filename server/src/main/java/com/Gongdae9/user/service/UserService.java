@@ -78,6 +78,7 @@ public class UserService {
         return false;
     }
 
+    @Transactional
     public boolean updateProfileImage(Long userId, String base64Image) {
         User user = userRepository.findById(userId);
         user.updateProfileImage(base64Image);
