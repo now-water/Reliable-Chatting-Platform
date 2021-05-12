@@ -15,8 +15,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var user : User
     private lateinit var stompEventListener : StompEventListener
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportFragmentManager.fragmentFactory = MainFragmentFactoryImpl()
+
         super.onCreate(savedInstanceState)
         user = intent.getParcelableExtra<User>("user")!!
 
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     //test code for fragment visible
     fun setFrag(fragNum: Int) {
+        val friendlistFragment = supportFragmentManager.fragmentFactory.instantiate(classLoader, FriendlistFragment::class.java.name)
         val ft = supportFragmentManager.beginTransaction()
         when (fragNum) {
             0 -> {

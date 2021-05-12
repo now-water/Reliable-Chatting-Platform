@@ -15,6 +15,7 @@
         <activity android:name=".view.BookmarkActivity"/>
         <activity android:name=".view.MainActivity"/>
         <activity android:name=".view.ProfileActivity" />
+        <activity android:name=".view.ProfileChangeActivity" />
         <activity android:name=".view.MessageChatActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.LoginActivity"/>
