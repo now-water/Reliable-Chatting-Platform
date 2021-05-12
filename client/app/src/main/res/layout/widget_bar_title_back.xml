@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/back_button"
+            android:id="@+id/bookmark_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/abc_vector_test" />
@@ -53,7 +53,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/check_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_baseline_dehaze_24" />

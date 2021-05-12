@@ -40,7 +40,7 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         widget_title_bar_basic.setText(room.roomName)
 
         //back button onclick func
-        findViewById<ImageView>(R.id.back_button).setOnClickListener {
+        findViewById<ImageView>(R.id.bookmark_back_btn).setOnClickListener {
             finish()
         }
 
