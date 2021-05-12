@@ -3,6 +3,7 @@ package com.example.chattingapp.view
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
@@ -93,6 +94,7 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.bookmark_btn -> {
+                Log.d("hello","hi~~")
                 intent = Intent(this, BookmarkActivity::class.java)
                 startActivity(intent);
             }
