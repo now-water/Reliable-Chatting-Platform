@@ -61,4 +61,6 @@ public class User {
     public void changeStatusMessage(String statusMessage){
         this.statusMessage = statusMessage;
     }
+
+    public void updateProfileImage(String base64Image){ this.profileImage = base64Image; }
 }
