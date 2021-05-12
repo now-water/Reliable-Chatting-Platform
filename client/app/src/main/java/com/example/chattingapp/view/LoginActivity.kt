@@ -1,5 +1,6 @@
 package com.example.chattingapp.view
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -16,6 +17,9 @@ import com.example.chattingapp.dto.User
 import com.example.chattingapp.dto.request.LoginRequest
 import com.example.chattingapp.service.UserApiService
 import com.example.chattingapp.view.SimpleTextWatcher
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.iid.FirebaseInstanceId
 import java.lang.IllegalStateException
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatcher {
@@ -42,6 +46,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
 
         setUpAdapter()
         setUpListener()
+        FirebaseApp.initializeApp(applicationContext)
+        System.out.println("token : "+ FirebaseInstanceId.getInstance().getToken()); // 토큰을 확인할 수 있는 코드
+
     }
 
     fun initView() {
