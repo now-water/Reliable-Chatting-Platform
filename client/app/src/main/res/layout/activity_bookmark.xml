@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/widget_action_bar_back_btn"
+            android:id="@+id/bookmark_back_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -26,7 +26,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/bookmark_back_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/abc_vector_test" />
