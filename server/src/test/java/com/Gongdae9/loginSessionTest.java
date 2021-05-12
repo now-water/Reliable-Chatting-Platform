@@ -2,6 +2,7 @@ package com.Gongdae9;
 
 import com.Gongdae9.user.domain.User;
 import com.Gongdae9.user.dto.LoginRequestDto;
+import com.Gongdae9.user.dto.UserDto;
 import com.Gongdae9.user.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +32,8 @@ public class loginSessionTest {
             .build();
 
         //when
-        long createdUserId = userService.signUp(user);
+        UserDto userDto = userService.signUp(user);
+        Long createdUserId = userDto.getUserId();
 
         //then
         Long needCheckId = userService.findById(createdUserId).getUserId();
@@ -41,7 +43,7 @@ public class loginSessionTest {
     @Test
     public void 로그인_테스트() throws Exception {
         //given
-        LoginRequestDto dto = new LoginRequestDto("testid4", "testpw4");
+        LoginRequestDto dto = new LoginRequestDto("testid4", "testpw4", "testToken");
         MockHttpSession session = new MockHttpSession();
 
         //when

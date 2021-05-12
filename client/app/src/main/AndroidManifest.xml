@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.BookmarkActivity"/>
         <activity android:name=".view.MainActivity"/>
         <activity android:name=".view.ProfileActivity" />
         <activity android:name=".view.ProfileChangeActivity" />
@@ -19,7 +20,6 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.LoginActivity"/>
         <activity android:name=".view.SignUpActivity"/>
-        <activity android:name=".view.BookmarkActivity"/>
         <activity android:name=".view.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

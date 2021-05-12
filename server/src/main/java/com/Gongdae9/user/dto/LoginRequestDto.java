@@ -6,9 +6,11 @@ import lombok.Data;
 public class LoginRequestDto {
     private String accountId;
     private String password;
+    private String fcmToken;
 
-    public LoginRequestDto(String accountId, String password) {
+    public LoginRequestDto(String accountId, String password, String fcmToken) {
         this.accountId = accountId;
         this.password = password;
+        this.fcmToken = fcmToken;
     }
 }

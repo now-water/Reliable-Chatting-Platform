@@ -1,22 +1,13 @@
 package com.example.chattingapp.view
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.chattingapp.R
-import okhttp3.ResponseBody
-import org.json.JSONException
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.IOException
 
 class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatcher {
     private var mBackBtn // 뒤로가기
@@ -63,7 +54,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatc
     }
 
     fun initView() {
-        mBackBtn = findViewById(R.id.widget_action_bar_back_btn)
+        mBackBtn = findViewById(R.id.back_button)
         inputID = findViewById(R.id.input_id) as EditText?
         inputIDcheck = findViewById(R.id.input_id_check) as TextView?
         inputPW = findViewById(R.id.input_pw) as EditText?
@@ -108,7 +99,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatc
     override fun onClick(v: View) {
         val id = v.id
         when (id) {
-            R.id.widget_action_bar_back_btn -> {
+            R.id.back_button -> {
                 onBackPressed()
             }
 //            R.id.input_phone_layout, R.id.phone_auth -> {

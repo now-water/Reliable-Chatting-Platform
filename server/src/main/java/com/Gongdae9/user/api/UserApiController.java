@@ -63,14 +63,18 @@ public class UserApiController {
         return userService.signUp(user);
     }
 
-    @PostMapping("/api/user/setStatus")
-    public boolean setStatusMessage(@RequestBody @Valid ChangeStatusRequestDto req, Errors errors){
-        if(errors.hasErrors()){
-            return false;
-        }
+    @PostMapping("/api/user/updateStatus")
+    public boolean updateStatusMessage(@RequestBody @Valid String statusMessage,HttpServletRequest req){
+        long userId = (Long)req.getSession().getAttribute("userId");
 
-        userService.setUserStatusMessage(req.getAccountId(), req.getStatusMessage());
-        return true;
+        return userService.updateUserStatusMessage(userId,statusMessage);
+    }
+
+    @PostMapping("/api/user/updateNickName")
+    public boolean updateNickName(@RequestBody @Valid String NickName,HttpServletRequest req){
+        long userId = (Long)req.getSession().getAttribute("userId");
+
+        return userService.updateUserNickName(userId,NickName);
     }
 
     @PostMapping("/api/user/updateImage")

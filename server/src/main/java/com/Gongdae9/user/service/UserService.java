@@ -43,11 +43,16 @@ public class UserService {
         return new UserDto(user);
     }
 
+    @Transactional
     public UserDto login(LoginRequestDto req,  HttpSession session) {
         User account = userRepository.findByAccountId(req.getAccountId()).get(0);
 
         if(!account.getPassword().equals(req.getPassword())){
             return null;
+        }
+
+        if(!account.getFcmToken().equals(req.getFcmToken())){
+            account.updateFcmToken(req.getFcmToken());
         }
 
         /* Save session information */
@@ -57,16 +62,28 @@ public class UserService {
     }
 
     @Transactional
-    public boolean setUserStatusMessage(String acconutId, String userStatusMessage){
-        List<User> accounts = userRepository.findByAccountId(acconutId);
-
-        if(accounts.size() <= 0) return false;
-
-        User account = accounts.get(0);
-        account.changeStatusMessage(userStatusMessage);
-        return true;
+    public boolean updateUserStatusMessage(Long userId,String userStatusMessage){
+        User user = userRepository.findById(userId);
+        if(user!=null){
+            user.changeStatusMessage(userStatusMessage);
+            save(user);
+            return true;
+        }
+        return false;
     }
 
+    @Transactional
+    public boolean updateUserNickName(Long userId,String userNickName){
+        User user = userRepository.findById(userId);
+        if(user!=null){
+            user.changeUserNickName(userNickName);
+            save(user);
+            return true;
+        }
+        return false;
+    }
+
+    @Transactional
     public boolean updateProfileImage(Long userId, String base64Image) {
         User user = userRepository.findById(userId);
         user.updateProfileImage(base64Image);
