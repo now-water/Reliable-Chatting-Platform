@@ -36,41 +36,50 @@
             app:srcCompat="@drawable/ic_baseline_person_24" />
     </androidx.cardview.widget.CardView>
 
+    <ImageView
+        android:id="@+id/btn_change_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="208dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardView3"
+        app:srcCompat="@drawable/ic_check" />
+
     <EditText
         android:id="@+id/et_profile_name"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="132dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="#514F4F"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/btn_change_nickname"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="372dp"
-        android:layout_marginTop="548dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="148dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/et_profile_name"
         app:srcCompat="@drawable/ic_check" />
 
     <EditText
         android:id="@+id/et_profile_status_msg"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="#716D6D"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_profile_name" />
@@ -79,10 +88,10 @@
         android:id="@+id/btn_change_status_msg"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="372dp"
-        android:layout_marginTop="605dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="34dp"
+        app:layout_constraintStart_toEndOf="@+id/et_profile_status_msg"
+        app:layout_constraintTop_toBottomOf="@+id/btn_change_nickname"
         app:srcCompat="@drawable/ic_check" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

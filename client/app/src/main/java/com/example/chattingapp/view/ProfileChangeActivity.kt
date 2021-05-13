@@ -23,6 +23,7 @@ class ProfileChangeActivity : AppCompatActivity() {
 
                 btn_change_nickname.setOnClickListener {
                         UserApiService.instance.updateNickName(et_profile_name.text.toString()){
+                                println(et_profile_name.text.toString())
                         }
                         Toast.makeText(this, "닉네임을 변경하였습니다.", Toast.LENGTH_SHORT).show()
                 }
@@ -30,6 +31,8 @@ class ProfileChangeActivity : AppCompatActivity() {
                 btn_change_status_msg.setOnClickListener {
                         UserApiService.instance.updateStatus(et_profile_status_msg.text.toString()){
                                 Log.e("status!!",it.toString())
+                                println(et_profile_status_msg.text.toString())
+
                         }
                         Toast.makeText(this, "상태메시지를 변경하였습니다.", Toast.LENGTH_SHORT).show()
                 }
