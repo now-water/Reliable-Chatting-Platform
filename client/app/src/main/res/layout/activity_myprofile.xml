@@ -48,30 +48,30 @@
 
     <TextView
         android:id="@+id/profile_name"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="132dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="#514F4F"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/profile_status_msg"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="#716D6D"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_name" />
+        app:layout_constraintTop_toBottomOf="@id/profile_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
