@@ -38,6 +38,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/btn_reset"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_reset" />
+
+            <ImageView
                 android:id="@+id/imageView6"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

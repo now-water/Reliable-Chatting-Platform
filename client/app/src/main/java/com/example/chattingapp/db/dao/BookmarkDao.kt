@@ -8,7 +8,7 @@ import com.example.chattingapp.dto.Message
 @Dao
 interface BookmarkDao {
     @Query("SELECT * FROM BOOKMARK WHERE room_id == :roomID")
-    fun getAll(roomID : Int) : LiveData<List<Message>>
+    fun getAll(roomID : Int) : LiveData<List<Bookmark>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(bookmark : Bookmark)

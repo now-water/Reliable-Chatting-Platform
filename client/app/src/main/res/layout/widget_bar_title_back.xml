@@ -7,7 +7,7 @@
     android:background="#F16B6F">
 
     <LinearLayout
-        android:id="@+id/widget_action_bar_back_btn"
+        android:id="@+id/room_back_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:gravity="center"
@@ -16,7 +16,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/abc_vector_test" />
@@ -53,7 +52,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/check_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_baseline_dehaze_24" />

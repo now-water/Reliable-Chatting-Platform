@@ -12,7 +12,7 @@
         android:background="@color/red_214_81_71">
 
         <LinearLayout
-            android:id="@+id/widget_action_bar_back_btn"
+            android:id="@+id/back_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"

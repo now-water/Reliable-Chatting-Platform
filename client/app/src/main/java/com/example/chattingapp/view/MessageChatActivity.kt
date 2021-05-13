@@ -3,11 +3,13 @@ package com.example.chattingapp.view
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.chattingapp.R
@@ -40,7 +42,7 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         widget_title_bar_basic.setText(room.roomName)
 
         //back button onclick func
-        findViewById<ImageView>(R.id.back_button).setOnClickListener {
+        findViewById<LinearLayout>(R.id.room_back_button).setOnClickListener {
             finish()
         }
 
@@ -93,6 +95,7 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.bookmark_btn -> {
+                Log.d("hello","hi~~")
                 intent = Intent(this, BookmarkActivity::class.java)
                 startActivity(intent);
             }

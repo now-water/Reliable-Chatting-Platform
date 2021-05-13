@@ -35,6 +35,7 @@ class MessagelistFragment(val userId: Int, val roomId: Int) : Fragment(){
         AppDatabase.getInstance(context!!).messageDao().getAll(roomId).observe(this){
             dataChangeAndScrollToEnd(it)
         }
+
     }
 
     private fun dataChangeAndScrollToEnd(messages: List<Message>) {

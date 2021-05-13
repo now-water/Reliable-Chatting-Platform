@@ -24,6 +24,19 @@ class UserApiService(private val restApiService: RestApiService) {
         restApiService.checkSession().enqueue(RestApiServiceCallback(successCallback, failureCallback))
     }
 
+    fun updateStatus(statusMessage : String, callback : Consumer<Boolean>){
+        restApiService.updateStatus(statusMessage).enqueue(RestApiServiceCallback(callback))
+    }
+
+    fun updateNickName(nickname : String, callback : Consumer<Boolean>){
+        restApiService.updateNickName(nickname).enqueue(RestApiServiceCallback(callback))
+    }
+
+    fun updateImage(image : String, callback : Consumer<Boolean>){
+        restApiService.updateImage(image).enqueue(RestApiServiceCallback(callback))
+    }
+
+
     companion object{
         val instance = UserApiService(RestApiService.instance)
     }

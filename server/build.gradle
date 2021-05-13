@@ -55,6 +55,9 @@ dependencies{
 	//webSocket
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.webjars:stomp-websocket:2.3.3'
+
+	//FireBase
+	implementation 'com.google.firebase:firebase-admin:6.8.1'
 }
 
 test {
