@@ -1,6 +1,5 @@
 package com.example.chattingapp.service
 
-import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.dto.request.LoginRequest
 import com.example.chattingapp.service.util.rest.RestApiService

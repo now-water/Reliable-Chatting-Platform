@@ -14,6 +14,7 @@ interface RestApiService {
     @GET("/api/user/checkSession") fun checkSession() : Call<Int>
     @POST("/api/user/signup") fun signUp(@Body user:User) : Call<String>
     @POST("/api/user/login") fun signIn(@Body loginRequest: LoginRequest) : Call<User>
+    @POST("/api/user/updateImage") fun updateImage(@Body base64Image : String) : Call<String>
 
     // Friend Api
     @GET("/api/friend/all") fun getFriends() : Call<List<Friend>>
