@@ -41,7 +41,7 @@ class SettingFragment(val user: User) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setting_myname.setText(user.name)
-        ImageService.stringBase64ToBitmap(user.profileImageAsBase64String)?.let { profile_photo.setImageBitmap(it) }
+        user.profileImageAsBase64String?.let { ImageService.stringBase64ToBitmap(it)?.let { profile_photo.setImageBitmap(it) } }
 
         // for test
         view.findViewById<ImageView>(R.id.profile_photo).setOnClickListener { view ->

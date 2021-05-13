@@ -32,7 +32,7 @@ class UserApiService(private val restApiService: RestApiService) {
         restApiService.updateNickName(nickname).enqueue(RestApiServiceCallback(callback))
     }
 
-    fun updateImage(image : String, callback : Consumer<Boolean>){
+    fun updateImage(image : String, callback : Consumer<String>){
         restApiService.updateImage(image).enqueue(RestApiServiceCallback(callback))
     }
 
