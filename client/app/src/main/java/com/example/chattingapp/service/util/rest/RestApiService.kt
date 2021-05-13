@@ -18,7 +18,6 @@ interface RestApiService {
     @POST("/api/user/updateImage") fun updateImage(@Body base64Image : String) : Call<String>
     @POST("/api/user/updateStatus") fun updateStatus(@Body statusMessage: String) : Call<Boolean>
     @POST("/api/user/updateNickName") fun updateNickName(@Body nickName: String) : Call<Boolean>
-    @POST("/api/user/updateImage") fun updateImage(@Body image: String) : Call<Boolean>
 
 
     // Friend Api

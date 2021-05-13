@@ -47,7 +47,7 @@ class FriendlistFragment(val user : User) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ImageService.stringBase64ToBitmap(user.profileImageAsBase64String)?.let { my_image.setImageBitmap(it) }
+        user.profileImageAsBase64String?.let { ImageService.stringBase64ToBitmap(it)?.let { my_image.setImageBitmap(it) } }
 
         my_name.setText(user.name)
         my_status_msg.setText(user.statusMessage)   // 상태메세지 항목없어서 임의로 시현때 보여주려고 암거나 넣음
