@@ -73,10 +73,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
 
     override fun onClick(v: View) {
         when (v.id) {
-//            R.id.join_btn -> {
-//                val i = Intent(getApplicationContext(), SignUpActivity::class.java)
-//                startActivity(i)
-//            }
+            R.id.join_btn -> {
+                val i = Intent(getApplicationContext(), SignUpActivity::class.java)
+                startActivity(i)
+            }
 //            R.id.find_id -> {
 //                val i = Intent(getApplicationContext(), FindIDActivity::class.java)
 //                startActivity(i)

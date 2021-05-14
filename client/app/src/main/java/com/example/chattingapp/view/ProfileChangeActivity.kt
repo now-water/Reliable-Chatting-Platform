@@ -23,6 +23,7 @@ class ProfileChangeActivity : AppCompatActivity() {
 
                 btn_change_nickname.setOnClickListener {
                         UserApiService.instance.updateNickName(et_profile_name.text.toString()){
+                                Log.d("boolean", it.toString())
                                 println(et_profile_name.text.toString())
                         }
                         Toast.makeText(this, "닉네임을 변경하였습니다.", Toast.LENGTH_SHORT).show()
