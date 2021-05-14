@@ -1,13 +1,19 @@
 package com.example.chattingapp.view
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.chattingapp.R
+import com.example.chattingapp.dto.User
+import com.example.chattingapp.service.UserApiService
+import okhttp3.ResponseBody
+import java.io.IOException
 
 class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatcher {
     private var mBackBtn // 뒤로가기
@@ -17,9 +23,9 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatc
     private var inputPW: EditText? = null
     private var inputPWconfirm: EditText? = null
     private var inputName: EditText? = null
+    private var inputNickname: EditText? = null
     private var inputPhone: TextView? = null
-    private var mPhoneAuthBtn: TextView? = null
-    private var mPhoneAuthBtnLayout: LinearLayout? = null
+
 
     //약관동의
     private var mAllLayout: LinearLayout? = null
@@ -60,9 +66,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatc
         inputPW = findViewById(R.id.input_pw) as EditText?
         inputPWconfirm = findViewById(R.id.input_pw_confirm) as EditText?
         inputName = findViewById(R.id.input_name) as EditText?
+        inputNickname = findViewById(R.id.input_nickname) as EditText?
         inputPhone = findViewById(R.id.input_phone) as TextView?
-        mPhoneAuthBtn = findViewById(R.id.phone_auth) as TextView?
-        mPhoneAuthBtnLayout = findViewById(R.id.input_phone_layout) as LinearLayout?
         mAllLayout = findViewById(R.id.check_all_layout) as LinearLayout?
         mcheck1Layout = findViewById(R.id.check_1_layout) as LinearLayout?
         mcheck2Layout = findViewById(R.id.check_2_layout) as LinearLayout?
@@ -82,8 +87,6 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatc
     fun setUpAdapter() {}
     fun setUpListener() {
         mBackBtn!!.setOnClickListener(this)
-        mPhoneAuthBtn!!.setOnClickListener(this)
-        mPhoneAuthBtnLayout!!.setOnClickListener(this)
         mAllLayout!!.setOnClickListener(this)
         mcheck1Layout!!.setOnClickListener(this)
         mcheck2Layout!!.setOnClickListener(this)
@@ -137,7 +140,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatc
             R.id.auth_3 -> {
             }
             R.id.join_submit -> {
-                //requestJoin()
+                requestJoin()
             }
         }
     }
@@ -223,46 +226,66 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatc
 //            })
 //    }
 
-//    fun requestJoin() {
-//        if (inputID!!.text.toString().isEmpty()) {
-//            Toast.makeText(getApplicationContext(), "이메일을 입력하세요.", Toast.LENGTH_SHORT).show()
-//            inputID!!.requestFocus()
-//            return
-//        }
-//        if (inputPW!!.text.toString().isEmpty()) {
-//            Toast.makeText(getApplicationContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show()
-//            inputPW!!.requestFocus()
-//            return
-//        }
-//        if (inputPWconfirm!!.text.toString().isEmpty()) {
-//            Toast.makeText(getApplicationContext(), "비밀번호 확인을 입력하세요.", Toast.LENGTH_SHORT).show()
-//            inputPWconfirm!!.requestFocus()
-//            return
-//        }
-//        if (inputName!!.text.toString().isEmpty()) {
-//            Toast.makeText(getApplicationContext(), "이름을 입력하세요.", Toast.LENGTH_SHORT).show()
-//            inputName!!.requestFocus()
-//            return
-//        }
-//        if (inputPhone!!.text.toString().isEmpty()) {
-//            Toast.makeText(getApplicationContext(), "전화번호 인증이 되지 않았습니다.", Toast.LENGTH_SHORT).show()
+    fun requestJoin() {
+        if (inputID!!.text.toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "이메일을 입력하세요.", Toast.LENGTH_SHORT).show()
+            inputID!!.requestFocus()
+            return
+        }
+        if (inputPW!!.text.toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show()
+            inputPW!!.requestFocus()
+            return
+        }
+        if (inputPWconfirm!!.text.toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "비밀번호 확인을 입력하세요.", Toast.LENGTH_SHORT).show()
+            inputPWconfirm!!.requestFocus()
+            return
+        }
+        if (inputName!!.text.toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "이름을 입력하세요.", Toast.LENGTH_SHORT).show()
+            inputName!!.requestFocus()
+            return
+        }
+        if (inputNickname!!.text.toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "닉네임을 입력하세요.", Toast.LENGTH_SHORT).show()
+            inputNickname!!.requestFocus()
+            return
+        }
+        if (inputPhone!!.text.toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "전화번호 인증이 되지 않았습니다.", Toast.LENGTH_SHORT).show()
+            inputPhone!!.requestFocus()
 //            val i = Intent(getApplicationContext(), PhoneAuthActivity::class.java)
 //            startActivityForResult(i, REQUEST_AUTH)
-//            return
-//        }
-//        val isCheckPw = pwPattern(inputPW!!.text.toString())
-//        if (isCheckPw) {
-//            Toast.makeText(getApplicationContext(), "비밀번호가 형식에 맞지 않습니다.", Toast.LENGTH_SHORT).show()
-//            inputPW!!.requestFocus()
-//            return
-//        }
-//        if (inputPW!!.text.toString() != inputPWconfirm!!.text.toString()) {
-//            Toast.makeText(getApplicationContext(), "비밀번호와 비밀번호 확인이 다릅니다.", Toast.LENGTH_SHORT)
-//                .show()
-//            inputPWconfirm!!.requestFocus()
-//            return
-//        }
-//        if (isCheck1 && isCheck2 && isCheck3) {
+            return
+        }
+        val isCheckPw = pwPattern(inputPW!!.text.toString())
+        if (!isCheckPw) {
+            Toast.makeText(getApplicationContext(), "비밀번호가 형식에 맞지 않습니다.", Toast.LENGTH_SHORT).show()
+            inputPW!!.requestFocus()
+            return
+        }
+        if (inputPW!!.text.toString() != inputPWconfirm!!.text.toString()) {
+            Toast.makeText(getApplicationContext(), "비밀번호와 비밀번호 확인이 다릅니다.", Toast.LENGTH_SHORT)
+                .show()
+            inputPWconfirm!!.requestFocus()
+            return
+        }
+        if (isCheck1 && isCheck2 && isCheck3) {
+            val newUser: User = User(12345, inputID!!.text.toString(), inputName!!.text.toString(), inputNickname!!.text.toString(),
+                inputPW!!.text.toString(), inputPhone!!.text.toString(), null, null)
+
+
+            Log.d("InfoNickname", inputNickname!!.text.toString())
+            Log.d("InfoId", newUser.accountId)
+
+            UserApiService.instance.signUp(newUser) {
+                Log.d("newUser", it.toString())//왜 안뜰까??
+
+                Toast.makeText(this, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT)
+                finish()
+            }
+
 //            RetrofitClient.getInstance(this)
 //                .getAuthApiService()
 //                .requestPostJoin(
@@ -293,14 +316,14 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatc
 //                        Log.d("Login Error = ", "onFailed!!")
 //                    }
 //                })
-//        } else {
-//            Toast.makeText(
-//                getApplicationContext(),
-//                "필수 약관에 모두 동의하셔야 가입이 가능합니다.",
-//                Toast.LENGTH_SHORT
-//            ).show()
-//        }
-//    }
+        } else {
+            Toast.makeText(
+                getApplicationContext(),
+                "필수 약관에 모두 동의하셔야 가입이 가능합니다.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     private val mIdTextWatcher: SimpleTextWatcher = object : SimpleTextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -334,4 +357,6 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatc
         val repExp = Regex("^([0-9a-zA-Z]).{3,20}$")
         return pw.matches(repExp)
     }
+
+
 }
