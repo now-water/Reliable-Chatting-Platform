@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 //@SpringBootTest
 public class ProfileUploadTest {
 
-    @Test
+//    @Test
     public void Base64인코딩() throws Exception {
         //given
         String encoded="";
