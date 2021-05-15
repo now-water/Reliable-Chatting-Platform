@@ -13,14 +13,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class loginSessionTest {
 
     @Autowired
     private UserService userService;
 
-    @Test
+//    @Test
     public void 회원가입_테스트() throws Exception {
         //given
         User user = User.builder()
@@ -40,7 +40,7 @@ public class loginSessionTest {
         assertThat(createdUserId).isEqualTo(needCheckId);
     }
 
-    @Test
+//    @Test
     public void 로그인_테스트() throws Exception {
         //given
         LoginRequestDto dto = new LoginRequestDto("testid4", "testpw4", "testToken");
