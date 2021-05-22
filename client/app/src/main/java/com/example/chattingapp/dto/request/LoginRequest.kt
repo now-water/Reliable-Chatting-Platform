@@ -6,7 +6,8 @@ data class LoginRequest(
     @SerializedName("accountId")
     var accountId : String,
     @SerializedName("password")
-    val password : String
-
+    val password : String,
+    @SerializedName("fcmToken")
+    val fcmToken : String
 )
 
