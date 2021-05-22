@@ -38,3 +38,7 @@ out/
 
 ### Log ###
 /logs/
+
+### aws s3 ###
+**/main/resources/application-aws.yml
+**/main/resources/application-credentials.yml
