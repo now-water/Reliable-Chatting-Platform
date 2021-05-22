@@ -70,6 +70,9 @@ class MainActivity : AppCompatActivity() {
             4 -> {
                 ft.replace(R.id.main_frame, AddFriendFragment(user)).commit()
             }
+            5 -> {
+                ft.replace(R.id.main_frame, FriendSearchFragment(user)).commit()
+            }
         }
     }
 }
