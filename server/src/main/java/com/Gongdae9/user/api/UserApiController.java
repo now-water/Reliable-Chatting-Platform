@@ -93,9 +93,10 @@ public class UserApiController {
     }
 
     @PostMapping("/api/user/uploadProfileImage")
-    public boolean updateProfileImage(@RequestParam MultipartFile file, HttpServletRequest req) throws IOException{
+    public String updateProfileImage(@RequestParam MultipartFile file, HttpServletRequest req) throws IOException{
         long userId = (Long)req.getSession().getAttribute("userId");
         String profileImageUrl = s3Uploader.upload(file, "static");
-        return userService.updateProfileImage(userId, profileImageUrl);
+        userService.updateProfileImage(userId, profileImageUrl);
+        return profileImageUrl;
     }
 }
