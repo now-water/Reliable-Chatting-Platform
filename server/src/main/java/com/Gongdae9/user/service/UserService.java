@@ -2,10 +2,12 @@ package com.Gongdae9.user.service;
 
 import com.Gongdae9.user.domain.User;
 import com.Gongdae9.user.dto.LoginRequestDto;
+import com.Gongdae9.user.dto.SignupRequestDto;
 import com.Gongdae9.user.repository.UserRepository;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.Gongdae9.user.dto.UserDto;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     public void save(User user) {userRepository.save(user); }
 
@@ -30,16 +34,23 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public UserDto signUp(User user) {
-        List<User> accountIdCheck = userRepository.findByAccountId(user.getAccountId());
+    public UserDto signUp(SignupRequestDto userDto) {
+        List<User> accountIdCheck = userRepository.findByAccountId(userDto.getAccountId());
 
         /* Check duplicate accountId */
         if(accountIdCheck.size() > 0){
             return null;
         }
 
-        userRepository.save(user);
+        User user = User.builder()
+            .name(userDto.getName())
+            .phoneNum(userDto.getPhoneNum())
+            .nickName(userDto.getNickName())
+            .accountId(userDto.getAccountId())
+            .password(passwordEncoder.encode(userDto.getPassword()))
+            .build();
 
+        userRepository.save(user);
         return new UserDto(user);
     }
 
@@ -58,6 +69,8 @@ public class UserService {
 
         return new UserDto(account);
     }
+
+
 
     @Transactional
     public boolean updateUserStatusMessage(Long userId,String userStatusMessage){

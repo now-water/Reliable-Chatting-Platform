@@ -58,15 +58,7 @@ public class UserApiController {
             return null;
         }
 
-        User user = User.builder()
-            .name(req.getName())
-            .phoneNum(req.getPhoneNum())
-            .nickName(req.getNickName())
-            .accountId(req.getAccountId())
-            .password(req.getPassword())
-            .build();
-
-        return userService.signUp(user);
+        return userService.signUp(req);
     }
 
     @PostMapping("/api/user/updateStatus")
