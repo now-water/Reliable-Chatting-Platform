@@ -60,8 +60,13 @@ dependencies{
 	//FireBase
 	implementation 'com.google.firebase:firebase-admin:6.8.1'
 
+
 	//Security
 	compile "org.springframework.boot:spring-boot-starter-security"
+
+	// S3 uplodaer
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.1.RELEASE'
+
 }
 
 test {
