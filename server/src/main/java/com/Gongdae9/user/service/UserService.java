@@ -96,9 +96,9 @@ public class UserService {
     }
 
     @Transactional
-    public User updateProfileImage(Long userId, String base64Image) {
+    public UserDto updateProfileImage(Long userId, String base64Image) {
         User user = userRepository.findById(userId);
         user.updateProfileImage(base64Image);
-        return user;
+        return new UserDto(user);
     }
 }
