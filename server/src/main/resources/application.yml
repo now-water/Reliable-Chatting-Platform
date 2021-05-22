@@ -24,6 +24,8 @@ spring:
     include:
       - aws
       - credentials
+my :
+  tempFilePath : src/main/resources/
 
 logging.level:
   org.hibernate.SQL: debug

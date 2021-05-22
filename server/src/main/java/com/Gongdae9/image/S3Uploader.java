@@ -18,7 +18,8 @@ import java.io.IOException;
 @Component // 빈 등록을 위한 어노테이션
 public class S3Uploader {
 
-    private final static String TEMP_FILE_PATH = "src/main/resources/";
+    @Value("${my.tempFilePath}")
+    public String TEMP_FILE_PATH;
 
     private final AmazonS3Client amazonS3Client;
 
