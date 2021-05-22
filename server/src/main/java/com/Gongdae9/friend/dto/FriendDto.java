@@ -12,6 +12,7 @@ public class FriendDto {
     private String phoneNum;
     private String nickName;
     private String statusMessage;
+    private String profileImage;
 
     public FriendDto(Friend friend){
         User user = friend.getFriend();
@@ -22,5 +23,8 @@ public class FriendDto {
 
         if(user.getStatusMessage() != null)
             this.statusMessage = user.getStatusMessage();
+
+        if(user.getProfileImage() != null)
+            this.profileImage = user.getProfileImage();
     }
 }
