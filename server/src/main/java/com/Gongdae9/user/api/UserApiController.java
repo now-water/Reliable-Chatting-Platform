@@ -1,6 +1,7 @@
 package com.Gongdae9.user.api;
 
 import com.Gongdae9.friend.dto.FriendDto;
+import com.Gongdae9.image.S3Uploader;
 import com.Gongdae9.joinroom.domain.JoinRoom;
 import com.Gongdae9.room.domain.Room;
 import com.Gongdae9.room.dto.RoomDto;
@@ -11,6 +12,8 @@ import com.Gongdae9.user.dto.LoginRequestDto;
 import com.Gongdae9.user.service.UserService;
 import com.Gongdae9.user.dto.SignupRequestDto;
 import com.Gongdae9.user.dto.UserDto;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
@@ -19,12 +22,15 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
 public class UserApiController {
 
     private final UserService userService;
+
+    private final S3Uploader s3Uploader;
 
     @GetMapping("/api/user/all")
     public List<UserDto> showAll(){
@@ -78,8 +84,15 @@ public class UserApiController {
     }
 
     @PostMapping("/api/user/updateImage")
-    public boolean updateProfileImage(@RequestBody @Valid String base64Image, HttpServletRequest req){
+    public boolean updateProfileImage(@RequestParam @Valid String base64Image, HttpServletRequest req){
         Long userId = (Long)req.getSession().getAttribute("userId");
         return userService.updateProfileImage(userId, base64Image);
+    }
+
+    @PostMapping("/api/user/uploadProfileImage")
+    public boolean updateProfileImage(@RequestParam MultipartFile file, HttpServletRequest req) throws IOException{
+        long userId = (Long)req.getSession().getAttribute("userId");
+        String profileImageUrl = s3Uploader.upload(file, "static");
+        return userService.updateProfileImage(userId, profileImageUrl);
     }
 }
