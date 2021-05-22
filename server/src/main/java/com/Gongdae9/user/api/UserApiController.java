@@ -11,6 +11,7 @@ import com.Gongdae9.user.dto.LoginRequestDto;
 import com.Gongdae9.user.service.UserService;
 import com.Gongdae9.user.dto.SignupRequestDto;
 import com.Gongdae9.user.dto.UserDto;
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
@@ -81,5 +82,16 @@ public class UserApiController {
     public boolean updateProfileImage(@RequestBody @Valid String base64Image, HttpServletRequest req){
         Long userId = (Long)req.getSession().getAttribute("userId");
         return userService.updateProfileImage(userId, base64Image);
+    }
+
+    @ApiOperation(value="유저검색",notes="accountID를 입력하면 유저 return")
+    @PostMapping("/api/user/search")
+    public UserDto searchFriend(String accountId){
+        List<User> user = userService.findByAccountId(accountId);
+        if(user.get(0)!=null){
+            return new UserDto(user.get(0));
+        }
+
+        return null;
     }
 }
