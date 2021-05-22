@@ -21,23 +21,13 @@ spring:
     store-type: jdbc
   profiles:
     active: local
+    include:
+      - aws
+      - credentials
 
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace
-
-cloud:
-  aws:
-    s3:
-      bucket: knu-moapp2
-    region:
-      static: ap-northeast-2
-    stack:
-      auto: false
-    credentials:
-      instanceProfile: true
-      access-key: 1234
-      secret-key: 1234
 
 --- # dev 환경
 spring:
