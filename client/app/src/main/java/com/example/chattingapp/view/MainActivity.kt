@@ -67,6 +67,9 @@ class MainActivity : AppCompatActivity() {
             3 -> {
                 ft.replace(R.id.main_frame, AddRoomFragment(user)).commit()
             }
+            4 -> {
+                ft.replace(R.id.main_frame, AddFriendFragment(user)).commit()
+            }
         }
     }
 }

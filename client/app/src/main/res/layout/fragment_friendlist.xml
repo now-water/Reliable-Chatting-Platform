@@ -54,7 +54,7 @@
                 android:src="@drawable/ic_search" />
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/btn_add_friend"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"

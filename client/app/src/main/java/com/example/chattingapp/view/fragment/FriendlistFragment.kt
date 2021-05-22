@@ -34,12 +34,17 @@ class FriendlistFragment(val user : User) : Fragment() {
         // Inflate the layout for this fragment
         val view:View = inflater.inflate(R.layout.fragment_friendlist, container, false)
         val btn_reset: ImageView = view.findViewById(R.id.btn_reset)
+        val btn_add_friend: ImageView = view.findViewById(R.id.btn_add_friend)
 
         btn_reset.setOnClickListener {
             Log.d("reset","friend reset")
             (activity as MainActivity).setFrag(0)
         }
 
+        btn_add_friend.setOnClickListener {
+            Log.d("addFriend","Button Clicked")
+            (activity as MainActivity).setFrag(4)
+        }
         return view
     }
 
