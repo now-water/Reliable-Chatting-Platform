@@ -51,9 +51,7 @@ public class UserService {
             return null;
         }
 
-        if(!account.getFcmToken().equals(req.getFcmToken())){
-            account.updateFcmToken(req.getFcmToken());
-        }
+        account.updateFcmToken(req.getFcmToken());
 
         /* Save session information */
         session.setAttribute("userId", account.getUserId());
