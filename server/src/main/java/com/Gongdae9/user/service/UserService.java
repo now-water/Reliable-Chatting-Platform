@@ -58,7 +58,8 @@ public class UserService {
     public UserDto login(LoginRequestDto req,  HttpSession session) {
         User account = userRepository.findByAccountId(req.getAccountId()).get(0);
 
-        if(!account.getPassword().equals(req.getPassword())){
+        if(!passwordEncoder.matches(req.getPassword(), account.getPassword())){
+            System.out.println("ERROR");
             return null;
         }
 
