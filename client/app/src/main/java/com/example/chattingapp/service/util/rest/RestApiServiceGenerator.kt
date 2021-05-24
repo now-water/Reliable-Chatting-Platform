@@ -1,5 +1,6 @@
 package com.example.chattingapp.service.util.rest
 
+import com.google.gson.GsonBuilder
 import okhttp3.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,8 +29,10 @@ object RestApiServiceGenerator {
             .retryOnConnectionFailure(true)
             .build()
 
+        val gson = GsonBuilder().setLenient().create()
+
         val builder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .baseUrl(EC2_URL)
             .client(okHttpClient)
         val retrofit = builder.build()

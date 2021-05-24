@@ -12,17 +12,21 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.chattingapp.R
+import com.example.chattingapp.db.AppDatabase
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.ImageService
 import com.example.chattingapp.service.ProfileApiService
+import com.example.chattingapp.service.UserApiService
 import kotlinx.android.synthetic.main.fragment_setting.*
+import java.io.File
 import java.util.logging.Logger
 import kotlin.math.log
 
 
 //test for fragment visibility
-class SettingFragment(val user: User) : Fragment() {
+class SettingFragment(var user: User) : Fragment() {
     private val GET_GALLERY_IMAGE = 200
     private val logger = Logger.getLogger(SettingFragment::class.java.name)
 
@@ -41,7 +45,7 @@ class SettingFragment(val user: User) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setting_myname.setText(user.name)
-        user.profileImageAsBase64String?.let { ImageService.stringBase64ToBitmap(it)?.let { profile_photo.setImageBitmap(it) } }
+        user.profileImageUrl?.let { Glide.with(this).load(it).into(profile_photo) }
 
         // for test
         view.findViewById<ImageView>(R.id.profile_photo).setOnClickListener { view ->
@@ -64,20 +68,18 @@ class SettingFragment(val user: User) : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun sendImageChangedAndSetImageView(uri: Uri){
-        val stringBase64 = ImageService.uriToBase64String(activity!!, uri)
+        val file = ImageService.toFile(activity!!, uri)!!
+        logger.info("이미지 파일 만들기 성공!")
+        UserApiService.instance.uploadProfileImage(file,{
+            logger.info("프로필 이미지 업로드 성공!")
+            logger.info(it.profileImageUrl)
+            Glide.with(this).load(it.profileImageUrl).into(profile_photo)
 
-        if (stringBase64 != null) {
-            Log.e("good", stringBase64)
-            ImageService.stringBase64ToBitmap(stringBase64)?.let { profile_photo.setImageBitmap(it) }
-
-            ProfileApiService.instance.sendImageAsBase64String(stringBase64,
-                {
-                    logger.info("good job!")
-                },
-                {
-                    logger.info("image send failed...")
-                }
-            )
-        }
+            Thread() {
+                AppDatabase.getInstance(context!!).userDao().insert(it)
+            }.start()
+        },{
+            logger.info("실패...")
+        });
     }
 }

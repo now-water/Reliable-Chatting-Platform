@@ -62,16 +62,14 @@ public class UserApiController {
     }
 
     @PostMapping("/api/user/updateStatus")
-    public boolean updateStatusMessage(@RequestBody @Valid String statusMessage,HttpServletRequest req){
+    public UserDto updateStatusMessage(@RequestParam @Valid String statusMessage,HttpServletRequest req){
         long userId = (Long)req.getSession().getAttribute("userId");
-
         return userService.updateUserStatusMessage(userId,statusMessage);
     }
 
     @PostMapping("/api/user/updateNickName")
-    public boolean updateNickName(@RequestBody @Valid String NickName,HttpServletRequest req){
+    public UserDto updateNickName(@RequestParam @Valid String NickName,HttpServletRequest req){
         long userId = (Long)req.getSession().getAttribute("userId");
-
         return userService.updateUserNickName(userId,NickName);
     }
 

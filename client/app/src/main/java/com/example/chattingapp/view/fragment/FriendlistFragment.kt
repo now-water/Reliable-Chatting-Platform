@@ -11,8 +11,10 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.chattingapp.R
 import com.example.chattingapp.adapter.FriendlistAdapter
+import com.example.chattingapp.db.AppDatabase
 import com.example.chattingapp.dto.Friend
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.FriendApiService
@@ -32,11 +34,10 @@ import kotlinx.android.synthetic.main.fragment_friendlist.recyclerFriendlist
 import java.util.logging.Logger
 
 //test for fragment visibility
-class FriendlistFragment(val user : User) : Fragment() {
+class FriendlistFragment(var userId : Int) : Fragment() {
     private val logger = Logger.getLogger(FriendlistFragment::class.java.name)
 
     var friendList = ArrayList<Friend>()  // temporary data array
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -59,17 +60,29 @@ class FriendlistFragment(val user : User) : Fragment() {
             Log.d("addFriend","Button Clicked")
             (activity as MainActivity).setFrag(4)
         }
+
+
         return view
     }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        user.profileImageAsBase64String?.let { ImageService.stringBase64ToBitmap(it)?.let { my_image.setImageBitmap(it) } }
+        AppDatabase.getInstance(context!!).userDao().getLiveData(userId).observe(this){ user ->
+            user.profileImageUrl?.let { Glide.with(this).load(it).into(my_image) }
+            my_name.setText(user.nickName)
+            my_status_msg.setText(user.statusMessage)   // 상태메세지 항목없어서 임의로 시현때 보여주려고 암거나 넣음
 
-        my_name.setText(user.name)
-        my_status_msg.setText(user.statusMessage)   // 상태메세지 항목없어서 임의로 시현때 보여주려고 암거나 넣음
+            // my profile 액티비티 실행
+            myprofile_layout.setOnClickListener {
+                val intent = Intent(activity, ProfileChangeActivity::class.java)
+                intent.putExtra("user", user)
+
+                startActivity(intent)
+            }
+        }
 
         val adapter =  FriendlistAdapter(requireContext(), friendList)
 
@@ -82,14 +95,5 @@ class FriendlistFragment(val user : User) : Fragment() {
                 adapter.addItem(friend)
             }
         }
-
-        // my profile 액티비티 실행
-        myprofile_layout.setOnClickListener {
-            val intent = Intent(activity, ProfileActivity::class.java)
-            intent.putExtra("user", user)
-
-            startActivity(intent)
-        }
-
     }
 }

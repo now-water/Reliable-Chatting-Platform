@@ -1,10 +1,19 @@
 package com.Gongdae9.message.controller;
 
 
+import com.Gongdae9.fcm.service.FCMService;
 import com.Gongdae9.message.domain.EventSubDto;
 import com.Gongdae9.message.domain.Message;
 import com.Gongdae9.message.domain.MessageDto;
 import com.Gongdae9.message.service.MessageService;
+import com.Gongdae9.room.dto.ChattingUserDto;
+import com.Gongdae9.room.dto.RoomDto;
+import com.Gongdae9.room.service.RoomService;
+import com.Gongdae9.user.domain.User;
+import com.Gongdae9.user.repository.UserRepository;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -19,16 +28,41 @@ import org.springframework.stereotype.Controller;
 public class MessageController {
 
     private final MessageService messageService;
+    private final RoomService roomService;
+    private final UserRepository userRepository;
+    private final FCMService fcmService;
+
 
     @MessageMapping("/chat/message/{userId}/{roomId}")
     @SendTo("/sub/chat/room/{roomId}")
     public MessageDto greeting(@DestinationVariable("userId") Long userId,@DestinationVariable("roomId") Long roomId, @Payload String content) throws Exception {
         Thread.sleep(100); // delay
-        content=content.substring(0,content.length()-2);
-        Message message = messageService.createMessage(userId, roomId, content);
+
+        User sender = userRepository.findById(userId);
+        String ncontent=content.substring(0,content.length()-2);
+        Message message = messageService.createMessage(userId, roomId, ncontent);
         message = messageService.save(message);
 
-//        MessageDto messageDto = new MessageDto(userId,content,message.getUser().getName(),message.getWrittenAt());
+        List<ChattingUserDto> chattingUsers = roomService.getChattingUser(roomId);
+        List<Long> userIdList = chattingUsers.stream()
+            .filter(o -> !o.getUserId().equals(userId))
+            .map(o->o.getUserId())
+            .collect(Collectors.toList());
+
+        List<String> fcmToken = userRepository.findFCMToken(userIdList);
+
+
+        fcmToken.forEach(o-> {
+            try {
+                fcmService.send(o,sender.getNickName(),ncontent);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+
+
         MessageDto messageDto = new MessageDto(message);
         return messageDto;
     }

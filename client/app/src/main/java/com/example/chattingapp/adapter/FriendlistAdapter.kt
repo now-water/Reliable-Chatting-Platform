@@ -1,14 +1,19 @@
 package com.example.chattingapp.adapter
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Friend
+import com.example.chattingapp.view.MessageChatActivity
+import com.example.chattingapp.view.ProfileActivity
 
 // Main Userlist type Adapter
 class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>) :
@@ -18,10 +23,17 @@ class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>)
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val nameText = itemView?.findViewById<TextView>(R.id.nameText)
         val statusText = itemView?.findViewById<TextView>(R.id.statusText)
+        val profileImage = itemView?.findViewById<ImageView>(R.id.friend_image)
 
         fun bind(friend: Friend, context: Context) {
             nameText?.text = friend.name
             statusText?.text = friend.statusMessage
+
+            friend.profileImage?.let {
+                if (profileImage != null) {
+                    Glide.with(context).load(it).into(profileImage)
+                }
+            }
         }
     }
 
@@ -32,6 +44,11 @@ class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>)
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder?.bind(friends?.get(position)!!, context)
+        holder?.itemView.setOnClickListener{
+            val intent = Intent(context, ProfileActivity::class.java)
+            intent.putExtra("friend", friends?.get(position))
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
