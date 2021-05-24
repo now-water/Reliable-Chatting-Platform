@@ -35,16 +35,7 @@ public class RoomApiContoller {
 
     @GetMapping("/api/room/chattingUser/{roomId}")
     public List<ChattingUserDto> chattingUsers(@PathVariable(name ="roomId") Long roomId){
-        Room room = roomService.findById(roomId);
-        List<ChattingUserDto> chattingUsers = new ArrayList<>();
-        List<JoinRoom> joinRooms = room.getJoinRooms();
-        log.info(roomId + "번 방에 참가 중인 유저 리스트");
-        joinRooms.forEach(joinRoom -> {
-            User user = joinRoom.getUser();
-            log.info("userId : " + user.getUserId() + ", user's nickname : " + user.getNickName());
-            chattingUsers.add(new ChattingUserDto(user.getUserId(), user.getNickName()));
-        });
-        return chattingUsers;
+        return roomService.getChattingUser(roomId);
     }
 
     @GetMapping("/api/room/{roomId}")
