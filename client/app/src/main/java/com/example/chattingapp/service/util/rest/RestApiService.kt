@@ -18,8 +18,8 @@ interface RestApiService {
     @POST("/api/user/login") fun signIn(@Body loginRequest: LoginRequest) : Call<User>
   
     @POST("/api/user/updateImage") fun updateImage(@Body base64Image : String) : Call<String>
-    @POST("/api/user/updateStatus") fun updateStatus(@Body statusMessage: String) : Call<Boolean>
-    @POST("/api/user/updateNickName") fun updateNickName(@Body nickName: String) : Call<Boolean>
+    @POST("/api/user/updateStatus") fun updateStatus(@Query("statusMessage") statusMessage: String) : Call<User>
+    @POST("/api/user/updateNickName") fun updateNickName(@Query("NickName")  nickName: String) : Call<User>
     @Multipart @POST("/api/user/uploadProfileImage") fun uploadProfileImage(@Part file : MultipartBody.Part) : Call<User>
 
 
