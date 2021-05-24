@@ -39,7 +39,7 @@ class AddFriendFragment(val user: User) : Fragment() {
         btn_search.setOnClickListener {
             Log.d("searchFriend","Button Clicked")
 
-            val friendName: EditText = view.findViewById(R.id.et_search_friend)
+            val friendName: EditText = view.findViewById(R.id.et_search_room)
             UserApiService.instance.getUsers(){
                 for(user in it){
                     Log.d("user accountID", user.accountId)

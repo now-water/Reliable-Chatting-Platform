@@ -85,6 +85,9 @@ class MainActivity : AppCompatActivity() {
                 5 -> {
                 ft.replace(R.id.main_frame, FriendSearchFragment(user)).commit()
                 }
+                6 -> {
+                    ft.replace(R.id.main_frame, RoomSearchFragment(user)).commit()
+                }
             }
         }.start()
     }

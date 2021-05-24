@@ -3,10 +3,12 @@ package com.example.chattingapp.view.fragment
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -21,29 +23,26 @@ import com.example.chattingapp.service.MessageApiService
 import com.example.chattingapp.service.RoomApiService
 import com.example.chattingapp.view.MainActivity
 import com.example.chattingapp.view.MessageChatActivity
+import com.example.chattingapp.view.SimpleTextWatcher
+import kotlinx.android.synthetic.main.fragment_room_searchlist.*
 import kotlinx.android.synthetic.main.fragment_roomlist.*
+import kotlinx.android.synthetic.main.fragment_roomlist.recyclerRoomlist
 import java.util.*
 import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
-class RoomlistFragment(val user : User) : Fragment() {
+class RoomSearchFragment(val user : User) : Fragment(), SimpleTextWatcher {
     private val logger = Logger.getLogger(RoomlistFragment::class.java.name)
     private lateinit var adapter : RoomlistAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view:View = inflater.inflate(R.layout.fragment_roomlist, container, false)
-        val btn_addRoom: ImageView = view.findViewById(R.id.btn_addRoom)
-        val btn_search_room: ImageView = view.findViewById(R.id.btn_search_room)
+        val view:View = inflater.inflate(R.layout.fragment_room_searchlist, container, false)
+        val btn_back: ImageView = view.findViewById(R.id.btn_back)
 
-        btn_addRoom.setOnClickListener {
-            Log.d("btnclicked","btn clicked!")
-            (activity as MainActivity).setFrag(3)
+        btn_back.setOnClickListener {
+            (activity as MainActivity).setFrag(1)
         }
 
-        btn_search_room.setOnClickListener {
-            Log.d("search","Button Clicked")
-            (activity as MainActivity).setFrag(6)
-        }
         return view
     }
 
@@ -52,10 +51,12 @@ class RoomlistFragment(val user : User) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = RoomlistAdapter(requireContext(), user, activity!!)
+        val et_search_room: EditText = view.findViewById(R.id.et_search_room)
 
         recyclerRoomlist.adapter = adapter
         recyclerRoomlist.layoutManager = LinearLayoutManager(requireContext())
         recyclerRoomlist.setHasFixedSize(true)
+
 
         // 추후에 user ID를 기반으로 들고 올 수 있도록 조정해야함! 이것도 서버와 얘기해봐야하나
         // 초대 받을 시 마지막으로 받는데, 이거는 어쩔 수 없음... 서버와 얘기해서 createdAt도 room에 추가해야함!
@@ -64,6 +65,9 @@ class RoomlistFragment(val user : User) : Fragment() {
             adapter.setRooms(it)
             observerNewMessage(it, db)
         }
+
+        //et_search_room.addTextChangedListener(nameTextWatcher)
+
     }
 
     private fun observerNewMessage(rooms : List<ChatRoom>, db : AppDatabase){
@@ -74,4 +78,16 @@ class RoomlistFragment(val user : User) : Fragment() {
             }
         }
     }
+
+//    private val nameTextWatcher: SimpleTextWatcher = object : SimpleTextWatcher {
+//        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//        }
+//
+//        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            adapter.getFilter().filter(p0.toString());
+//        }
+//
+//        override fun afterTextChanged(s: Editable?) {
+//        }
+//    }
 }

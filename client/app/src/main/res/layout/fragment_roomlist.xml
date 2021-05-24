@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/btn_search_menu"
+                android:id="@+id/btn_search_room"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"

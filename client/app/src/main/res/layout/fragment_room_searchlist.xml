@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +20,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/orbitron"
-            android:text="Add User"
+            android:text="Rooms"
             android:textColor="#f8ecc9"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -37,9 +38,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
-
-
+            <ImageView
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/abc_vector_test"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -56,9 +61,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:gravity="left|center"
-            android:text="아이디"
-            android:textStyle="bold"
-            android:textSize="15dp">
+            android:text="방이름"
+            android:textSize="15dp"
+            android:textStyle="bold">
 
         </TextView>
 
@@ -69,27 +74,26 @@
             android:layout_weight="7"
             android:background="@android:color/transparent"
             android:gravity="left|center"
-            android:hint="등록할 친구 아이디를 입력하세요."
+            android:hint="검색할 방 이름을 입력하세요."
             android:inputType="textMultiLine"
             android:singleLine="false"
-            android:textSize="14sp">
+            android:textSize="16sp">
 
         </EditText>
 
         <ImageView
             android:id="@+id/btn_search"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:scaleType="centerInside"
             android:src="@drawable/ic_search" />
 
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerFriendlist"
+        android:id="@+id/recyclerRoomlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/widget_addfriend_item"/>
+        tools:listitem="@layout/widget_roomlist_item" />
 </LinearLayout>
