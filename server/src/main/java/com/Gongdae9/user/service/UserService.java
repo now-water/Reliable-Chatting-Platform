@@ -74,25 +74,25 @@ public class UserService {
 
 
     @Transactional
-    public boolean updateUserStatusMessage(Long userId,String userStatusMessage){
+    public UserDto updateUserStatusMessage(Long userId,String userStatusMessage){
         User user = userRepository.findById(userId);
         if(user!=null){
             user.changeStatusMessage(userStatusMessage);
             save(user);
-            return true;
+            return new UserDto(user);
         }
-        return false;
+        return null;
     }
 
     @Transactional
-    public boolean updateUserNickName(Long userId,String userNickName){
+    public UserDto updateUserNickName(Long userId,String userNickName){
         User user = userRepository.findById(userId);
         if(user!=null){
             user.changeUserNickName(userNickName);
             save(user);
-            return true;
+            return new UserDto(user);
         }
-        return false;
+        return null;
     }
 
     @Transactional
