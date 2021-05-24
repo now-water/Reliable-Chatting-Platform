@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.chattingapp.R
 import com.example.chattingapp.adapter.FriendlistAdapter
 import com.example.chattingapp.dto.Friend
@@ -32,7 +33,7 @@ import kotlinx.android.synthetic.main.fragment_friendlist.recyclerFriendlist
 import java.util.logging.Logger
 
 //test for fragment visibility
-class FriendlistFragment(val user : User) : Fragment() {
+class FriendlistFragment(var user : User) : Fragment() {
     private val logger = Logger.getLogger(FriendlistFragment::class.java.name)
 
     var friendList = ArrayList<Friend>()  // temporary data array
@@ -66,7 +67,7 @@ class FriendlistFragment(val user : User) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        user.profileImageAsBase64String?.let { ImageService.stringBase64ToBitmap(it)?.let { my_image.setImageBitmap(it) } }
+        user.profileImageUrl?.let { Glide.with(this).load(it).into(my_image) }
 
         my_name.setText(user.name)
         my_status_msg.setText(user.statusMessage)   // 상태메세지 항목없어서 임의로 시현때 보여주려고 암거나 넣음

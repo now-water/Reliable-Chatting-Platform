@@ -5,8 +5,10 @@ import com.example.chattingapp.dto.Friend
 import com.example.chattingapp.dto.Message
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.dto.request.LoginRequest
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
+import java.io.File
 
 interface RestApiService {
     // User Api
@@ -18,6 +20,7 @@ interface RestApiService {
     @POST("/api/user/updateImage") fun updateImage(@Body base64Image : String) : Call<String>
     @POST("/api/user/updateStatus") fun updateStatus(@Body statusMessage: String) : Call<Boolean>
     @POST("/api/user/updateNickName") fun updateNickName(@Body nickName: String) : Call<Boolean>
+    @Multipart @POST("/api/user/uploadProfileImage") fun uploadProfileImage(@Part file : MultipartBody.Part) : Call<User>
 
 
     // Friend Api

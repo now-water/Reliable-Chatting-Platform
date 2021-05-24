@@ -16,5 +16,8 @@ data class Friend(
     val nickName : String,
 
     @SerializedName("statusMessage")
-    val statusMessage : String
+    val statusMessage : String?,
+
+    @SerializedName("profileImage")
+    val profileImage : String?
 )
