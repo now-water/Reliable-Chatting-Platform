@@ -63,7 +63,7 @@
         </TextView>
 
         <EditText
-            android:id="@+id/input_friendname_text"
+            android:id="@+id/et_search_friend"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
