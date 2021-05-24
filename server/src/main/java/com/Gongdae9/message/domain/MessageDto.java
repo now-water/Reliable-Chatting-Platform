@@ -1,6 +1,8 @@
 package com.Gongdae9.message.domain;
 
+import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import lombok.Data;
 import lombok.Getter;
 
@@ -12,14 +14,17 @@ public class MessageDto {
     private Long roomId;
     private String content;
     private String userName;
-    private LocalDateTime writtenAt;
+    private String writtenAt;
     private int unreadCnt;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 
     public MessageDto(Long userId,String content,String userName,LocalDateTime writtenAt){
         this.userId=userId;
         this.content=content;
         this.userName=userName;
-        this.writtenAt=writtenAt;
+        this.writtenAt= writtenAt.format(formatter);
     }
 
     public MessageDto(Message message){
@@ -28,7 +33,7 @@ public class MessageDto {
         this.roomId = message.getRoom().getRoomId();
         this.content = message.getContent();
         this.userName = message.getUser().getName();
-        this.writtenAt = message.getWrittenAt();
+        this.writtenAt = message.getWrittenAt().format(formatter);
         this.unreadCnt = message.getUnreadCnt();
     }
 }
