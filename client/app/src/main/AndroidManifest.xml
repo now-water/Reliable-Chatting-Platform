@@ -18,6 +18,7 @@
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true">
         android:usesCleartextTraffic="true">
+
         <activity android:name=".view.BookmarkActivity"/>
         <activity android:name=".view.MainActivity"/>
         <activity android:name=".view.ProfileActivity" />

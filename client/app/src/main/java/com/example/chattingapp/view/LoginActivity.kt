@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
     //user 정보
     private lateinit var id: String
     private lateinit var password: String
-    private lateinit var fcmToken : String;
+    private var fcmToken : String = "temporaliy"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

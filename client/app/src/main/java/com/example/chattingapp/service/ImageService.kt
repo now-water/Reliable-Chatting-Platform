@@ -61,7 +61,7 @@ object ImageService {
         return encodedStr
     }
 
-    private fun toFile(activity: Activity, contentUri: Uri) : File? {
+    fun toFile(activity: Activity, contentUri: Uri) : File? {
         val proj = arrayOf(MediaStore.Images.Media.DATA)
 
         val cursor = activity.contentResolver.query(contentUri, proj, null, null, null)
