@@ -1,7 +1,10 @@
 package com.example.chattingapp.dto
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Friend(
     @SerializedName("userId")
     val userId : Long,
@@ -20,4 +23,4 @@ data class Friend(
 
     @SerializedName("profileImage")
     val profileImage : String?
-)
+) : Parcelable

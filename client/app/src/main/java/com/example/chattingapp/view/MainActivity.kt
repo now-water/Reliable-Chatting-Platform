@@ -1,5 +1,7 @@
 package com.example.chattingapp.view
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             user = AppDatabase.getInstance(applicationContext).userDao().get(user.userId)
             when (fragNum) {
                 0 -> {
-                    ft.replace(R.id.main_frame, FriendlistFragment(user)).commit()
+                    ft.replace(R.id.main_frame, FriendlistFragment(user.userId)).commit()
                 }
                 1 -> {
                     ft.replace(R.id.main_frame, RoomlistFragment(user)).commit()

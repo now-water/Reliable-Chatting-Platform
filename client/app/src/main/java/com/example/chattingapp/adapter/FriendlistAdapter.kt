@@ -1,5 +1,6 @@
 package com.example.chattingapp.adapter
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Friend
+import com.example.chattingapp.view.MessageChatActivity
+import com.example.chattingapp.view.ProfileActivity
 
 // Main Userlist type Adapter
 class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>) :
@@ -41,6 +44,11 @@ class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>)
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder?.bind(friends?.get(position)!!, context)
+        holder?.itemView.setOnClickListener{
+            val intent = Intent(context, ProfileActivity::class.java)
+            intent.putExtra("friend", friends?.get(position))
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

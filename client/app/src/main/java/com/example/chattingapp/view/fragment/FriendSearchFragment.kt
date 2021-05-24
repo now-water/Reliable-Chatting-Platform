@@ -14,6 +14,7 @@ import android.widget.EditText
 import androidx.annotation.RequiresApi
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.chattingapp.R
 import com.example.chattingapp.adapter.FriendlistAdapter
 import com.example.chattingapp.dto.Friend
@@ -64,7 +65,8 @@ class FriendSearchFragment(val user : User) : Fragment(), SimpleTextWatcher {
         super.onViewCreated(view, savedInstanceState)
         val et_search_friend: EditText = view.findViewById(R.id.et_search_friend)
 
-        user.profileImageAsBase64String?.let { ImageService.stringBase64ToBitmap(it)?.let { my_image.setImageBitmap(it) } }
+
+        user.profileImageUrl?.let { Glide.with(this).load(it).into(my_image) }
 
         my_name.setText(user.name)
         my_status_msg.setText(user.statusMessage)   // 상태메세지 항목없어서 임의로 시현때 보여주려고 암거나 넣음

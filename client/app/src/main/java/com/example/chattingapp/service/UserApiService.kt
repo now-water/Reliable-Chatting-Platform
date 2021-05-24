@@ -30,11 +30,11 @@ class UserApiService(private val restApiService: RestApiService) {
         restApiService.checkSession().enqueue(RestApiServiceCallback(successCallback, failureCallback))
     }
 
-    fun updateStatus(statusMessage : String, callback : Consumer<Boolean>){
+    fun updateStatus(statusMessage : String, callback : Consumer<User>){
         restApiService.updateStatus(statusMessage).enqueue(RestApiServiceCallback(callback))
     }
 
-    fun updateNickName(nickname : String, callback : Consumer<Boolean>){
+    fun updateNickName(nickname : String, callback : Consumer<User>){
         restApiService.updateNickName(nickname).enqueue(RestApiServiceCallback(callback))
     }
 
