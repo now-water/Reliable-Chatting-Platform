@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 public class FCMInitializer {
 
     private static final Logger logger = LoggerFactory.getLogger(FCMInitializer.class);
-    private static final String FIREBASE_CONFIG_PATH = "reliablemessage-168d1-firebase-adminsdk-olyui-caec3e6e5f.json";
+
+    @Value("${fcm.tempFilePath}")
+    private String FIREBASE_CONFIG_PATH;
 
     @PostConstruct
     public void initialize() {
