@@ -108,11 +108,10 @@
         <ImageView
             android:id="@+id/btn_search"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:scaleType="centerInside"
             android:src="@drawable/ic_search" />
-
 
     </LinearLayout>
 

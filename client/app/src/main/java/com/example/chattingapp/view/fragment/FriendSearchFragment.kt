@@ -1,7 +1,6 @@
 package com.example.chattingapp.view.fragment
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -22,7 +21,6 @@ import com.example.chattingapp.service.FriendApiService
 import com.example.chattingapp.service.ImageService
 import com.example.chattingapp.view.MainActivity
 import com.example.chattingapp.view.ProfileActivity
-import com.example.chattingapp.view.ProfileChangeActivity
 import com.example.chattingapp.view.SimpleTextWatcher
 import kotlinx.android.synthetic.main.fragment_friendlist.*
 import java.util.logging.Logger
