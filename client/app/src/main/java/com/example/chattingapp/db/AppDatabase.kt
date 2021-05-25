@@ -14,11 +14,11 @@ import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.Message
 import com.example.chattingapp.dto.User
 
-@Database(entities = [ChatRoom::class, Message::class, User::class], version = 1, exportSchema = false)
+@Database(entities = [ChatRoom::class, Message::class, User::class, Bookmark::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun messageDao() : MessageDao
     abstract fun roomDao() : RoomDao
-//    abstract fun BookmarkDao() : BookmarkDao
+    abstract fun BookmarkDao() : BookmarkDao
     abstract fun userDao() : UserDao
 
     companion object{
