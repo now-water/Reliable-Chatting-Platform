@@ -18,7 +18,7 @@ class BookmarkActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bookmark)
 
 
-        bookmarkList.add(Bookmark(1, 1, 1, 1, "5시약속", "이따 5시에 ㄱ"))
+        bookmarkList.add(Bookmark(1, 1, 1, "5시약속", "이따 5시에 ㄱ"))
 
 
         total_bookmark_nums.text = bookmarkList.size.toString();

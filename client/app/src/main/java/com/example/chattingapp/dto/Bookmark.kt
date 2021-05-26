@@ -9,9 +9,6 @@ data class Bookmark(
     @PrimaryKey
     val bookmarkId: Int,
 
-    @ColumnInfo(name = "user_id")
-    val userId: Int,
-
     @ColumnInfo(name = "room_id")
     val roomId: Int,
 
