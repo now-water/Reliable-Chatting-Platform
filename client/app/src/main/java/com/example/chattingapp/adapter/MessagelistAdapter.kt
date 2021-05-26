@@ -46,17 +46,14 @@ class MessagelistAdapter(val userId: Int) : RecyclerView.Adapter<RecyclerView.Vi
     }
 
     inner class OtherChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val messageView: TextView =
-            itemView?.findViewById<TextView>(R.id.item_chat_customer_content)!!
-        val timeView: TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_date)!!
+        val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_content)!!
+        val timeView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_date)!!
+        val nicknameView : TextView = itemView?.findViewById(R.id.item_chat_customer_nickname)!!
 
         fun bind(message: Message) {
             messageView.text = message.content
             timeView.text = message.writtenAt
-
-//            itemView.findViewById<TextView>(R.id.item_chat_customer_content).setOnClickListener {
-//                Log.e("hi", itemView.toString());
-//            }
+            nicknameView.text = message.writtenBy
 
             itemView.findViewById<TextView>(R.id.item_chat_customer_content).setOnLongClickListener(
                 object : View.OnLongClickListener {

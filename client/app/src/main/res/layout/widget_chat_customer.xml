@@ -5,19 +5,12 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="15dp"
     android:layout_marginTop="5dp"
-    android:layout_marginRight="15dp"
-    android:layout_marginBottom="5dp"
-    android:orientation="horizontal">
+    android:layout_marginRight="15dp">
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/item_chat_customer_img"
@@ -27,9 +20,22 @@
             android:layout_marginRight="7dp"
             android:src="@drawable/sample_pro" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/item_chat_customer_nickname"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="이효동"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="#333333"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
 
             <TextView
                 android:id="@+id/item_chat_customer_content"
@@ -63,6 +69,22 @@
             android:textSize="10sp" />
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <TextView
+            android:id="@+id/item_chat_customer_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="오전 10:26"
+            android:textColor="#999999"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/customer_bookmark_add_button"

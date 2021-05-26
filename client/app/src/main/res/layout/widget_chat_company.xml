@@ -9,6 +9,23 @@
     android:gravity="right"
     android:orientation="horizontal">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <TextView
+            android:id="@+id/item_chat_company_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:letterSpacing="-0.08"
+            android:text="오전 10:26"
+            android:textColor="#999999"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/my_bookmark_add_button"
         android:layout_width="wrap_content"
