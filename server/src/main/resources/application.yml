@@ -21,10 +21,18 @@ spring:
     store-type: jdbc
   profiles:
     active: local
+    include:
+      - aws
+      - credentials
+my :
+  tempFilePath : src/main/resources/
 
 logging.level:
   org.hibernate.SQL: debug
   org.hibernate.type: trace
+
+fcm:
+  tempFilePath : reliablemessage-168d1-firebase-adminsdk-olyui-caec3e6e5f.json
 
 --- # dev 환경
 spring:

@@ -3,6 +3,10 @@
     package="com.example.chattingapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
 
     <application
         android:allowBackup="true"
@@ -11,7 +15,10 @@
         android:roundIcon="@mipmap/knu_mark"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
         android:usesCleartextTraffic="true">
+
         <activity android:name=".view.BookmarkActivity"/>
         <activity android:name=".view.MainActivity"/>
         <activity android:name=".view.ProfileActivity" />

@@ -39,7 +39,7 @@ public class FriendApiController {
         return friendService.addFriend(fromId,to);
     }
   
-    @PostMapping("/api/friend/delete/")
+    @PostMapping("/api/friend/delete")
     public boolean deleteFriend(long to, HttpServletRequest req){
         long fromId = (Long)req.getSession().getAttribute("userId");
         return friendService.deleteFriend(fromId, to);

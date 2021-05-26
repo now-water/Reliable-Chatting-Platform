@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
     //user 정보
     private lateinit var id: String
     private lateinit var password: String
+    private var fcmToken : String = "temporaliy"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +49,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
         setUpListener()
         FirebaseApp.initializeApp(applicationContext)
         System.out.println("token : "+ FirebaseInstanceId.getInstance().getToken()); // 토큰을 확인할 수 있는 코드
-
+        fcmToken = FirebaseInstanceId.getInstance().token!!;
     }
 
     fun initView() {
@@ -73,10 +74,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
 
     override fun onClick(v: View) {
         when (v.id) {
-//            R.id.join_btn -> {
-//                val i = Intent(getApplicationContext(), SignUpActivity::class.java)
-//                startActivity(i)
-//            }
+            R.id.join_btn -> {
+                val i = Intent(getApplicationContext(), SignUpActivity::class.java)
+                startActivity(i)
+            }
 //            R.id.find_id -> {
 //                val i = Intent(getApplicationContext(), FindIDActivity::class.java)
 //                startActivity(i)
@@ -127,22 +128,25 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
 //            })
         //checkStatus()
 
+        Log.e("good", id + " " + password)
 
-            UserApiService.instance.signIn(LoginRequest(id, password), {
-                Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
-                intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("user", it)
-                startActivity(intent)
-                finish()
-            }, {
-                Toast.makeText(this, "아이디나 패스워드가 존재하지 않거나 잘못되었습니다.", Toast.LENGTH_SHORT).show()
+
+        UserApiService.instance.signIn(LoginRequest(id, password, fcmToken), {
+            Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+            UserApiService.instance.checkSession({
+                Log.d("logincheck", it.toString())
+            },{
+                Log.d("logincheckfail", "꺼졍")
             })
-
-        UserApiService.instance.checkSession({
-            Log.d("logincheck", it.toString())
-        },{
-            Log.d("logincheckfail", "꺼졍")
+            intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("user", it)
+            startActivity(intent)
+            finish()
+        }, {
+            Toast.makeText(this, "아이디나 패스워드가 존재하지 않거나 잘못되었습니다.", Toast.LENGTH_SHORT).show()
         })
+
+
     }
 
     // meminfo 요청

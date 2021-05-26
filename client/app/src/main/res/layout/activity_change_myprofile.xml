@@ -28,23 +28,13 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/imageView9"
+            android:id="@+id/et_profile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginBottom="210dp"
             android:background="#E37A7A"
             app:srcCompat="@drawable/ic_baseline_person_24" />
     </androidx.cardview.widget.CardView>
-
-    <ImageView
-        android:id="@+id/btn_change_image"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="208dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cardView3"
-        app:srcCompat="@drawable/ic_check" />
 
     <EditText
         android:id="@+id/et_profile_name"

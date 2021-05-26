@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +20,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/orbitron"
-            android:text="Add User"
+            android:text="Rooms"
             android:textColor="#f8ecc9"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -38,21 +39,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/btn_search_menu"
+                android:id="@+id/btn_back"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_search" />
-
-            <ImageView
-                android:id="@+id/btn_make"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_chat" />
-
+                app:srcCompat="@drawable/abc_vector_test"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -70,30 +62,38 @@
             android:layout_weight="3"
             android:gravity="left|center"
             android:text="방이름"
-            android:textSize="15dp">
+            android:textSize="15dp"
+            android:textStyle="bold">
 
         </TextView>
 
         <EditText
-            android:id="@+id/input_roomname_text"
+            android:id="@+id/et_search_room"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
             android:background="@android:color/transparent"
             android:gravity="left|center"
-            android:hint="방 이름을 써주세요."
+            android:hint="검색할 방 이름을 입력하세요."
             android:inputType="textMultiLine"
             android:singleLine="false"
-            android:textSize="14sp">
+            android:textSize="16sp">
 
         </EditText>
 
+        <ImageView
+            android:id="@+id/btn_search"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_search" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerFriendlist"
+        android:id="@+id/recyclerRoomlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/widget_addroom_item"/>
+        tools:listitem="@layout/widget_roomlist_item" />
 </LinearLayout>

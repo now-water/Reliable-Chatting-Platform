@@ -1,10 +1,14 @@
 package com.example.chattingapp.view
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.chattingapp.R
+import com.example.chattingapp.db.AppDatabase
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.RoomApiService
 import com.example.chattingapp.service.StompEventListener
@@ -22,6 +26,10 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         user = intent.getParcelableExtra<User>("user")!!
+
+        Thread(){
+            AppDatabase.getInstance(applicationContext).userDao().insert(user)
+        }.start()
 
         setContentView(R.layout.activity_main)
 
@@ -54,19 +62,33 @@ class MainActivity : AppCompatActivity() {
     fun setFrag(fragNum: Int) {
         val friendlistFragment = supportFragmentManager.fragmentFactory.instantiate(classLoader, FriendlistFragment::class.java.name)
         val ft = supportFragmentManager.beginTransaction()
-        when (fragNum) {
-            0 -> {
-                ft.replace(R.id.main_frame, FriendlistFragment(user)).commit()
+
+//        user.profileImageUrl?.let { Log.e("fragment change", it) }
+        Thread{
+            user = AppDatabase.getInstance(applicationContext).userDao().get(user.userId)
+            when (fragNum) {
+                0 -> {
+                    ft.replace(R.id.main_frame, FriendlistFragment(user.userId)).commit()
+                }
+                1 -> {
+                    ft.replace(R.id.main_frame, RoomlistFragment(user)).commit()
+                }
+                2 -> {
+                    ft.replace(R.id.main_frame, SettingFragment(user)).commit()
+                }
+                3 -> {
+                    ft.replace(R.id.main_frame, AddRoomFragment(user)).commit()
+                }
+                4 -> {
+                    ft.replace(R.id.main_frame, AddFriendFragment(user)).commit()
+                }
+                5 -> {
+                ft.replace(R.id.main_frame, FriendSearchFragment(user)).commit()
+                }
+                6 -> {
+                    ft.replace(R.id.main_frame, RoomSearchFragment(user)).commit()
+                }
             }
-            1 -> {
-                ft.replace(R.id.main_frame, RoomlistFragment(user)).commit()
-            }
-            2 -> {
-                ft.replace(R.id.main_frame, SettingFragment(user)).commit()
-            }
-            3 -> {
-                ft.replace(R.id.main_frame, AddRoomFragment(user)).commit()
-            }
-        }
+        }.start()
     }
 }

@@ -46,13 +46,13 @@
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/nameText" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="20dp"
-        android:text=""
+    <Button
+        android:id="@+id/btn_add_friend_item"
+        android:layout_width="67dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="276dp"
+        android:layout_marginTop="12dp"
+        android:text="추가"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="parent" />
 

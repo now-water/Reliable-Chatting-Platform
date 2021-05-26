@@ -16,7 +16,7 @@ public class FCMApiController {
     private final FCMService fcmService;
 
     @PostMapping("/api/fcm/send")
-    public void updateStatusMessage(String token,String title,String content)
+    public void sendNotification(String token,String title,String content)
         throws ExecutionException, InterruptedException {
         fcmService.send(token,title,content);
     }

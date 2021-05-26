@@ -4,6 +4,7 @@ package com.Gongdae9.room.service;
 import com.Gongdae9.joinroom.domain.JoinRoom;
 import com.Gongdae9.message.domain.Message;
 import com.Gongdae9.room.domain.Room;
+import com.Gongdae9.room.dto.ChattingUserDto;
 import com.Gongdae9.room.dto.RoomDto;
 import com.Gongdae9.room.repository.RoomRepository;
 import com.Gongdae9.user.domain.User;
@@ -11,10 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class RoomService {
 
     private final RoomRepository roomRepository;
@@ -68,4 +72,20 @@ public class RoomService {
         }
         return new RoomDto(room.getRoomId(),room.getRoomName(),curMessage,recentTime);
     }
+
+
+    @Transactional
+    public List<ChattingUserDto> getChattingUser(Long roomId){
+        Room room = findById(roomId);
+        List<ChattingUserDto> chattingUsers = new ArrayList<>();
+        List<JoinRoom> joinRooms = room.getJoinRooms();
+        log.info(roomId + "번 방에 참가 중인 유저 리스트");
+        joinRooms.forEach(joinRoom -> {
+            User user = joinRoom.getUser();
+            log.info("userId : " + user.getUserId() + ", user's nickname : " + user.getNickName());
+            chattingUsers.add(new ChattingUserDto(user.getUserId(), user.getNickName()));
+        });
+        return chattingUsers;
+    }
+
 }
