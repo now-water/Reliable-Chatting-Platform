@@ -1,7 +1,6 @@
 package com.example.chattingapp.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Bookmark
-import com.example.chattingapp.view.ProfileActivity
 
 class BookmarklistAdapter(val context: Context, var bookmarkList: ArrayList<Bookmark>) :
     RecyclerView.Adapter<BookmarklistAdapter.Holder>(), Filterable {
@@ -19,7 +17,7 @@ class BookmarklistAdapter(val context: Context, var bookmarkList: ArrayList<Book
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val nameText = itemView?.findViewById<TextView>(R.id.bookmark_name)
-        val contentText = itemView?.findViewById<TextView>(R.id.bookmark_content)
+        val contentText = itemView?.findViewById<TextView>(R.id.bookmark_contents)
 
         fun bind(bookmark: Bookmark, context: Context) {
             nameText?.text = bookmark.bookmarkName
