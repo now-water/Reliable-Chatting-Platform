@@ -13,7 +13,7 @@ import com.example.chattingapp.dto.Message
 import com.example.chattingapp.view.AddBookmarkActivity
 import kotlinx.android.synthetic.main.widget_chat_company.view.*
 
-class MessagelistAdapter(val userId: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessagelistAdapter(val userId: Int, val roomId: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         val MY_CHATTING = 0
         val OTHER_CHATTING = 1
@@ -49,6 +49,7 @@ class MessagelistAdapter(val userId: Int) : RecyclerView.Adapter<RecyclerView.Vi
 
                             val intent = Intent(v?.context, AddBookmarkActivity::class.java)
                             intent.putExtra("msgContent", itemView.findViewById<TextView>(R.id.item_chat_company_content).text.toString())
+                            intent.putExtra("roomId", roomId)
 
                             v?.context?.startActivity(intent)
 
@@ -92,6 +93,7 @@ class MessagelistAdapter(val userId: Int) : RecyclerView.Adapter<RecyclerView.Vi
 
                             val intent = Intent(v?.context, AddBookmarkActivity::class.java)
                             intent.putExtra("msgContent", itemView.findViewById<TextView>(R.id.item_chat_customer_content).text.toString())
+                            intent.putExtra("roomId", roomId)
 
                             v?.context?.startActivity(intent)
 

@@ -95,8 +95,8 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.bookmark_btn -> {
-                Log.d("hello","hi~~")
                 intent = Intent(this, BookmarkActivity::class.java)
+                intent.putExtra("roomId", room.roomId)
                 startActivity(intent);
             }
         }
