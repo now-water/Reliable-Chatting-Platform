@@ -1,13 +1,17 @@
 package com.example.chattingapp.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Message
+import com.example.chattingapp.view.AddBookmarkActivity
+import kotlinx.android.synthetic.main.widget_chat_company.view.*
 
 class MessagelistAdapter(val userId: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
@@ -28,15 +32,30 @@ class MessagelistAdapter(val userId: Int) : RecyclerView.Adapter<RecyclerView.Vi
             messageView.text = message.content
             timeView.text = message.writtenAt
 
-//            itemView.findViewById<TextView>(R.id.item_chat_company_content).setOnClickListener {
-//                Log.e("hi", itemView.toString());
-//            }
+            itemView.findViewById<TextView>(R.id.item_chat_company_content).setOnClickListener {
+                if (itemView.findViewById<TextView>(R.id.my_bookmark_add_button).visibility == View.VISIBLE) {
+                    itemView.findViewById<TextView>(R.id.my_bookmark_add_button).visibility =
+                        View.INVISIBLE
+                }
+            }   // 한 번 더 짧게 클릭 시 북마크 추가 버튼 없어짐
 
             itemView.findViewById<TextView>(R.id.item_chat_company_content).setOnLongClickListener(
                 object : View.OnLongClickListener {
                     override fun onLongClick(v: View?): Boolean {
-                        itemView.findViewById<TextView>(R.id.my_bookmark_add_button).visibility =View.VISIBLE
-//                        Log.e("long click", itemView.toString())
+                        itemView.findViewById<TextView>(R.id.my_bookmark_add_button).visibility =
+                            View.VISIBLE
+
+                        itemView.findViewById<TextView>(R.id.my_bookmark_add_button).setOnClickListener {
+
+                            val intent = Intent(v?.context, AddBookmarkActivity::class.java)
+                            intent.putExtra("msgContent", itemView.findViewById<TextView>(R.id.item_chat_company_content).text.toString())
+
+                            v?.context?.startActivity(intent)
+
+                            itemView.findViewById<TextView>(R.id.my_bookmark_add_button).visibility =
+                                View.INVISIBLE
+                        }   //bookmark 추가 버튼 클릭 시 액티비티 전환
+
                         return true;
                     }
                 }
@@ -46,20 +65,40 @@ class MessagelistAdapter(val userId: Int) : RecyclerView.Adapter<RecyclerView.Vi
     }
 
     inner class OtherChatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val messageView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_content)!!
-        val timeView : TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_date)!!
-        val nicknameView : TextView = itemView?.findViewById(R.id.item_chat_customer_nickname)!!
+        val messageView: TextView =
+            itemView?.findViewById<TextView>(R.id.item_chat_customer_content)!!
+        val timeView: TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_date)!!
+        val nicknameView: TextView = itemView?.findViewById(R.id.item_chat_customer_nickname)!!
 
         fun bind(message: Message) {
             messageView.text = message.content
             timeView.text = message.writtenAt
             nicknameView.text = message.writtenBy
 
+            itemView.findViewById<TextView>(R.id.item_chat_customer_content).setOnClickListener {
+                if (itemView.findViewById<TextView>(R.id.customer_bookmark_add_button).visibility == View.VISIBLE) {
+                    itemView.findViewById<TextView>(R.id.customer_bookmark_add_button).visibility =
+                        View.INVISIBLE
+                }
+            }   // 한 번 더 짧게 클릭 시 북마크 추가 버튼 없어짐
+
             itemView.findViewById<TextView>(R.id.item_chat_customer_content).setOnLongClickListener(
                 object : View.OnLongClickListener {
                     override fun onLongClick(v: View?): Boolean {
-                        itemView.findViewById<TextView>(R.id.customer_bookmark_add_button).visibility =View.VISIBLE
-//                        Log.e("long click", itemView.toString())
+                        itemView.findViewById<TextView>(R.id.customer_bookmark_add_button).visibility =
+                            View.VISIBLE
+
+                        itemView.findViewById<TextView>(R.id.customer_bookmark_add_button).setOnClickListener {
+
+                            val intent = Intent(v?.context, AddBookmarkActivity::class.java)
+                            intent.putExtra("msgContent", itemView.findViewById<TextView>(R.id.item_chat_customer_content).text.toString())
+
+                            v?.context?.startActivity(intent)
+
+                            itemView.findViewById<TextView>(R.id.customer_bookmark_add_button).visibility =
+                                View.INVISIBLE
+                        }   //bookmark 추가 버튼 클릭 시 액티비티 전환
+
                         return true;
                     }
                 }
