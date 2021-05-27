@@ -23,8 +23,6 @@ class BookmarkActivity : AppCompatActivity() {
 
         AppDatabase.getInstance(this).BookmarkDao().getAll(roomId).observe(this) {
             bookmarkList = it as ArrayList<Bookmark>;
-            Log.e("isis", it[0].toString())
-
 
             total_bookmark_nums.text = bookmarkList.size.toString();
             // 북마크 갯수 출력
