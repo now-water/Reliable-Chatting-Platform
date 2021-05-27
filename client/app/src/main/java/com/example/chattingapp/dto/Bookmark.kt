@@ -12,9 +12,6 @@ data class Bookmark(
     @ColumnInfo(name = "room_id")
     val roomId: Int,
 
-    @ColumnInfo(name = "message_id")
-    val messageId: Int,
-
     @ColumnInfo(name = "bookmark_name")
     val bookmarkName: String,
 
