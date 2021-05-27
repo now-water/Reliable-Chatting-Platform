@@ -26,7 +26,7 @@ class AddBookmarkActivity : AppCompatActivity() {
 
             val r = Runnable {
                 val bookmark = Bookmark(
-                    1,
+                    AppDatabase.getInstance(this).BookmarkDao().getAllCount() + 1,
                     roomId,
                     bookmark_input.text.toString(),
                     bookmark_contents.text.toString())
