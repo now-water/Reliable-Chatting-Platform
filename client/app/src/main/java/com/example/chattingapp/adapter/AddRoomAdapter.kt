@@ -5,23 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Friend
 
 // Main Userlist type Adapter
 class AddRoomAdapter(val context: Context, val friendList: ArrayList<Friend>, val inviteList: ArrayList<Friend>) :
     RecyclerView.Adapter<AddRoomAdapter.Holder>() {
+    private var friends: ArrayList<Friend>? = friendList
 
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val nameText = itemView?.findViewById<TextView>(R.id.nameText)
         val statusText = itemView?.findViewById<TextView>(R.id.statusText)
         val checkbox = itemView?.findViewById<CheckBox>(R.id.checkBox)
+        val profileImage = itemView?.findViewById<ImageView>(R.id.friend_room_image)
 
         fun bind(friend: Friend, context: Context) {
             nameText?.text = friend.name
             statusText?.text = friend.statusMessage
+
+            friend.profileImage?.let {
+                if (profileImage != null) {
+                    Glide.with(context).load(it).into(profileImage)
+                }
+            }
 
             checkbox?.setOnCheckedChangeListener { compoundButton, isChecked ->
                 if(isChecked){

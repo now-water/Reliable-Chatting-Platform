@@ -71,7 +71,7 @@ class FriendlistFragment(var userId : Int) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         AppDatabase.getInstance(context!!).userDao().getLiveData(userId).observe(this){ user ->
-            user.profileImageUrl?.let { Glide.with(this).load(it).into(my_image) }
+            user.profileImage?.let { Glide.with(this).load(it).into(my_image) }
             my_name.setText(user.name)
             my_status_msg.setText(user.statusMessage)   // 상태메세지 항목없어서 임의로 시현때 보여주려고 암거나 넣음
 

@@ -32,5 +32,5 @@ data class User (
     val statusMessage : String?,
 
     @SerializedName("profileImage")
-    val profileImageUrl : String?,
+    val profileImage : String?,
 ) : Parcelable

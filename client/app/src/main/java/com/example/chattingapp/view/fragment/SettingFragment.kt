@@ -45,7 +45,7 @@ class SettingFragment(var user: User) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setting_myname.setText(user.name)
-        user.profileImageUrl?.let { Glide.with(this).load(it).into(profile_photo) }
+        user.profileImage?.let { Glide.with(this).load(it).into(profile_photo) }
 
         // for test
         view.findViewById<ImageView>(R.id.profile_photo).setOnClickListener { view ->
@@ -72,8 +72,8 @@ class SettingFragment(var user: User) : Fragment() {
         logger.info("이미지 파일 만들기 성공!")
         UserApiService.instance.uploadProfileImage(file,{
             logger.info("프로필 이미지 업로드 성공!")
-            logger.info(it.profileImageUrl)
-            Glide.with(this).load(it.profileImageUrl).into(profile_photo)
+            logger.info(it.profileImage)
+            Glide.with(this).load(it.profileImage).into(profile_photo)
 
             Thread() {
                 AppDatabase.getInstance(context!!).userDao().insert(it)
