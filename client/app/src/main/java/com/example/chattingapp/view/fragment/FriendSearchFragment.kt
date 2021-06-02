@@ -64,7 +64,7 @@ class FriendSearchFragment(val user : User) : Fragment(), SimpleTextWatcher {
         val et_search_friend: EditText = view.findViewById(R.id.et_search_friend)
 
 
-        user.profileImageUrl?.let { Glide.with(this).load(it).into(my_image) }
+        user.profileImage?.let { Glide.with(this).load(it).into(my_image) }
 
         my_name.setText(user.name)
         my_status_msg.setText(user.statusMessage)   // 상태메세지 항목없어서 임의로 시현때 보여주려고 암거나 넣음

@@ -35,7 +35,7 @@ class ProfileChangeActivity : AppCompatActivity() {
                 et_profile_name.setText(user.nickName)
                 et_profile_status_msg.setText(user.statusMessage)
 
-                user.profileImageUrl?.let { Glide.with(this).load(it).into(et_profile_image) }
+                user.profileImage?.let { Glide.with(this).load(it).into(et_profile_image) }
 
                 btn_change_nickname.setOnClickListener {
                         UserApiService.instance.updateNickName(et_profile_name.text.toString()) {
@@ -84,7 +84,7 @@ class ProfileChangeActivity : AppCompatActivity() {
         private fun sendImageChangedAndSetImageView(uri: Uri) {
                 val file = ImageService.toFile(this, uri)!!
                 UserApiService.instance.uploadProfileImage(file, {
-                        Glide.with(this).load(it.profileImageUrl).into(et_profile_image)
+                        Glide.with(this).load(it.profileImage).into(et_profile_image)
                         Thread() {
                                 AppDatabase.getInstance(applicationContext).userDao().insert(it)
                         }.start()

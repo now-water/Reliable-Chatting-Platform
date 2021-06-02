@@ -26,7 +26,7 @@ class FriendlistAdapter(val context: Context, var friendList: ArrayList<Friend>)
         val profileImage = itemView?.findViewById<ImageView>(R.id.friend_image)
 
         fun bind(friend: Friend, context: Context) {
-            nameText?.text = friend.name
+            nameText?.text = friend.nickName
             statusText?.text = friend.statusMessage
 
             friend.profileImage?.let {
