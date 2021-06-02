@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Message
 import com.example.chattingapp.view.AddBookmarkActivity
+import kotlinx.android.synthetic.main.fragment_friendlist.*
 import kotlinx.android.synthetic.main.widget_chat_company.view.*
 
 class MessagelistAdapter(val context: Context, val userId: Int, val roomId: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -30,17 +30,10 @@ class MessagelistAdapter(val context: Context, val userId: Int, val roomId: Int)
         val messageView: TextView =
             itemView?.findViewById<TextView>(R.id.item_chat_company_content)!!
         val timeView: TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_date)!!
-        val profileImage: ImageView = itemView?.findViewById<ImageView>(R.id.item_chat_customer_img)!!
 
         fun bind(message: Message, context: Context) {
             messageView.text = message.content
             timeView.text = message.writtenAt
-
-            message.profileImage?.let {
-                if (profileImage != null) {
-                    Glide.with(context).load(it).into(profileImage)
-                }
-            }
 
             itemView.findViewById<TextView>(R.id.item_chat_company_content).setOnClickListener {
                 if (itemView.findViewById<TextView>(R.id.my_bookmark_add_button).visibility == View.VISIBLE) {
@@ -80,6 +73,7 @@ class MessagelistAdapter(val context: Context, val userId: Int, val roomId: Int)
             itemView?.findViewById<TextView>(R.id.item_chat_customer_content)!!
         val timeView: TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_date)!!
         val nicknameView: TextView = itemView?.findViewById(R.id.item_chat_customer_nickname)!!
+        val profileImageView : ImageView = itemView?.findViewById<ImageView>(R.id.item_chat_customer_image)!!
 
         fun bind(message: Message, context: Context) {
             messageView.text = message.content
@@ -135,6 +129,8 @@ class MessagelistAdapter(val context: Context, val userId: Int, val roomId: Int)
             holder.bind(this.messages[position], context)
         } else if (holder is OtherChatHolder) {
             holder.bind(this.messages[position], context)
+            Log.e(" ", messages[position].profileImage!!)
+            Glide.with(holder.itemView.context).load(messages[position].profileImage).override(10,10).centerCrop().into(holder.profileImageView)
         }
     }
 

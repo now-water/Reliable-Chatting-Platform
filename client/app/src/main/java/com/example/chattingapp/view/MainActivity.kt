@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportFragmentManager.fragmentFactory = MainFragmentFactoryImpl()
-
         super.onCreate(savedInstanceState)
         user = intent.getParcelableExtra<User>("user")!!
 
@@ -60,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
     //test code for fragment visible
     fun setFrag(fragNum: Int) {
-        val friendlistFragment = supportFragmentManager.fragmentFactory.instantiate(classLoader, FriendlistFragment::class.java.name)
+//        val friendlistFragment = supportFragmentManager.fragmentFactory.instantiate(classLoader, FriendlistFragment::class.java.name)
         val ft = supportFragmentManager.beginTransaction()
 
 //        user.profileImageUrl?.let { Log.e("fragment change", it) }

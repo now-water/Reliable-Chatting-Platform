@@ -19,7 +19,7 @@ import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
 class MessagelistFragment(val userId: Int, val roomId: Int) : Fragment(){
-    private val adapter = MessagelistAdapter(requireContext(), userId, roomId)
+    private lateinit var adapter : MessagelistAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_messagelist, container, false)
@@ -27,6 +27,8 @@ class MessagelistFragment(val userId: Int, val roomId: Int) : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        adapter = MessagelistAdapter(context!!, userId, roomId)
 
         recyclerMessagelist.layoutManager = LinearLayoutManager(requireContext())
         recyclerMessagelist.adapter = adapter
