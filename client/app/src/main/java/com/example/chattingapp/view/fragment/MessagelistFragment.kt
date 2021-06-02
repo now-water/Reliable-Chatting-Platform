@@ -19,7 +19,7 @@ import java.util.logging.Logger
 import kotlin.collections.ArrayList
 
 class MessagelistFragment(val userId: Int, val roomId: Int) : Fragment(){
-    private val adapter = MessagelistAdapter(userId, roomId)
+    private val adapter = MessagelistAdapter(requireContext(), userId, roomId)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_messagelist, container, false)
@@ -42,9 +42,5 @@ class MessagelistFragment(val userId: Int, val roomId: Int) : Fragment(){
         adapter.setMessages(messages)
         if(adapter.itemCount > 0)
             recyclerMessagelist.smoothScrollToPosition(adapter.itemCount - 1)
-    }
-
-    override fun onStop() {
-        super.onStop()
     }
 }
