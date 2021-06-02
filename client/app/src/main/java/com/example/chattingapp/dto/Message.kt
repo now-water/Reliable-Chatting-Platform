@@ -33,5 +33,8 @@ data class Message (
 
     @SerializedName("unreadCnt")
     @ColumnInfo(name="unread_cnt")
-    val unreadCnt : Int
+    val unreadCnt : Int,
+
+    @SerializedName("profileImage")
+    val profileImage : String?
 )

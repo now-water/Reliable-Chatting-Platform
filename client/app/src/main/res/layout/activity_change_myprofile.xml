@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/et_profile_image"
+            android:id="@+id/et_change_profile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginBottom="210dp"
