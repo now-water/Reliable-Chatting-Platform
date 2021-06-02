@@ -3,6 +3,7 @@ package com.Gongdae9.message.domain;
 import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.persistence.Lob;
 import lombok.Data;
 import lombok.Getter;
 
@@ -15,6 +16,7 @@ public class MessageDto {
     private String content;
     private String userName;
     private String writtenAt;
+    private String profileImage;
     private int unreadCnt;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -33,6 +35,7 @@ public class MessageDto {
         this.roomId = message.getRoom().getRoomId();
         this.content = message.getContent();
         this.userName = message.getUser().getName();
+        this.profileImage=message.getUser().getProfileImage();
         this.writtenAt = message.getWrittenAt().format(formatter);
         this.unreadCnt = message.getUnreadCnt();
     }
