@@ -1,5 +1,6 @@
 package com.example.chattingapp.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,12 +10,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Message
 import com.example.chattingapp.view.AddBookmarkActivity
 import kotlinx.android.synthetic.main.widget_chat_company.view.*
 
-class MessagelistAdapter(val userId: Int, val roomId: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessagelistAdapter(val context: Context, val userId: Int, val roomId: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         val MY_CHATTING = 0
         val OTHER_CHATTING = 1
@@ -28,10 +30,17 @@ class MessagelistAdapter(val userId: Int, val roomId: Int) : RecyclerView.Adapte
         val messageView: TextView =
             itemView?.findViewById<TextView>(R.id.item_chat_company_content)!!
         val timeView: TextView = itemView?.findViewById<TextView>(R.id.item_chat_company_date)!!
+        val profileImage: ImageView = itemView?.findViewById<ImageView>(R.id.item_chat_customer_img)!!
 
-        fun bind(message: Message) {
+        fun bind(message: Message, context: Context) {
             messageView.text = message.content
             timeView.text = message.writtenAt
+
+            message.profileImage?.let {
+                if (profileImage != null) {
+                    Glide.with(context).load(it).into(profileImage)
+                }
+            }
 
             itemView.findViewById<TextView>(R.id.item_chat_company_content).setOnClickListener {
                 if (itemView.findViewById<TextView>(R.id.my_bookmark_add_button).visibility == View.VISIBLE) {
@@ -72,7 +81,7 @@ class MessagelistAdapter(val userId: Int, val roomId: Int) : RecyclerView.Adapte
         val timeView: TextView = itemView?.findViewById<TextView>(R.id.item_chat_customer_date)!!
         val nicknameView: TextView = itemView?.findViewById(R.id.item_chat_customer_nickname)!!
 
-        fun bind(message: Message) {
+        fun bind(message: Message, context: Context) {
             messageView.text = message.content
             timeView.text = message.writtenAt
             nicknameView.text = message.writtenBy
@@ -123,9 +132,9 @@ class MessagelistAdapter(val userId: Int, val roomId: Int) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is MyChatHolder) {
-            holder.bind(this.messages[position])
+            holder.bind(this.messages[position], context)
         } else if (holder is OtherChatHolder) {
-            holder.bind(this.messages[position])
+            holder.bind(this.messages[position], context)
         }
     }
 
