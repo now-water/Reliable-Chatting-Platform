@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chattingapp.R
+import com.example.chattingapp.db.AppDatabase
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.dto.request.LoginRequest
 import com.example.chattingapp.service.UserApiService
@@ -38,7 +39,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
     //user 정보
     private lateinit var id: String
     private lateinit var password: String
-    private var fcmToken : String = "temporaliy"
+    private lateinit var fcmToken : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,31 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
         setUpListener()
         FirebaseApp.initializeApp(applicationContext)
         System.out.println("token : "+ FirebaseInstanceId.getInstance().getToken()); // 토큰을 확인할 수 있는 코드
-        fcmToken = FirebaseInstanceId.getInstance().token!!;
+        fcmToken = FirebaseInstanceId.getInstance().getToken()!!
+
+        Thread {
+            val users = AppDatabase.getInstance(applicationContext).userDao().getAll()
+            if (users.isNotEmpty() && users[0].password != null) {
+                val me = users[0]
+                UserApiService.instance.signIn(
+                    LoginRequest(me.accountId, me.password!!, fcmToken),
+                    {
+                        Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+                        UserApiService.instance.checkSession({
+                            Log.d("logincheck", it.toString())
+                        }, {
+                            Log.d("logincheckfail", "꺼졍")
+                        })
+                        intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra("user", it)
+                        startActivity(intent)
+                        finish()
+                    },
+                    {
+                        Toast.makeText(this, "로그인 해주세요. ", Toast.LENGTH_SHORT).show()
+                    })
+            }
+        }.start()
     }
 
     fun initView() {
@@ -128,9 +153,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
 //            })
         //checkStatus()
 
-        Log.e("good", id + " " + password)
-
-
         UserApiService.instance.signIn(LoginRequest(id, password, fcmToken), {
             Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
             UserApiService.instance.checkSession({
@@ -138,6 +160,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
             },{
                 Log.d("logincheckfail", "꺼졍")
             })
+
+            Thread{
+                val user = User(it.userId, it.accountId, it.name, it.nickName, password, it.phoneNum, it.statusMessage, it.profileImage)
+                AppDatabase.getInstance(applicationContext).userDao().insert(user)
+            }.start()
+
             intent = Intent(this, MainActivity::class.java)
             intent.putExtra("user", it)
             startActivity(intent)
@@ -145,8 +173,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener, SimpleTextWatch
         }, {
             Toast.makeText(this, "아이디나 패스워드가 존재하지 않거나 잘못되었습니다.", Toast.LENGTH_SHORT).show()
         })
-
-
     }
 
     // meminfo 요청

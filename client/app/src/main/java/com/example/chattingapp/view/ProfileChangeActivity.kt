@@ -41,7 +41,7 @@ class ProfileChangeActivity : AppCompatActivity() {
                         UserApiService.instance.updateNickName(et_profile_name.text.toString()) {
                                 Thread {
                                         AppDatabase.getInstance(applicationContext).userDao()
-                                                .insert(it)
+                                                .update(it)
                                 }.start()
                                 Toast.makeText(this, "닉네임을 변경하였습니다.", Toast.LENGTH_SHORT).show()
                                 dataChanged = true
@@ -52,7 +52,7 @@ class ProfileChangeActivity : AppCompatActivity() {
                         UserApiService.instance.updateStatus(et_profile_status_msg.text.toString()) {
                                 Thread {
                                         AppDatabase.getInstance(applicationContext).userDao()
-                                                .insert(it)
+                                                .update(it)
                                 }.start()
                                 Toast.makeText(this, "상태메시지를 변경하였습니다.", Toast.LENGTH_SHORT).show()
                                 dataChanged = true

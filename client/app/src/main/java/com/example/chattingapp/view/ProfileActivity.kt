@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.chattingapp.R
 import com.example.chattingapp.dto.Friend
 import com.example.chattingapp.dto.User
@@ -18,6 +19,7 @@ class ProfileActivity : AppCompatActivity() {
 
         profile_name.setText(friend.name)
         profile_status_msg.setText(friend.statusMessage)   // 상태메세지에 관한게 없어서 임의로 닉네임 넣어둔 것
+        friend.profileImage?. let { Glide.with(applicationContext).load(it).into(profile_image) }
 
         profile_close_btn.setOnClickListener {
             finish();

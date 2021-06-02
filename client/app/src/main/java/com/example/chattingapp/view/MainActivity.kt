@@ -23,11 +23,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        user = intent.getParcelableExtra<User>("user")!!
-
-        Thread(){
-            AppDatabase.getInstance(applicationContext).userDao().insert(user)
-        }.start()
+        user = intent.getParcelableExtra("user")!!
 
         setContentView(R.layout.activity_main)
 

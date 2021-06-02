@@ -76,7 +76,7 @@ class SettingFragment(var user: User) : Fragment() {
             Glide.with(this).load(it.profileImage).into(profile_photo)
 
             Thread() {
-                AppDatabase.getInstance(context!!).userDao().insert(it)
+                AppDatabase.getInstance(context!!).userDao().update(it)
             }.start()
         },{
             logger.info("실패...")
