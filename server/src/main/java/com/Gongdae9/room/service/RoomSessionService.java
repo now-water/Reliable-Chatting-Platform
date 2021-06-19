@@ -9,7 +9,7 @@ import java.util.Hashtable;
 @Service
 @Slf4j
 public class RoomSessionService {
-    private Hashtable<Long, HashSet<Long>> roomSessions;
+    private final Hashtable<Long, HashSet<Long>> roomSessions = new Hashtable<>();
 
     public void setJoin(Long roomId, Long userId){
         roomSessions.putIfAbsent(roomId, new HashSet<>());
