@@ -6,8 +6,8 @@ import com.Gongdae9.message.domain.EventSubDto;
 import com.Gongdae9.message.domain.Message;
 import com.Gongdae9.message.domain.MessageDto;
 import com.Gongdae9.message.service.MessageService;
+import com.Gongdae9.room.service.RoomSessionService;
 import com.Gongdae9.room.dto.ChattingUserDto;
-import com.Gongdae9.room.dto.RoomDto;
 import com.Gongdae9.room.service.RoomService;
 import com.Gongdae9.user.domain.User;
 import com.Gongdae9.user.repository.UserRepository;
@@ -22,7 +22,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
 
-
 @Controller
 @RequiredArgsConstructor
 public class MessageController {
@@ -31,6 +30,8 @@ public class MessageController {
     private final RoomService roomService;
     private final UserRepository userRepository;
     private final FCMService fcmService;
+
+    private final RoomSessionService roomSessionService;
 
 
     @MessageMapping("/chat/message/{userId}/{roomId}")
@@ -49,8 +50,8 @@ public class MessageController {
             .map(o->o.getUserId())
             .collect(Collectors.toList());
 
-        List<String> fcmToken = userRepository.findFCMToken(userIdList);
-
+        List<Long> currentJoin = userIdList.stream().filter(id -> roomSessionService.isJoin(roomId, id)).collect(Collectors.toList());
+        List<String> fcmToken = userRepository.findFCMToken(currentJoin);
 
         fcmToken.forEach(o-> {
             try {

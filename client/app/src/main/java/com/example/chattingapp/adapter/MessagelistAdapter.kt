@@ -129,8 +129,10 @@ class MessagelistAdapter(val context: Context, val userId: Int, val roomId: Int)
             holder.bind(this.messages[position], context)
         } else if (holder is OtherChatHolder) {
             holder.bind(this.messages[position], context)
-            Log.e(" ", messages[position].profileImage!!)
-            Glide.with(holder.itemView.context).load(messages[position].profileImage).override(10,10).centerCrop().into(holder.profileImageView)
+
+            messages[position].profileImage?. let {Log.e(" ", messages[position].profileImage!!)
+                Glide.with(holder.itemView.context).load(messages[position].profileImage).override(10,10).centerCrop().into(holder.profileImageView)
+            }
         }
     }
 

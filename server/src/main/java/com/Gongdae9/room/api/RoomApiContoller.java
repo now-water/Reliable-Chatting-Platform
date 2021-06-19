@@ -1,7 +1,7 @@
 package com.Gongdae9.room.api;
 
-import com.Gongdae9.joinroom.domain.JoinRoom;
 import com.Gongdae9.message.domain.MessageDto;
+import com.Gongdae9.room.service.RoomSessionService;
 import com.Gongdae9.room.domain.Room;
 import com.Gongdae9.room.dto.ChattingUserDto;
 import com.Gongdae9.room.dto.RoomDto;
@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -24,6 +25,7 @@ public class RoomApiContoller {
 
     private final RoomService roomService;
     private final UserService userService;
+    private final RoomSessionService roomSessionService;
 
     @GetMapping("/api/room/getRooms")
     public List<RoomDto> getChatRooms(HttpServletRequest req){
@@ -54,4 +56,17 @@ public class RoomApiContoller {
         });
         return messageDtos;
     }
+
+    @PostMapping("/api/room/enter/{roomId}/{userId}")
+    public int enterRoom(@PathVariable("roomId") long roomId, @PathVariable("userId") long userId){
+        roomSessionService.setJoin(roomId, userId);
+        return 1;
+    }
+
+    @PostMapping("/api/room/exit/{roomId}/{userId}")
+    public int exitRoom(@PathVariable("roomId") long roomId, @PathVariable("userId") long userId){
+        roomSessionService.deleteJoin(roomId, userId);
+        return 1;
+    }
+
 }
