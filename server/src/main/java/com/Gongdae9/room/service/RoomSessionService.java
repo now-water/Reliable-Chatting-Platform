@@ -14,6 +14,7 @@ public class RoomSessionService {
     public void setJoin(Long roomId, Long userId){
         roomSessions.putIfAbsent(roomId, new HashSet<>());
         roomSessions.get(roomId).add(userId);
+        log.info("user " + userId + " enter room " + roomId);
     }
 
     public boolean isJoin(Long roomId, Long userId){
@@ -23,5 +24,6 @@ public class RoomSessionService {
 
     public void deleteJoin(Long roomId, Long userId){
         roomSessions.get(roomId).remove(userId);
+        log.info("user " +userId + "exit room " + roomId);
     }
 }
