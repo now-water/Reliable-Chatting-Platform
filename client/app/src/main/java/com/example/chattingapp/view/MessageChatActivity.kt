@@ -16,6 +16,7 @@ import com.example.chattingapp.R
 import com.example.chattingapp.dto.ChatRoom
 import com.example.chattingapp.dto.User
 import com.example.chattingapp.service.MessageApiService
+import com.example.chattingapp.service.RoomApiService
 import com.example.chattingapp.view.fragment.MessagelistFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_message_chat.*
@@ -28,6 +29,7 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     private lateinit var room: ChatRoom
 
     private val messageApiService = MessageApiService.getNewInstance()
+    private val roomApiService = RoomApiService.instance
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +63,10 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
             chatInput.setText("")
             messageApiService.sendMessage(user.userId, room.roomId, text)
         }
+
+        roomApiService.enterRoom(room.roomId, user.userId){
+            Log.e("enter room", "exit")
+        }
     }
 
     private fun setFragment(userId: Int, roomId: Int, roomName: String) {
@@ -76,6 +82,9 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     }
 
     override fun onBackPressed() {
+        roomApiService.exitRoom(room.roomId, user.userId){
+            Log.e("room exit", "success")
+        }
         finish()
     }
 

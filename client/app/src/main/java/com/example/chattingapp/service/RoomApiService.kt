@@ -32,6 +32,14 @@ class RoomApiService(private val restApiService: RestApiService, private val myS
         }
     }
 
+    fun enterRoom(roomId: Int, userId: Int, callback: Consumer<Int>){
+        restApiService.enterRoom(roomId,userId).enqueue(RestApiServiceCallback(callback))
+    }
+
+    fun exitRoom(roomId: Int, userId: Int, callback: Consumer<Int>){
+        restApiService.exitRoom(roomId,userId).enqueue(RestApiServiceCallback(callback))
+    }
+
     fun outRoom(roomId: Int, callback : Consumer<String>){
         restApiService.outRoom(roomId).enqueue(RestApiServiceCallback(callback))
     }

@@ -36,6 +36,9 @@ interface RestApiService {
     @POST("/api/room/invite") fun inviteRoom(@Query("roomId") roomId : Int, @Query("toId") toId: Int) : Call<String>
     @POST("/api/room/out") fun outRoom(@Query("roomId") roomId: Int) : Call<String>
 
+    @POST("/api/room/enter/{roomId}/{userId}") fun enterRoom(@Path("roomId") roomId: Int, @Path("userId") userId: Int) : Call<Int>
+    @POST("/api/room/exit/{roomId}/{userId}") fun exitRoom(@Path("roomId") roomId: Int, @Path("userId") userId: Int) : Call<Int>
+
     // Message Api
     @GET("/api/room/message/{roomId}") fun getMessages(@Path("roomId") roomId : Int) : Call<List<Message>>
 
