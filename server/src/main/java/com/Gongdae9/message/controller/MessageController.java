@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class MessageController {
 
     private final MessageService messageService;
@@ -50,8 +52,15 @@ public class MessageController {
             .map(o->o.getUserId())
             .collect(Collectors.toList());
 
-        List<Long> currentJoin = userIdList.stream().filter(id -> !(roomSessionService.isJoin(roomId, id))).collect(Collectors.toList());
+        List<Long> currentJoin = userIdList.stream().filter(id -> !roomSessionService.isJoin(roomId, id)).collect(Collectors.toList());
+        StringBuilder sb = new StringBuilder();
+        for(long i : currentJoin){
+            sb.append(i);
+            sb.append("  ");
+        }
+        log.info("current join list : " + sb);
         List<String> fcmToken = userRepository.findFCMToken(currentJoin);
+
 
         fcmToken.forEach(o-> {
             try {
