@@ -45,6 +45,9 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
         //back button onclick func
         findViewById<LinearLayout>(R.id.room_back_button).setOnClickListener {
+            roomApiService.exitRoom(room.roomId, user.userId){
+                Log.e("room exit", "success")
+            }
             finish()
         }
 
@@ -65,7 +68,7 @@ class MessageChatActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         }
 
         roomApiService.enterRoom(room.roomId, user.userId){
-            Log.e("enter room", "exit")
+            Log.e("enter room", "success")
         }
     }
 

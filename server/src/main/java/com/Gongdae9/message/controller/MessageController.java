@@ -50,7 +50,7 @@ public class MessageController {
             .map(o->o.getUserId())
             .collect(Collectors.toList());
 
-        List<Long> currentJoin = userIdList.stream().filter(id -> roomSessionService.isJoin(roomId, id)).collect(Collectors.toList());
+        List<Long> currentJoin = userIdList.stream().filter(id -> !(roomSessionService.isJoin(roomId, id))).collect(Collectors.toList());
         List<String> fcmToken = userRepository.findFCMToken(currentJoin);
 
         fcmToken.forEach(o-> {
