@@ -18,7 +18,7 @@ public class RoomSessionService {
     }
 
     public boolean isJoin(Long roomId, Long userId){
-        if (!roomSessions.contains(roomId)) return false;
+        if (!roomSessions.containsKey(roomId)) return false;
         log.info("check join " + userId + " is in " + roomId);
         return roomSessions.get(roomId).contains(userId);
     }
