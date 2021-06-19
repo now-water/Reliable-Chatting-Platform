@@ -58,7 +58,7 @@ public class MessageController {
             sb.append(i);
             sb.append("  ");
         }
-        log.info("current join list : " + sb);
+        log.info("current not enter list : " + sb);
         List<String> fcmToken = userRepository.findFCMToken(currentJoin);
 
 
