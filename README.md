@@ -6,7 +6,7 @@ FCM 푸쉬 솔루션과 STOMP 프로토콜을 기반으로 신뢰성을 높인 �
 
 # System Diagram
 
-![image](https://user-images.githubusercontent.com/51476083/112645058-7173a480-8e89-11eb-9ab9-7ad04f76c974.png)
+![image](https://user-images.githubusercontent.com/57346393/128634304-0e0d914c-c29b-4d96-a227-227d622fdbdd.png)
 
 <hr/>
 
