@@ -1,4 +1,30 @@
 spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/Messenger
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+    jpa:
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          show_sql: flase
+          format_sql: true
+
+    h2:
+      console:
+        enabled=true:
+
+    session:
+      store-type: jdbc
+    profiles:
+      active: local
+      include:
+        - aws
+        - credentials
+
   rabbitmq:
     host: 52.79.203.88
     port: 5672
