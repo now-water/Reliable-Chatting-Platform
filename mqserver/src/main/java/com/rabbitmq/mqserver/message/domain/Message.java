@@ -3,6 +3,8 @@ package com.rabbitmq.mqserver.message.domain;
 import static javax.persistence.FetchType.LAZY;
 
 
+import com.rabbitmq.mqserver.room.domain.Room;
+import com.rabbitmq.mqserver.user.domain.User;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Getter;
 
 
-@Entity(name="Message")
+@Entity
 @NoArgsConstructor
 @Getter
 public class Message {
@@ -30,36 +32,36 @@ public class Message {
 
     private LocalDateTime writtenAt;
 
-//    @ManyToOne(fetch = LAZY)
-//    @JoinColumn(name = "user_id")
-//    private User user;
-//
-//    @ManyToOne(fetch = LAZY)
-//    @JoinColumn(name = "room_id")
-//    private Room room;
-//
-//    //== 연관관계 편의 메서드 ==//
-//    public void setUser(User user){
-//        if(this.user != null){
-//            this.user.getMessages().remove(this);
-//        }
-//        this.user = user;
-//        user.getMessages().add(this);
-//    }
-//
-//    public void setRoom(Room room){
-//        if(this.room != null){
-//            this.room.getMessages().remove(this);
-//        }
-//        this.room = room;
-//        room.getMessages().add(this);
-//    }
-//
-//    public ChatMessage (User user,Room room,String content){
-//        this.setUser(user);
-//        this.setRoom(room);
-//        this.content=content;
-//        this.unreadCnt=room.getJoinRooms().size();
-//        this.writtenAt= LocalDateTime.now();
-//    }
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "room_id")
+    private Room room;
+
+    //== 연관관계 편의 메서드 ==//
+    public void setUser(User user){
+        if(this.user != null){
+            this.user.getMessages().remove(this);
+        }
+        this.user = user;
+        user.getMessages().add(this);
+    }
+
+    public void setRoom(Room room){
+        if(this.room != null){
+            this.room.getMessages().remove(this);
+        }
+        this.room = room;
+        room.getMessages().add(this);
+    }
+
+    public Message (User user,Room room,String content){
+        this.setUser(user);
+        this.setRoom(room);
+        this.content=content;
+        this.unreadCnt=room.getJoinRooms().size();
+        this.writtenAt= LocalDateTime.now();
+    }
 }
