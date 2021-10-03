@@ -1,0 +1,37 @@
+spring:
+  rabbitmq:
+    host: 52.79.203.88
+    port: 5672
+    username: root
+    password: password
+
+
+
+--- # prod 환경
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/capston_design_db?useSSL=false&characterEncoding=UTF-8&serverTimeZone=UTC
+    username: capston
+    password: 1234cap
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    root: info
+
+server:
+  port: 8089
+
+---
