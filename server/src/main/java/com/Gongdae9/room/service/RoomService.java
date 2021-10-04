@@ -82,10 +82,9 @@ public class RoomService {
         log.info(roomId + "번 방에 참가 중인 유저 리스트");
         joinRooms.forEach(joinRoom -> {
             User user = joinRoom.getUser();
-            log.info("userId : " + user.getUserId() + ", user's nickname : " + user.getNickName());
+            log.info(roomId + "번 방 유저 " + "userId : " + user.getUserId() + ", user's nickname : " + user.getNickName());
             chattingUsers.add(new ChattingUserDto(user.getUserId(), user.getNickName()));
         });
         return chattingUsers;
     }
-
 }

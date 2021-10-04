@@ -1,10 +1,12 @@
 package com.Gongdae9.message.controller;
 
 
+import com.Gongdae9.config.RabbitmqConfig;
 import com.Gongdae9.fcm.service.FCMService;
 import com.Gongdae9.message.domain.EventSubDto;
 import com.Gongdae9.message.domain.Message;
 import com.Gongdae9.message.domain.MessageDto;
+import com.Gongdae9.message.domain.SimpleMessageDto;
 import com.Gongdae9.message.service.MessageService;
 import com.Gongdae9.room.service.RoomSessionService;
 import com.Gongdae9.room.dto.ChattingUserDto;
@@ -14,8 +16,11 @@ import com.Gongdae9.user.repository.UserRepository;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -27,6 +32,7 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 @Slf4j
 public class MessageController {
+    private final RabbitTemplate rabbitTemplate;
 
     private final MessageService messageService;
     private final RoomService roomService;
@@ -35,36 +41,40 @@ public class MessageController {
 
     private final RoomSessionService roomSessionService;
 
+    private final Gson gson = new Gson();
 
     @MessageMapping("/chat/message/{userId}/{roomId}")
     @SendTo("/sub/chat/room/{roomId}")
     public MessageDto greeting(@DestinationVariable("userId") Long userId,@DestinationVariable("roomId") Long roomId, @Payload String content) throws Exception {
+        log.info("user " + userId  + " send message to room " + roomId + " : "  + content);
         Thread.sleep(100); // delay
 
-        User sender = userRepository.findById(userId);
-        String ncontent=content.substring(0,content.length()-2);
-        Message message = messageService.createMessage(userId, roomId, ncontent);
-        message = messageService.save(message);
+        content = content.substring(0,content.length()-2);
 
+        // DB에 저장하는 기능을 분리
+        // 이를 전달하기 위해 RabbitMQ 사용
+        SimpleMessageDto simpleMessageDto = new SimpleMessageDto(userId, roomId, content);
+        rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE, RabbitmqConfig.ROUTHING_KEY, simpleMessageDto);
+
+        User sender = userRepository.findById(userId);
+        Message message = messageService.createMessage(userId, roomId, content);
+
+        // 방에 참여하는 유저 목록 가져오기
         List<ChattingUserDto> chattingUsers = roomService.getChattingUser(roomId);
         List<Long> userIdList = chattingUsers.stream()
             .filter(o -> !o.getUserId().equals(userId))
             .map(o->o.getUserId())
             .collect(Collectors.toList());
 
-        List<Long> currentJoin = userIdList.stream().filter(id -> !roomSessionService.isJoin(roomId, id)).collect(Collectors.toList());
-        StringBuilder sb = new StringBuilder();
-        for(long i : currentJoin){
-            sb.append(i);
-            sb.append("  ");
-        }
-        log.info("current not enter list : " + sb);
-        List<String> fcmToken = userRepository.findFCMToken(currentJoin);
+        // 방에 참여하는 유저 중 현재 존재하지 않는 유저만
+        List<Long> notExistNow = userIdList.stream().filter(id -> !roomSessionService.isJoin(roomId, id)).collect(Collectors.toList());
 
-
+        // 현재 방에 참여하지 않은 유저한테는 푸시 알람 보내기
+        List<String> fcmToken = userRepository.findFCMToken(notExistNow);
+        String finalContent = content;
         fcmToken.forEach(o-> {
             try {
-                fcmService.send(o,sender.getNickName(),ncontent);
+                fcmService.send(o,sender.getNickName(), finalContent);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
@@ -72,9 +82,7 @@ public class MessageController {
             }
         });
 
-
-        MessageDto messageDto = new MessageDto(message);
-        return messageDto;
+        return new MessageDto(message);
     }
 
     @MessageMapping("/event/sub/{fromId}/{toId}")
