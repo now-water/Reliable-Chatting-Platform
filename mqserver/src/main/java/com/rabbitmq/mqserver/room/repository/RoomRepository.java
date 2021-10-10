@@ -15,6 +15,16 @@ public class RoomRepository {
 
     private final EntityManager em;
 
+    @Transactional
+    public boolean save(Room room){
+        if(room.getRoomId()==null){
+            em.persist(room);
+            return true;
+        }
+
+        return false;
+    }
+
     @Transactional(readOnly = true)
     public Room findById(Long id) {
         return em.find(Room.class, id);
