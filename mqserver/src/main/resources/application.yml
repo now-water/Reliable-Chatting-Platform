@@ -31,6 +31,8 @@ spring:
     username: root
     password: password
 
+fcm:
+  tempFilePath : reliablemessage-168d1-firebase-adminsdk-olyui-caec3e6e5f.json
 
 
 --- # prod 환경

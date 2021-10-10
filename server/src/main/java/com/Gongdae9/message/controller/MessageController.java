@@ -56,32 +56,7 @@ public class MessageController {
         SimpleMessageDto simpleMessageDto = new SimpleMessageDto(userId, roomId, content);
         rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE, RabbitmqConfig.ROUTHING_KEY, simpleMessageDto);
 
-        User sender = userRepository.findById(userId);
         Message message = messageService.createMessage(userId, roomId, content);
-
-        // 방에 참여하는 유저 목록 가져오기
-        List<ChattingUserDto> chattingUsers = roomService.getChattingUser(roomId);
-        List<Long> userIdList = chattingUsers.stream()
-            .filter(o -> !o.getUserId().equals(userId))
-            .map(o->o.getUserId())
-            .collect(Collectors.toList());
-
-        // 방에 참여하는 유저 중 현재 존재하지 않는 유저만
-        List<Long> notExistNow = userIdList.stream().filter(id -> !roomSessionService.isJoin(roomId, id)).collect(Collectors.toList());
-
-        // 현재 방에 참여하지 않은 유저한테는 푸시 알람 보내기
-        List<String> fcmToken = userRepository.findFCMToken(notExistNow);
-        String finalContent = content;
-        fcmToken.forEach(o-> {
-            try {
-                fcmService.send(o,sender.getNickName(), finalContent);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        });
-
         return new MessageDto(message);
     }
 

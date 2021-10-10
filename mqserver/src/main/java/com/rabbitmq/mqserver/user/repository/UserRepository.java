@@ -2,6 +2,7 @@ package com.rabbitmq.mqserver.user.repository;
 
 import com.rabbitmq.mqserver.user.domain.User;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,13 @@ public class UserRepository {
         return em.createQuery("select u from User u where u.accountId = :accountId", User.class)
             .setParameter("accountId", accountId)
             .getResultList();
+    }
+
+    @Transactional(readOnly=true)
+    public List<String> findFCMToken(List<Long> idList){
+
+        return idList.stream().map(o->em.createQuery("select u from User u where u.userId = :id",User.class)
+                .setParameter("id",o)
+                .getSingleResult().getFcmToken()).collect(Collectors.toList());
     }
 }
