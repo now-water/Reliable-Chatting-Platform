@@ -17,6 +17,12 @@ spring:
     console:
       enabled=true:
 
+  rabbitmq:
+    host: 52.79.203.88
+    port: 5672
+    username: root
+    password: password
+
   session:
     store-type: jdbc
   profiles:
