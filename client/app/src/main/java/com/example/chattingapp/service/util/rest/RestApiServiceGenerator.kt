@@ -14,7 +14,7 @@ object RestApiServiceGenerator {
     private val logger = Logger.getLogger(RestApiServiceGenerator.javaClass.name)
 
     private val LOCAL_URL = "http://10.0.2.2:8080/"
-    private val EC2_URL = "http://ec2-15-164-94-45.ap-northeast-2.compute.amazonaws.com:3000/"
+    private val EC2_URL = "http://ec2-3-35-4-12.ap-northeast-2.compute.amazonaws.com:80/"
 
     fun <S> createService(serviceClass: Class<S>): S {
         val cookieManager = CookieManager()
