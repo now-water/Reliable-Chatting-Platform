@@ -45,7 +45,7 @@ public class MessageController {
 
     @MessageMapping("/chat/message/{userId}/{roomId}")
     @SendTo("/sub/chat/room/{roomId}")
-    public MessageDto greeting(@DestinationVariable("userId") Long userId,@DestinationVariable("roomId") Long roomId, @Payload String content) throws Exception {
+    public SimpleMessageDto greeting(@DestinationVariable("userId") Long userId,@DestinationVariable("roomId") Long roomId, @Payload String content) throws Exception {
         log.info("user " + userId  + " send message to room " + roomId + " : "  + content);
         Thread.sleep(100); // delay
 
@@ -55,9 +55,10 @@ public class MessageController {
         // 이를 전달하기 위해 RabbitMQ 사용
         SimpleMessageDto simpleMessageDto = new SimpleMessageDto(userId, roomId, content);
         rabbitTemplate.convertAndSend(RabbitmqConfig.EXCHANGE, RabbitmqConfig.ROUTHING_KEY, simpleMessageDto);
+        return simpleMessageDto;
 
-        Message message = messageService.createMessage(userId, roomId, content);
-        return new MessageDto(message);
+//        Message message = messageService.createMessage(userId, roomId, content);
+//        return new MessageDto(message);
     }
 
     @MessageMapping("/event/sub/{fromId}/{toId}")
