@@ -16,7 +16,7 @@ class MyStompClient {
 
     private val LOCAL_URL = "ws://10.0.2.2:8080/"
 
-    private val EC2_URL = "ws://ec2-15-164-94-45.ap-northeast-2.compute.amazonaws.com:3000/"
+    private val EC2_URL = "ws://ec2-3-35-4-12.ap-northeast-2.compute.amazonaws.com:80/"
     private val END_POINT = "ws/websocket"
 
     private val INTERVAL_MILLIS = 5000L
