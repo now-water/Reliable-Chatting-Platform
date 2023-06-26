@@ -7,6 +7,7 @@ FCM 푸쉬 솔루션과 STOMP 프로토콜을 기반으로 신뢰성을 높인 �
 # System Diagram
 
 ![image](https://user-images.githubusercontent.com/57346393/128634304-0e0d914c-c29b-4d96-a227-227d622fdbdd.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnowwater%2FReliable-Chatting-Platform.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnowwater%2FReliable-Chatting-Platform?ref=badge_shield)
 
 <hr/>
 
@@ -83,3 +84,7 @@ FCM 푸쉬 솔루션과 STOMP 프로토콜을 기반으로 신뢰성을 높인 �
 - FCM 솔루션과 STOMP 프로토콜을 이용함으로써 신뢰성을 강조한 기업 자체 메신저 서버를 구축할 수 있으리라 기대합니다.
 
 - App 서비스 분야에 적합한 메신저 기능을 추가적으로 개발함으로써 맞춤 메신저 서비스 형태를 갖출 수 있을 것이라 예상합니다.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fnowwater%2FReliable-Chatting-Platform.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fnowwater%2FReliable-Chatting-Platform?ref=badge_large)
